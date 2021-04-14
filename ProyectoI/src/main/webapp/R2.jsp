@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ingreso </title>
+        <title>Ingreso de Usuarios</title>
     </head>
     <body>
         

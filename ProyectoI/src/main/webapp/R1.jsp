@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Búsqueda de Cursos</title>
+        <title>Búsqueda de Cursos de la Universidad</title>
     </head>
     <body>
-
+        <div>
+            <form action="consultarMVC" method="POST">
+            Curso:<input type="text" name="placa">
+            <input type="submit" value="Consultar">
+            </form>
+        </div>
     </body>
 </html>
