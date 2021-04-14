@@ -12,6 +12,11 @@
         <title>Búsqueda de Cursos de la Universidad</title>
     </head>
     <body>
-
+        <div>
+            <form action="consultarMVC" method="POST">
+            Curso:<input type="text" name="placa">
+            <input type="submit" value="Consultar">
+            </form>
+        </div>
     </body>
 </html>
