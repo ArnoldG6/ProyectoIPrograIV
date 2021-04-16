@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Apr 16, 2021, 11:58:19 AM
+    Document   : R4
+    Created on : Apr 16, 2021, 12:09:03 PM
     Author     : arnoldgq
 --%>
 
@@ -12,8 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%@ include file="/presentation/Header.jsp" %>
         <h1>Hello World!</h1>
-        <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>

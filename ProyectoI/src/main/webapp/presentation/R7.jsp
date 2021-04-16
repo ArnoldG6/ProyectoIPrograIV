@@ -1,7 +1,7 @@
 <%-- 
-    Document   : R11
-    Created on : Apr 14, 2021, 3:16:07 PM
-    Author     : arnol
+    Document   : R7
+    Created on : Apr 16, 2021, 12:09:33 PM
+    Author     : arnoldgq
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registrar Notas</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>

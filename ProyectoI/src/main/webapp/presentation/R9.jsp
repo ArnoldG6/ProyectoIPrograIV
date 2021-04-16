@@ -1,7 +1,7 @@
 <%-- 
-    Document   : R4
-    Created on : Apr 14, 2021, 3:15:01 PM
-    Author     : arnol
+    Document   : R9
+    Created on : Apr 16, 2021, 12:09:45 PM
+    Author     : arnoldgq
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro de Estudiantes</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>
