@@ -6,13 +6,6 @@ package Model;
  */
 public class Teacher extends User {
 
-    public Teacher(){
-        this.name="";
-        this.id="";
-        this.email="";
-        this.telephoneNumber="";
-    }
-    
     public Teacher(String _name, String _id, String _email, String _telephoneNumber){
         this.name=_name;
         this.id=_id;
@@ -20,8 +13,12 @@ public class Teacher extends User {
         this.telephoneNumber=_telephoneNumber;
     }
     
+    public Teacher(){
+        this("","","","");
+    }
+    
     @Override
-    public void validPassword(String password) {
-        
+    public boolean validPassword(String password) {
+        return false;
     }
 }

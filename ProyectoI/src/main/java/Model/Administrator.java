@@ -11,12 +11,7 @@ package Model;
  */
 public class Administrator extends User {
 
-    public Administrator(){
-        this.name="";
-        this.id="";
-        this.email="";
-        this.telephoneNumber="";
-    }
+
     
     public Administrator(String _name, String _id, String _email, String _telephoneNumber){
         this.name=_name;
@@ -25,8 +20,12 @@ public class Administrator extends User {
         this.telephoneNumber=_telephoneNumber;
     }
     
+    public Administrator(){
+        this("","","","");
+    }
+    
     @Override
-    public void validPassword(String password) {
-        
+    public boolean validPassword(String password) {
+        return false;
     }
 }

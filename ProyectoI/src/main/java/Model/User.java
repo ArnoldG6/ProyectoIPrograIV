@@ -14,5 +14,5 @@ public abstract class User {
     public String email;
     public String telephoneNumber;
     
-    public abstract void validPassword(String password);
+    public abstract boolean validPassword(String password);
 }
