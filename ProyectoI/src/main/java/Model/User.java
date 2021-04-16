@@ -7,10 +7,21 @@ package Model;
  */
 public abstract class User implements java.io.Serializable {
 
+
     public String name;
     public String id;
     public String email;
     public String telephoneNumber;
+    public String pass;
+    
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     
     public String getName() {
         return name;
