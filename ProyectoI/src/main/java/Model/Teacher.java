@@ -1,22 +1,28 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author victo
  */
 public class Teacher extends User {
 
-    public Teacher(String _name, String _id, String _email, String _telephoneNumber){
-        this.name=_name;
-        this.id=_id;
-        this.email=_email;
-        this.telephoneNumber=_telephoneNumber;
+    public List<Groups> groups;
+
+    public Teacher(String na, String ID, String e, String telNum) {
+        this.name = na;
+        this.id = ID;
+        this.email = e;
+        this.telephoneNumber = telNum;
+        groups = new ArrayList<>();
     }
-    
-    public Teacher(){
-        this("","","","");
+
+    public Teacher() {
+        this("", "", "", "");
     }
-    
+
     @Override
     public boolean validPassword(String password) {
         return false;

@@ -11,19 +11,17 @@ package Model;
  */
 public class Administrator extends User {
 
+    public Administrator(String na, String ID, String e, String telNum) {
+        this.name = na;
+        this.id = ID;
+        this.email = e;
+        this.telephoneNumber = telNum;
+    }
 
-    
-    public Administrator(String _name, String _id, String _email, String _telephoneNumber){
-        this.name=_name;
-        this.id=_id;
-        this.email=_email;
-        this.telephoneNumber=_telephoneNumber;
+    public Administrator() {
+        this("", "", "", "");
     }
-    
-    public Administrator(){
-        this("","","","");
-    }
-    
+
     @Override
     public boolean validPassword(String password) {
         return false;
