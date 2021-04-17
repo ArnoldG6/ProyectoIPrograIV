@@ -6,6 +6,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Digite sus datos:</h1>
+        <form>
+            ID:
+            <input type ="text" id ="user_id" name ="id">
+            Contraseña:
+            <input type ="text" id ="user_pass" name ="pass">
+        </form>
+        
     </body>
 </html>

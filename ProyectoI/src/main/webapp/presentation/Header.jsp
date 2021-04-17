@@ -1,37 +1,23 @@
 <%@page import="Model.User"%>
-<% User user=  (User) session.getAttribute("user");  %>
+<% User user = (User) session.getAttribute("user");%>
 
 <header>
-    <div class="logo">
-        <span>Sistema de matricula</span>
-        <!--<img src="/Guia/images/logo.png">-->
+    <div>
+
+        <img src="/ProyectoI/images/books_img.jpg" height="175" width = "1280">
+        <h1>Sistema de matricula</h1>
     </div> 
-    <div class="menu">
+    <div>
         <ul> 
-              <li>
-                <a href="/Guia/presentation/Index.jsp">Inicio</a>
-              </li>
-                        <% if (user!=null){ %>
-                <li>
-                  <a href="/Guia/presentation/cliente/cuentas/show">Cuentas</a>
-                  <ul>  <!--submenu --> </ul>
-                </li>                        
-                <li >
-                  <a  href="/Guia/presentation/cliente/datos/show">User:<%=user.getId()%></a>
-                  <ul>  <!--submenu --> </ul>
-                </li> 
-                <li >
-                  <a  href="/Guia/presentation/login/logout">Logout</a>
-                  <ul>  <!--submenu --> </ul>
-                </li>                
-                        <% } %>
-                        <% if (user==null){%>
-                <li>
-                  <a href="/Guia/presentation/login/show">Login</a>
-                </li>
-                
-                        <% }%>             
-            </ul>
+            <li>
+                <a href="/ProyectoI/index.jsp">Inicio</a>
+            </li>
+            <li>
+                <a href="/ProyectoI/presentation/R2.jsp">Login</a>
+            </li>
+
+
+        </ul>
     </div>
-  </header>          
+</header>          
 
