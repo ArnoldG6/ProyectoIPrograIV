@@ -1,5 +1,5 @@
 
-package Model;
+package proyecto.model;
 
 /**
  *
@@ -7,12 +7,16 @@ package Model;
  */
 public abstract class User implements java.io.Serializable {
 
-
-    public String name;
-    public String id;
-    public String email;
-    public String telephoneNumber;
-    public String pass;
+    String name;
+    String id;
+    String email;
+    String telNum;
+    String pass;
+    String type;
+    
+    public String getType() {
+        return type;
+    }
     
     public String getPass() {
         return pass;
@@ -47,12 +51,12 @@ public abstract class User implements java.io.Serializable {
         this.email = email;
     }
 
-    public String getTelephoneNumber() {
-        return telephoneNumber;
+    public String getTelNum() {
+        return telNum;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void telNum(String telNum) {
+        this.telNum = telNum;
     }
 
 

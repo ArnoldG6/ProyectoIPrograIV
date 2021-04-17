@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package proyecto.model;
 
 /**
  *
@@ -11,11 +11,12 @@ package Model;
  */
 public class Administrator extends User {
 
-    public Administrator(String na, String ID, String e, String telNum) {
-        this.name = na;
-        this.id = ID;
-        this.email = e;
-        this.telephoneNumber = telNum;
+    public Administrator(String name, String id, String email, String telNum) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
+        this.telNum = telNum;
+        type = "ADM";
     }
 
     public Administrator() {

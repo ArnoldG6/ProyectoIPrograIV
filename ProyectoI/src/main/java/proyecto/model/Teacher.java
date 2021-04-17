@@ -1,4 +1,4 @@
-package Model;
+package proyecto.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,25 +7,21 @@ import java.util.List;
  *
  * @author victo
  */
-public class Student extends User {
-    
+public class Teacher extends User {
     public List<Groups> groups;
-
-    public Student(String na, String ID, String e, String telNum) {
-        this.name = na;
-        this.id = ID;
-        this.email = e;
-        this.telephoneNumber = telNum;
+    public Teacher(String name, String id, String email, String telNum) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
+        this.telNum = telNum;
         groups = new ArrayList<>();
+        type = "TEA";
     }
-
-    public Student() {
+    public Teacher() {
         this("", "", "", "");
     }
-
     @Override
     public boolean validPassword(String password) {
         return false;
     }
-
 }
