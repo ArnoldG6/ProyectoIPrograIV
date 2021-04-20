@@ -2,9 +2,14 @@
 <% User user = (User) session.getAttribute("user");%>
  <%@ include file="/presentation/Head.jsp" %>
 <header class="bg-dark text-center text-white">
-    <div>
-        <h1>Sistema de matricula</h1>
-        <img src="/ProyectoI/images/whiteboard_img.jpg" height="160" width = "960">
+    <div class="d-grid gap-3">
+        <div class="p-1 bg-dark border">
+            <h1>Sistema de matricula</h1>
+         </div>
+        <div class="p-3 bg-dark border">
+            <img src="/ProyectoI/images/whiteboard_img.jpg" height="140" width = "960">
+        </div>
+        <div></div>
     </div> 
     <div>
         <ul class ="list-inline"> 
