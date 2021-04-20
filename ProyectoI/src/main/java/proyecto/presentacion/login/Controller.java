@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto.presentacion.login;
 
 import proyecto.model.User;
@@ -41,7 +36,7 @@ public class Controller extends HttpServlet {
                 viewUrl=this.logout(request);
                 break;
         }
-        request.getRequestDispatcher(viewUrl).forward( request, response); 
+        request.getRequestDispatcher(viewUrl).forward(request, response); 
   }
 
     private String login(HttpServletRequest request) { 
@@ -89,17 +84,17 @@ public class Controller extends HttpServlet {
             User real = domainModel.seekUser(model.getCurrent().getId(),model.getCurrent().getPass());
             session.setAttribute("usuario", real);
             String viewUrl="";
-            /*
             //To do logic here
             switch(real.getType()){
-                case 1:
-                    viewUrl="/presentation/cliente/cuentas/show";
+                case "ADM":
+                    viewUrl="/presentation/index.jsp";
                     break;
-                case 2:
-                     viewUrl="";
-                    break;             
+                case "STU":
+                     viewUrl="/presentation/index.jsp";
+                    break;  
+                case "TEA":
+                    viewUrl="/presentation/index.jsp";
             }
-            */
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();

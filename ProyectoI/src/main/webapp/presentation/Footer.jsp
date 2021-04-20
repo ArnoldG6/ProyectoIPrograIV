@@ -1,4 +1,8 @@
-
-<footer>
-    <h11>SISTEMA DE MATRICULA CRD SOFT. </h1>
+<%@ include file="/presentation/Head.jsp" %>
+<footer class="footer">
+    <div class = "bg-dark text-center text-white">
+        <div class="container p-4 pb-0">
+            <p>SISTEMA DE MATRICULA 2021. CRD SOFT. </p>
+        </div>      
+    </div>
 </footer>
