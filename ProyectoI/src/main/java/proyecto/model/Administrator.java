@@ -11,12 +11,12 @@ package proyecto.model;
  */
 public class Administrator extends User {
 
-    public Administrator(String name, String id, String email, String telNum, String pas) {
+    public Administrator(String name, String id, String email, String telNum, String pass) {
         this.name = name;
         this.id = id;
         this.email = email;
         this.telNum = telNum;
-        this.pass = pas;
+        this.pass = pass;
         this.type = "ADM";
     }
 

@@ -58,21 +58,20 @@ public class Controller extends HttpServlet {
     
     Map<String,String> validar(HttpServletRequest request){
         Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("cedulaFld").isEmpty()){
-            errores.put("cedulaFld","Cedula requerida");
+        if (request.getParameter("id").isEmpty()){
+            errores.put("id","Cedula requerida");
         }
 
-        if (request.getParameter("claveFld").isEmpty()){
-            errores.put("claveFld","Clave requerida");
+        if (request.getParameter("pass").isEmpty()){
+            errores.put("pass","Contraseña requerida");
         }
         return errores;
     }
     
     void updateModel(HttpServletRequest request){
        Model model= (Model) request.getAttribute("model");
-       
-        model.getCurrent().setId(request.getParameter("cedulaFld"));
-        model.getCurrent().setPass(request.getParameter("claveFld"));
+        model.getCurrent().setId(request.getParameter("id"));
+        model.getCurrent().setPass(request.getParameter("pass"));
    }
 
         
@@ -81,8 +80,10 @@ public class Controller extends HttpServlet {
         proyecto.model.Model  domainModel = proyecto.model.Model.getInstance();
         HttpSession session = request.getSession(true);
         try {
+            System.out.printf("%s",model.getCurrent().getId());
+            System.out.printf("%s",model.getCurrent().getPass());
             User real = domainModel.seekUser(model.getCurrent().getId(),model.getCurrent().getPass());
-            session.setAttribute("usuario", real);
+            session.setAttribute("user", real);
             String viewUrl="";
             //To do logic here
             switch(real.getType()){
@@ -94,13 +95,16 @@ public class Controller extends HttpServlet {
                     break;  
                 case "TEA":
                     viewUrl="/presentation/index.jsp";
+                default: 
+                    viewUrl="/presentation/index.jsp";
+                    break;
             }
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaFld","Usuario o clave incorrectos");
-            errores.put("claveFld","Usuario o clave incorrectos");
+            errores.put("id","Usuario o contraseña incorrectos");
+            errores.put("pass","Usuario o contraseña incorrectos");
             return "/presentation/login/View.jsp"; 
         }        
     }   
@@ -111,7 +115,7 @@ public class Controller extends HttpServlet {
     
     public String logoutAction(HttpServletRequest request){
         HttpSession session = request.getSession(true);
-        session.removeAttribute("usuario");
+        session.removeAttribute("user");
         session.invalidate();
         return "/presentation/Index.jsp";   
     }
