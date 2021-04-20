@@ -23,15 +23,19 @@ public class Subject {
         this("", "");
     }
 
-    public void insertGroups() {
-
+    public void insertGroups(Groups gr) {
+        groups.add(gr);
     }
 
-    public void deleteGroups() {
-
+    public void deleteGroups(String nrc) {
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).getNrc().equals(nrc)) {
+                groups.remove(i);
+            }
+        }
     }
 
-    public String showGroups() {
+    public String showGroup(int pos) {
         return "";
     }
 

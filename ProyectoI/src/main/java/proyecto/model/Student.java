@@ -8,20 +8,31 @@ import java.util.List;
  * @author victo
  */
 public class Student extends User {
-    
+
     public List<Groups> groups;
 
-    public Student(String name, String id, String email, String telNum) {
+    public Student(String name, String id, String email, String telNum, String pas) {
         this.name = name;
         this.id = id;
         this.email = email;
         this.telNum = telNum;
-        groups = new ArrayList<>();
-        type = "STU";
+        this.pass = pas;
+        this.groups = new ArrayList<>();
+        this.type = "STU";
     }
 
     public Student() {
-        this("", "", "", "");
+        this("", "", "", "", "");
+    }
+
+    public String show() {
+        String f = "", tn = name, tc = id, numS = email, nr = telNum;
+        f = f + "Nombre del estudiante: " + tn
+                + "\n" + "Correo del estudiante: " + tc
+                + "\n" + "Correo: " + numS
+                + "\n" + "Numero de telefono: " + nr
+                + "\n";
+        return f;
     }
 
     @Override

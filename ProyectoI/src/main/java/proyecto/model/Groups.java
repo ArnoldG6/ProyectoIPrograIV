@@ -21,10 +21,6 @@ public class Groups {
         this.nrc = n;
     }
 
-    //public Groups() {//Sobre insertar por parametro si hacerlo o crear la lista nada mas?
-    //    this();
-    //}
-    
     public List<Student> getStudents() {
         return students;
     }
@@ -55,6 +51,22 @@ public class Groups {
 
     public void setNrc(String nrc) {
         this.nrc = nrc;
+    }
+
+    public String show() {
+        String f = "", tn = teacher.getName(), tc = teacher.getEmail(), numS = Double.toString(numStu), nr = nrc;
+        f = f 
+                + "Nombre del profesor: " + tn
+                + "\n" + "Correo del profesor: " + tc
+                + "\n" + "Numero de estudiantes matriculados: " + numS
+                + "\n" + "NRC: " + nr
+                + "\n" + "Lista de estudiantes:" 
+                + "\n";
+        for (int i = 0; i < students.size(); i++) {
+            f += students.get(i).show() + "\n";
+        }
+
+        return f;
     }
 
 }
