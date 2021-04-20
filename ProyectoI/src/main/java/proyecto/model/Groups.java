@@ -13,12 +13,30 @@ public class Groups {
     private Teacher teacher;
     private double numStu;
     private String nrc;
+    private boolean status;
 
     public Groups(Teacher tea, double numS, String n) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
         this.nrc = n;
+        this.status=true;
+    }
+
+    public void insertStudents(Student stu) {
+        students.add(stu);
+    }
+
+    public void deleteGroups(String id) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(id)) {
+                students.remove(i);
+            }
+        }
+    }
+
+    public String showStudent(int pos) {
+        return "";
     }
 
     public List<Student> getStudents() {
@@ -55,12 +73,12 @@ public class Groups {
 
     public String show() {
         String f = "", tn = teacher.getName(), tc = teacher.getEmail(), numS = Double.toString(numStu), nr = nrc;
-        f = f 
+        f = f
                 + "Nombre del profesor: " + tn
                 + "\n" + "Correo del profesor: " + tc
                 + "\n" + "Numero de estudiantes matriculados: " + numS
                 + "\n" + "NRC: " + nr
-                + "\n" + "Lista de estudiantes:" 
+                + "\n" + "Lista de estudiantes:"
                 + "\n";
         for (int i = 0; i < students.size(); i++) {
             f += students.get(i).show() + "\n";

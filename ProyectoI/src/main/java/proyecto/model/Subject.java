@@ -36,7 +36,16 @@ public class Subject {
     }
 
     public String showGroup(int pos) {
-        return "";
+        return groups.get(pos).show();
+    }
+    
+    public String show(){
+        String f = "", tn = idSub, tc = nameSubj, numS = Integer.toString(groups.size());
+        f = f + "Identificador de curso: " + tn
+                + "\n" + "Nombre del curso: " + tc
+                + "\n" + "Grupos disponibles: " + numS
+                + "\n";
+        return f;
     }
 
     public List<Groups> getGroups() {
