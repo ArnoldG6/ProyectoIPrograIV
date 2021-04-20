@@ -5,4 +5,24 @@
             <p>SISTEMA DE MATRICULA 2021. CRD SOFT. </p>
         </div>      
     </div>
+    <div>
+        
+    </div>
+    <div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div><div>
+        
+    </div>
 </footer>
