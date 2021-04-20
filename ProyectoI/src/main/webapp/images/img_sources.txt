@@ -1,2 +1,1 @@
- 
-<!-- Source of books_img.jpg : https://pixabay.com/photos/books-stack-read-stack-of-books-690219/ -->
+Source of whiteboard_img.jpg: "https://pixabay.com/illustrations/geometry-mathematics-cube-1023846/".
