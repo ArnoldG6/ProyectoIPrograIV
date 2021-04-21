@@ -11,14 +11,14 @@ public class Student extends User {
 
     public List<Groups> groups;
 
-    public Student(String name, String id, String email, String telNum, String pas) {
+    public Student(String name, String id, String email, String telNum, String pass) {
         this.name = name;
         this.id = id.toUpperCase();
         this.email = email;
         this.telNum = telNum;
-        this.pass = pas;
+        this.pass = pass;
         this.groups = new ArrayList<>();
-        this.type = "STU";
+        this.type = 2;
     }
 
     public Student() {
@@ -35,9 +35,6 @@ public class Student extends User {
         return f;
     }
 
-    @Override
-    public boolean validPassword(String password) {
-        return false;
-    }
+
 
 }

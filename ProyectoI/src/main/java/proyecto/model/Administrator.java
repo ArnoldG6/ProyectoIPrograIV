@@ -17,15 +17,11 @@ public class Administrator extends User {
         this.email = email;
         this.telNum = telNum;
         this.pass = pass;
-        this.type = "ADM";
+        this.type = 3;
     }
 
     public Administrator() {
         this("", "", "", "", "");
     }
 
-    @Override
-    public boolean validPassword(String password) {
-        return false;
-    }
 }

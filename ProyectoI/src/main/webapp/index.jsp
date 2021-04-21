@@ -13,7 +13,7 @@
     </head>
     <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
         <%@ include file="/presentation/Header.jsp" %>
-        <h1>¡Bienvenido!</h1>
+        <h1 class = "text-center">¡Bienvenido!</h1>
         
         <%@ include file="/presentation/Footer.jsp" %>
     </body>

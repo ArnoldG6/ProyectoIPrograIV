@@ -1,6 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package proyecto.presentacion.login;
 
+
 import proyecto.model.User;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jsanchez
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show","/presentation/login/login","/presentation/login/logout"})
+@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/login"})
 public class Controller extends HttpServlet {
 
   protected void processRequest(HttpServletRequest request, 
@@ -25,31 +32,25 @@ public class Controller extends HttpServlet {
         request.setAttribute("model", new Model()); 
         
         String viewUrl="";
-        switch(request.getServletPath()){
-            case "/presentation/login/show":
-                viewUrl=this.show(request);
-                break;              
+        switch(request.getServletPath()){             
             case "/presentation/login/login":
                 viewUrl=this.login(request);
                 break;            
-            case "/presentation/login/logout":
-                viewUrl=this.logout(request);
-                break;
         }
-        request.getRequestDispatcher(viewUrl).forward(request, response); 
+        request.getRequestDispatcher(viewUrl).forward( request, response); 
   }
 
     private String login(HttpServletRequest request) { 
         try{
-            Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){
+            //Map<String,String> errores =  this.validar(request);
+            //if(errores.isEmpty()){
                 this.updateModel(request);          
                 return this.loginAction(request);
-            }
-            else{
-                request.setAttribute("errores", errores);
-                return "/presentation/login/View.jsp"; 
-            }            
+            //}
+            //else{
+                //request.setAttribute("errores", errores);
+                //return "/presentation/login/View.jsp"; 
+            //}            
         }
         catch(Exception e){
             return "/presentation/Error.jsp";             
@@ -63,13 +64,13 @@ public class Controller extends HttpServlet {
         }
 
         if (request.getParameter("pass").isEmpty()){
-            errores.put("pass","Contraseña requerida");
+            errores.put("pass","Clave requerida");
         }
         return errores;
     }
     
     void updateModel(HttpServletRequest request){
-       Model model= (Model) request.getAttribute("model");
+        Model model= (Model) request.getAttribute("model"); 
         model.getCurrent().setId(request.getParameter("id"));
         model.getCurrent().setPass(request.getParameter("pass"));
    }
@@ -77,33 +78,33 @@ public class Controller extends HttpServlet {
         
     public String loginAction(HttpServletRequest request) {
         Model model= (Model) request.getAttribute("model");
-        proyecto.model.Model  domainModel = proyecto.model.Model.getInstance();
+        proyecto.model.Model  domainModel =  proyecto.model.Model.getInstance();
         HttpSession session = request.getSession(true);
         try {
-            System.out.printf("%s",model.getCurrent().getId());
-            System.out.printf("%s",model.getCurrent().getPass());
             User real = domainModel.seekUser(model.getCurrent().getId(),model.getCurrent().getPass());
+            if(real == null) throw new Exception();
             session.setAttribute("user", real);
             String viewUrl="";
             switch(real.getType()){
-                case "ADM":
-                    viewUrl="/presentation/index.jsp";
+                case 0:
+                    viewUrl="/ProyectoI/";
                     break;
-                case "STU":
-                     viewUrl="/presentation/index.jsp";
-                    break;  
-                case "TEA":
-                    viewUrl="/presentation/index.jsp";
-                default: 
-                    viewUrl="/presentation/index.jsp";
+                case 1:
+                    viewUrl="/ProyectoI/";
                     break;
+                case 2:
+                     viewUrl="/ProyectoI/";
+                    break;      
+                case 3:
+                     viewUrl="/ProyectoI/";
+                    break; 
             }
             return viewUrl;
         } catch (Exception ex) {
-            Map<String,String> errores = new HashMap<>();
-            request.setAttribute("errores", errores);
-            errores.put("id","Usuario o contraseña incorrectos");
-            errores.put("pass","Usuario o contraseña incorrectos");
+            //Map<String,String> errores = new HashMap<>();
+            //request.setAttribute("errores", errores);
+            //errores.put("id","Usuario o clave incorrectos");
+            //errores.put("pass","Usuario o clave incorrectos");
             return "/presentation/login/View.jsp"; 
         }        
     }   
@@ -114,7 +115,7 @@ public class Controller extends HttpServlet {
     
     public String logoutAction(HttpServletRequest request){
         HttpSession session = request.getSession(true);
-        session.removeAttribute("user");
+        session.removeAttribute("usuario");
         session.invalidate();
         return "/presentation/Index.jsp";   
     }
@@ -157,13 +158,13 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+        
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+        
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -18,15 +18,12 @@ public class Teacher extends User {
         this.telNum = telNum;
         this.pass = pas;
         this.groups = new ArrayList<>();
-        this.type = "TEA";
+        this.type = 1;
     }
 
     public Teacher() {
         this("", "", "", "", "");
     }
 
-    @Override
-    public boolean validPassword(String password) {
-        return false;
-    }
+ 
 }

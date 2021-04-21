@@ -15,20 +15,30 @@ import proyecto.model.User;
  * @author jsanchez
  */
 public final class Model {
+
     User current;
 
     public Model() {
         this.reset();
     }
-    
-    public void reset(){ 
-       switch(current.getType()){
-           case "ADM": setCurrent(new Administrator()); break;
-           case "STU": setCurrent(new Student()); break;
-           case "TEA": setCurrent(new Teacher()); break;
-       }    
+
+    public void reset() {
+        if (current != null) {
+            switch (current.getType()) {
+                case 3:
+                    setCurrent(new Administrator());
+                    return;
+                case 2:
+                    setCurrent(new Student());
+                    return;
+                case 1:
+                    setCurrent(new Teacher());
+                    return;
+            }
+        }
+        setCurrent(new User());
     }
-    
+
     public User getCurrent() {
         return current;
     }
@@ -36,5 +46,5 @@ public final class Model {
     public void setCurrent(User current) {
         this.current = current;
     }
-   
+
 }

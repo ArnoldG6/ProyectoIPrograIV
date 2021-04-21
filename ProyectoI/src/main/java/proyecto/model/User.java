@@ -1,23 +1,32 @@
-
 package proyecto.model;
 
 /**
  *
  * @author victo
  */
-public abstract class User implements java.io.Serializable {
+public class User implements java.io.Serializable {
 
     String name;
     String id;
     String email;
     String telNum;
     String pass;
-    String type;
-    
-    public String getType() {
+    int type;
+
+    public User() {
+        name="";
+        id="";
+        email="";
+        telNum="";
+        pass="";
+        type=0;
+
+    }
+
+    public int getType() {
         return type;
     }
-    
+
     public String getPass() {
         return pass;
     }
@@ -26,7 +35,6 @@ public abstract class User implements java.io.Serializable {
         this.pass = pass;
     }
 
-    
     public String getName() {
         return name;
     }
@@ -59,7 +67,4 @@ public abstract class User implements java.io.Serializable {
         this.telNum = telNum;
     }
 
-
-    
-    public abstract boolean validPassword(String password);
 }
