@@ -82,21 +82,20 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         try {
             User real = domainModel.seekUser(model.getCurrent().getId(),model.getCurrent().getPass());
-            if(real == null) throw new Exception();
             session.setAttribute("user", real);
             String viewUrl="";
             switch(real.getType()){
                 case 0:
-                    viewUrl="/ProyectoI/";
+                    viewUrl="/ProyectoI/presentation/login/View.jsp";
                     break;
                 case 1:
-                    viewUrl="/ProyectoI/";
+                    viewUrl="/ProyectoI/presentation/login/View.jsp";
                     break;
                 case 2:
-                     viewUrl="/ProyectoI/";
+                     viewUrl="/ProyectoI/presentation/login/View.jsp";
                     break;      
                 case 3:
-                     viewUrl="/ProyectoI/";
+                     viewUrl="/ProyectoI/presentation/login/View.jsp";
                     break; 
             }
             return viewUrl;

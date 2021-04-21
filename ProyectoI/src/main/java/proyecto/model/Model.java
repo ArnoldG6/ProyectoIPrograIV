@@ -35,47 +35,49 @@ public class Model {
         }
         return instance;
     }
-    HashMap<String, User> getUsersMap(){
+
+    HashMap<String, User> getUsersMap() {
         HashMap<String, User> users = new HashMap<String, User>();
         users.putAll(students);
         users.putAll(admins);
         users.putAll(teachers);
         return users;
     }
+
     public User seekUser(String cedula, String clave) throws Exception {
         HashMap<String, User> users = getUsersMap();
-        User u;
-        for (Map.Entry<String, User> set : users.entrySet()) {
-            u = users.get(cedula);
-            if(u != null)
-                if (u.getId().equals(cedula)) 
-                    if(this.valPass(u,clave))
-                        return u;
-            else 
-                throw new Exception("El usuario digitado no existe");
-            
+        User u = users.get(cedula);
+        if (u != null) {
+            if (u.getId().equals(cedula)) {
+                if (this.valPass(u, clave)) 
+                    return u;
+                 else 
+                    throw new Exception("El usuario digitado no existe");
+                
+            }
         }
+
         return null;
     }
 
     public boolean valPass(User u, String pass) throws Exception {
         return u.getPass().equals(pass);
     }
-    
-    public String showSubjects(){
+
+    public String showSubjects() {
         return subjects.toString();
     }
-    
-    public String showSubject(String id){
+
+    public String showSubject(String id) {
         return subjects.get(id).show();
     }
-    
-    public String randomPass(){
+
+    public String randomPass() {
         return "";
     }
-    
-    public String insertStudent(String id, String nom, String em, String cllph){
+
+    public String insertStudent(String id, String nom, String em, String cllph) {
         return "";
     }
-    
+
 }
