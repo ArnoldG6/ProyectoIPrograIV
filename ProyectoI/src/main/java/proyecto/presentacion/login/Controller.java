@@ -70,9 +70,12 @@ public class Controller extends HttpServlet {
     }
     
     void updateModel(HttpServletRequest request){
+        
         Model model= (Model) request.getAttribute("model"); 
         model.getCurrent().setId(request.getParameter("id"));
         model.getCurrent().setPass(request.getParameter("pass"));
+        System.out.printf(request.getParameter("id"));
+        System.out.printf(request.getParameter("pass"));
    }
 
         
@@ -86,16 +89,16 @@ public class Controller extends HttpServlet {
             String viewUrl="";
             switch(real.getType()){
                 case 0:
-                    viewUrl="/ProyectoI/presentation/login/View.jsp";
+                    viewUrl="/presentation/login/View.jsp";
                     break;
                 case 1:
-                    viewUrl="/ProyectoI/presentation/login/View.jsp";
+                    viewUrl="/presentation/login/View.jsp";
                     break;
                 case 2:
-                     viewUrl="/ProyectoI/presentation/login/View.jsp";
+                     viewUrl="/presentation/login/View.jsp";
                     break;      
                 case 3:
-                     viewUrl="/ProyectoI/presentation/login/View.jsp";
+                     viewUrl="/presentation/login/View.jsp";
                     break; 
             }
             return viewUrl;
