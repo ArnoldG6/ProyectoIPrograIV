@@ -15,11 +15,11 @@ public interface DAO<K, V> { // DAO (Data Access Object Interface)
     // U(pdate)     M(odificar)
     // D(elete)     E(liminar)
     
-    public void add(K id, V valor);
+    public void add(K id, V value);
 
-    public V recover(K id,K contra);
+    public V recover(K id,K pass);
 
-    public void update(K id, V valor);
+    public void update(K id, V value);
 
     public void delete(K id);
 
