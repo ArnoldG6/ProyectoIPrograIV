@@ -5,10 +5,70 @@
  */
 package proyecto.model.entities;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import proyecto.model.Administrator;
+
 /**
  *
  * @author GONCAR4
  */
-public class AdministratorsDAO {
+public class AdministratorsDAO implements DAO<String, Administrator> {
+    
+    private static final String CMD_ESTABLECER_CONECTADO
+            = "UPDATE Usuario SET conectado = TRUE"
+            + " WHERE idUsuario = ?; ";
+    private static final String CMD_ESTABLECER_DESCONECTADO
+            = "UPDATE Usuario SET conectado = FALSE"
+            + " WHERE idUsuario = ?; ";
+    private static final String CMD_CUENTA_REGISTROS
+            = "SELECT COUNT(*) AS cuenta FROM Usuario; ";
+    private DataBases bd;
+//String name, String id, String email, String telNum, String pass
+    @Override
+    public List<Administrator> listAll() {
+        List<Administrator> u = new ArrayList<>();
+        try (Connection cnx = bd.getConnection();
+                Statement stm = cnx.createStatement();
+                ResultSet rs = stm.executeQuery(AdministratorsCRUD.CMD_LIST)) {
+            while (rs.next()) {
+//                Administrator us = new Administrator(rs.getString("idUsuario"), rs.getString("contra"),
+//                        rs.getString("email"));
+//                if (rs.getBoolean("conectado")) {
+//                    us.setConectado(true);
+//                } else {
+//                    us.setConectado(false);
+//                }
+//                u.add(us);
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+        }
+        return u;
+    }
+
+    @Override
+    public void add(String id, Administrator value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Administrator recover(String id, String pass) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(String id, Administrator value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

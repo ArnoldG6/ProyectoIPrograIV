@@ -24,4 +24,6 @@ public class Administrator extends User {
         this("", "", "", "", "");
     }
 
+    
+
 }
