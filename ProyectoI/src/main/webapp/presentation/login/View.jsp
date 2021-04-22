@@ -8,7 +8,7 @@
     <head>
         <%@ include file="/presentation/Head.jsp" %>
         <% Model model = (Model) request.getAttribute("model");
-                   %>
+        %>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingresar</title>
@@ -26,9 +26,14 @@
                     <div>&nbsp;</div>
                     <button class ="btn btn-outline-light form-control w-50">Ingresar los datos</button>
                 </div>
-                
+
             </div>
         </form>
+        <div class = "col-md-12 text-center">
+            <a class="link-info" href="/ProyectoI/presentation/register/View.jsp">
+                <label for "regBtn" >¿No tiene una cuenta? ¡Registrese aquí!</label>
+            </a>
+        </div>
         <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>
