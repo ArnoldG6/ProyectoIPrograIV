@@ -15,6 +15,7 @@ public class Model {
     HashMap<String, Subject> subjects;
     HashMap<String, Teacher> teachers;
     HashMap<String, Administrator> admins;
+    //HashMap<String, String> passwords; //Lleva el registro de todas las claves
 
     public Model() {
         students = new HashMap<String, Student>();
@@ -58,6 +59,14 @@ public class Model {
     
     public String showSubject(String id){
         return subjects.get(id).show();
+    }
+    
+    public String randomPass(){
+        return "";
+    }
+    
+    public String returnPass(String id, String nom, String em, String cllph){
+        return "";
     }
     
 }
