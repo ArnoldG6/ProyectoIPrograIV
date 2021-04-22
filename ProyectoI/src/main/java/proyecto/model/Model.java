@@ -15,7 +15,6 @@ public class Model {
     HashMap<String, Subject> subjects;
     HashMap<String, Teacher> teachers;
     HashMap<String, Administrator> admins;
-    //HashMap<String, String> passwords; //Lleva el registro de todas las claves
 
     public Model() {
         students = new HashMap<String, Student>();
@@ -75,7 +74,7 @@ public class Model {
         return "";
     }
     
-    public String returnPass(String id, String nom, String em, String cllph){
+    public String insertStudent(String id, String nom, String em, String cllph){
         return "";
     }
     
