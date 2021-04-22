@@ -1,17 +1,13 @@
-<%-- 
-    Document   : R3
-    Created on : Apr 16, 2021, 12:08:55 PM
-    Author     : arnoldgq
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Matricular cursos</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
+        <%@ include file="/presentation/Header.jsp" %>
+        <h1 class = "text-center">Matricular cursos</h1>       
+        <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>

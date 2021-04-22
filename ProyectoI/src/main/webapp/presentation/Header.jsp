@@ -7,7 +7,7 @@
             <h1>Sistema de matricula</h1>
          </div>
         <div class="p-3 bg-dark border">
-            <img src="/ProyectoI/images/whiteboard_img.jpg" height="140" width = "960">
+            <img src="/ProyectoI/images/whiteboard_img.jpg" height="120" width = "960">
         </div>
         <div></div>
     </div> 
