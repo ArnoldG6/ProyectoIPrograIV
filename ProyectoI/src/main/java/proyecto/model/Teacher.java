@@ -13,7 +13,7 @@ public class Teacher extends User {
 
     public Teacher(String name, String id, String email, String telNum, String pas) {
         this.name = name;
-        this.id = id;
+        this.id = id.toUpperCase(); //Ej: a00 vs A00
         this.email = email;
         this.telNum = telNum;
         this.pass = pas;

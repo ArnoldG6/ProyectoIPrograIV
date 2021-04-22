@@ -13,7 +13,7 @@ public class Administrator extends User {
 
     public Administrator(String name, String id, String email, String telNum, String pass) {
         this.name = name;
-        this.id = id;
+        this.id = id.toUpperCase();
         this.email = email;
         this.telNum = telNum;
         this.pass = pass;

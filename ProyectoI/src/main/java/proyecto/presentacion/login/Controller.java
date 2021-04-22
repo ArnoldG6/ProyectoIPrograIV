@@ -85,7 +85,6 @@ public class Controller extends HttpServlet {
             User real = domainModel.seekUser(model.getCurrent().getId(),model.getCurrent().getPass());
             session.setAttribute("user", real);
             String viewUrl="";
-            //To do logic here
             switch(real.getType()){
                 case "ADM":
                     viewUrl="/presentation/index.jsp";

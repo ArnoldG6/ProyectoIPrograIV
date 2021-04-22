@@ -5,7 +5,7 @@ package proyecto.model;
  *
  * @author victo
  */
-public class User implements java.io.Serializable {
+public abstract class User implements java.io.Serializable {
 
     String name;
     String id;
@@ -13,16 +13,6 @@ public class User implements java.io.Serializable {
     String telNum;
     String pass;
     String type;
-    
-    public User() {
-        name = ""; 
-        id = "";
-        email = "";
-        telNum = "";
-        pass = "";
-        type ="";
-    }
-
     
     public String getType() {
         return type;
@@ -71,7 +61,5 @@ public class User implements java.io.Serializable {
 
 
     
-    public boolean validPassword(String password){
-        return false;
-    }
+    public abstract boolean validPassword(String password);
 }

@@ -13,7 +13,7 @@ public class Student extends User {
 
     public Student(String name, String id, String email, String telNum, String pas) {
         this.name = name;
-        this.id = id;
+        this.id = id.toUpperCase();
         this.email = email;
         this.telNum = telNum;
         this.pass = pas;

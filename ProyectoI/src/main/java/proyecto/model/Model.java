@@ -35,7 +35,7 @@ public class Model {
         }
         return instance;
     }
-    HashMap<String, User> getUsersList(){
+    HashMap<String, User> getUsersMap(){
         HashMap<String, User> users = new HashMap<String, User>();
         users.putAll(students);
         users.putAll(admins);
@@ -43,13 +43,15 @@ public class Model {
         return users;
     }
     public User seekUser(String cedula, String clave) throws Exception {
-        HashMap<String, User> users = getUsersList();
+        HashMap<String, User> users = getUsersMap();
         User u;
         for (Map.Entry<String, User> set : users.entrySet()) {
-            if ((u = users.get(cedula)) != null) 
-                if(this.valPass(u,clave))
-                    return u;
-             else 
+            u = users.get(cedula);
+            if(u != null)
+                if (u.getId().equals(cedula)) 
+                    if(this.valPass(u,clave))
+                        return u;
+            else 
                 throw new Exception("El usuario digitado no existe");
             
         }
