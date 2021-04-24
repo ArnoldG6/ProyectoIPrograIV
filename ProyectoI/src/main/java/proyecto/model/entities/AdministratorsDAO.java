@@ -21,6 +21,7 @@ import proyecto.model.Administrator;
  */
 public class AdministratorsDAO implements DAO<String, Administrator> {
     private BaseDatos bd;
+    private static AdministratorsDAO instance = null;
     @Override
     public List<Administrator> listAll() {
         List<Administrator> u = new ArrayList<>();
@@ -40,7 +41,12 @@ public class AdministratorsDAO implements DAO<String, Administrator> {
         System.out.println();
         return u;
     }
-
+    public static AdministratorsDAO getInstance() {
+        if (instance == null) {
+            instance = new AdministratorsDAO();
+        }
+        return instance;
+    }
 
     @Override
     public void add(String id, Administrator value) {
