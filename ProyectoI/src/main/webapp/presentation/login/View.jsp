@@ -7,9 +7,6 @@
 <html>
     <head>
         <%@ include file="/presentation/Head.jsp" %>
-        <% Model model = (Model) request.getAttribute("model");
-        %>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingresar</title>
     </head>
