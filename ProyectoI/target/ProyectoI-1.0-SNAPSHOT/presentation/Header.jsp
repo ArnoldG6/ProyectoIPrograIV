@@ -1,5 +1,8 @@
+<%-- 
 <%@page import="proyecto.model.User"%>
 <% User user = (User) session.getAttribute("user");%>
+--%>
+
  <%@ include file="/presentation/Head.jsp" %>
 <header class="bg-dark text-center text-white">
     <div class="d-grid gap-3">

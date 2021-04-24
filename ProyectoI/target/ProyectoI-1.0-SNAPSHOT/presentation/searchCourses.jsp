@@ -1,9 +1,3 @@
-<%-- 
-    Document   : R1
-    Created on : Apr 16, 2021, 12:08:42 PM
-    Author     : arnoldgq
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
