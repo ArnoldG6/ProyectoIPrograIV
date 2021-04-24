@@ -20,20 +20,7 @@ import proyecto.model.Administrator;
  * @author GONCAR4
  */
 public class AdministratorsDAO implements DAO<String, Administrator> {
-
-    /*
-    private static final String CMD_ESTABLECER_CONECTADO
-            = "UPDATE Usuario SET conectado = TRUE"
-            + " WHERE idUsuario = ?; ";
-    private static final String CMD_ESTABLECER_DESCONECTADO
-            = "UPDATE Usuario SET conectado = FALSE"
-            + " WHERE idUsuario = ?; ";
-    private static final String CMD_CUENTA_REGISTROS
-            = "SELECT COUNT(*) AS cuenta FROM Usuario; ";
-     */
     private BaseDatos bd;
-//String name, String id, String email, String telNum, String pass
-
     @Override
     public List<Administrator> listAll() {
         List<Administrator> u = new ArrayList<>();
