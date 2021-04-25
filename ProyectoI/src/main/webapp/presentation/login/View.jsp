@@ -13,7 +13,7 @@
     <body  class="d-flex flex-column min-vh-100 bg-dark text-white">
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Digite sus credenciales: </h1>
-        <form class = "container center_div w-75 p-3"name = "form" action="/presentation/login/login" method="POST">
+        <form name = "form" class = "container center_div w-75 p-3" action="/ProyectoI/presentation/login/login" method="post">
             <div class = "form-group">
                 <label for = "id">&nbsp;Identificación:</label>
                 <input type="text" class ="form-control  text-center" name = "id" placeholder = "Número de identificación" id = "id">

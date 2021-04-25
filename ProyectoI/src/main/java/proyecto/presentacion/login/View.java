@@ -12,13 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import proyecto.model.entities.AdministratorsDAO;
+import proyecto.model.entities.AdministratorDAO;
 
 /**
  *
  * @author arnoldgq
  */
-@WebServlet(name = "View", urlPatterns = {"/mostrar_usuario"})
+@WebServlet(name = "Login_View", urlPatterns = {"/presentation/login/login/mostrar_usuario"})
 public class View extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,11 +31,19 @@ public class View extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Usuario</h1>");
-            out.println("Usuario digitado: "+request.getParameter("id"));
-            out.println("Contraseña digitada: "+request.getParameter("pass"));
-            out.println(AdministratorsDAO.getInstance().listAll().toString());
+            out.println("<div>Usuario digitado: "+request.getParameter("id")+"</div>");
+            out.println("<div>Contraseña digitada: "+request.getParameter("pass")+"</div>");
+            try{
+                out.println("<div>Cantidad de administradores: "+ String.valueOf
+                (AdministratorDAO.getInstance().listAll().size())+"/div");
+            }catch(Exception e){
+                
+                out.println("<div>ERROR EN LA BD. Excepcion: "+e.getMessage()+ "</div>");
+            }
+
             out.println("</body>");
             out.println("</html>");
+            
         }
     }
 

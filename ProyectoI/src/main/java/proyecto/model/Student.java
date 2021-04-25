@@ -12,7 +12,7 @@ public class Student extends User {
     public List<Groups> groups;
 
     public Student(String name, String id, String email, String telNum, String pass) {
-        this.name = name;
+        this.username = name;
         this.id = id.toUpperCase();
         this.email = email;
         this.telNum = telNum;
@@ -26,7 +26,7 @@ public class Student extends User {
     }
 
     public String show() {
-        String f = "", tn = name, tc = id, numS = email, nr = telNum;
+        String f = "", tn = username, tc = id, numS = email, nr = telNum;
         f = f + "Nombre del estudiante: " + tn
                 + "\n" + "Correo del estudiante: " + tc
                 + "\n" + "Correo: " + numS

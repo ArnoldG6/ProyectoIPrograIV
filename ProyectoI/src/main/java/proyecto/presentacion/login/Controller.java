@@ -25,16 +25,13 @@ public class Controller extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
          throws ServletException, IOException {
-      
-           response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String id = request.getParameter("id");
-            String pass = request.getParameter("pass");
-            System.out.println("ID:" + id);
-            System.out.println("Pass:" + pass);
-            request.getRequestDispatcher("mostrar_usuario").forward(request,response);
+            //String id = request.getParameter("id");
+            //S/tring pass = request.getParameter("pass");
+            request.getRequestDispatcher("/presentation/login/login/mostrar_usuario").forward(request,response);
+        }catch(Exception e){
+            throw e;
         }
-        
 
   }
 

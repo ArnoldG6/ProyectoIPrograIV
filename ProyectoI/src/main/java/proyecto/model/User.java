@@ -6,7 +6,7 @@ package proyecto.model;
  */
 public class User implements java.io.Serializable {
 
-    String name;
+    String username;
     String id;
     String email;
     String telNum;
@@ -14,7 +14,7 @@ public class User implements java.io.Serializable {
     int type;
 
     public User() {
-        name="";
+        username="";
         id="";
         email="";
         telNum="";
@@ -36,11 +36,11 @@ public class User implements java.io.Serializable {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getId() {

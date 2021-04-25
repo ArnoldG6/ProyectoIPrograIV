@@ -12,7 +12,7 @@ public class Teacher extends User {
     public List<Groups> groups;
 
     public Teacher(String name, String id, String email, String telNum, String pas) {
-        this.name = name;
+        this.username = name;
         this.id = id.toUpperCase(); //Ej: a00 vs A00
         this.email = email;
         this.telNum = telNum;
