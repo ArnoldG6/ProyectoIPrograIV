@@ -22,11 +22,11 @@ public class Administrator extends User {
     @Override
     public String toString(){
         StringBuilder s = new StringBuilder();
-        s.append("Username:" + username+".\n");
-        s.append("ID:" + id+".\n");
-        s.append("Email:" + email+".\n");
-        s.append("Password:" + pass+".\n");
-        s.append("Type:" + String.valueOf(type)+".\n");
+        s.append("Username:").append(username).append(".\n");
+        s.append("ID:").append(id).append(".\n");
+        s.append("Email: ").append(email).append(".\n");
+        s.append("Password:").append(pass).append(".\n");
+        s.append("Type:").append(String.valueOf(type)).append(".\n");
         return s.toString();
     }
     public Administrator() {

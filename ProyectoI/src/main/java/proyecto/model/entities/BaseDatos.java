@@ -36,10 +36,14 @@ public class BaseDatos extends MysqlDataSource {
         if (instancia == null) {
             try {
                 instancia = new BaseDatos();
+                System.out.println("HOLA 1\n");
             } catch (IOException ex) { 
+                System.out.println("HOLA 2\n");
                 throw ex;
+                
             }
         }
+        System.out.println("HOLA 3\n");
         return instancia;
     }
 

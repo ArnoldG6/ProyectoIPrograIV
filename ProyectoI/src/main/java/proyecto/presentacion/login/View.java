@@ -24,6 +24,7 @@ public class View extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -34,10 +35,11 @@ public class View extends HttpServlet {
             out.println("<div>Usuario digitado: "+request.getParameter("id")+"</div>");
             out.println("<div>Contraseña digitada: "+request.getParameter("pass")+"</div>");
             try{
+                System.out.println("HOLA 12");
                 out.println("<div>Cantidad de administradores: "+ String.valueOf
                 (AdministratorDAO.getInstance().listAll().size())+"/div");
             }catch(Exception e){
-                
+                System.out.println("HOLA 13");
                 out.println("<div>ERROR EN LA BD. Excepcion: "+e.getMessage()+ "</div>");
             }
 

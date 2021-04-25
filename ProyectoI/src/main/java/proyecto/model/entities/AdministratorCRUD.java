@@ -13,7 +13,7 @@ public class AdministratorCRUD {
     protected static final String CMD_UPDATE_ADMIN_PASS
             = "UPDATE administrators SET pass = ?"
             + "WHERE admin_id = ?; ";
-        protected static final String CMD_UPDATE_ADMIN_iD
+        protected static final String CMD_UPDATE_ADMIN_ID
             = "UPDATE administrators SET pass = ?"
             + "WHERE admin_id = ?; ";
         protected static final String CMD_DELETE
