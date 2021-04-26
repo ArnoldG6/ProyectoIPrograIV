@@ -4,4 +4,4 @@ SELECT DATABASE();
 USE universidad;
 select * from information_schema.schemata; 
 show databases;
-
+select count(*) as total_admins from administrators;

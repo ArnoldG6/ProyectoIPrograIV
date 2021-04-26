@@ -4,12 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto.presentacion.login;
-
-import proyecto.model.Administrator;
-import proyecto.model.Student;
-import proyecto.model.Teacher;
 import proyecto.model.User;
-
 /**
  *
  * @author jsanchez
@@ -22,20 +17,17 @@ public final class Model {
         this.reset();
     }
 
-    public void reset() {
-        if (current != null) {
-            switch (current.getType()) {
-                case 3:
-                    setCurrent(new Administrator());
-                    return;
-                case 2:
-                    setCurrent(new Student());
-                    return;
-                case 1:
-                    setCurrent(new Teacher());
-                    return;
-            }
+    public void login(String id, String pass) throws Exception{
+        try{
+            User u = proyecto.model.Model.getInstance().seekUser(id, pass);
+            if (u != null)
+                current = u;
+        }catch(Exception e){
+            throw e;
         }
+    }
+  
+    public void reset() {
         setCurrent(new User());
     }
 
@@ -46,5 +38,6 @@ public final class Model {
     public void setCurrent(User current) {
         this.current = current;
     }
+
 
 }

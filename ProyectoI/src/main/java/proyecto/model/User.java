@@ -22,7 +22,9 @@ public class User implements java.io.Serializable {
         type=0;
 
     }
-
+    public boolean valPass(String pass){
+        return (this.pass).equals(pass);
+    }
     public int getType() {
         return type;
     }

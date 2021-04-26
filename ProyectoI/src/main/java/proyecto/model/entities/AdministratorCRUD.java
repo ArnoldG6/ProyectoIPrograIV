@@ -1,6 +1,7 @@
 package proyecto.model.entities;
 
 public class AdministratorCRUD {
+
     protected static final String CMD_LIST
             = "SELECT admin_id, username, email, pho_num, pass FROM administrators;";
     protected static final String CMD_ADD
@@ -12,11 +13,12 @@ public class AdministratorCRUD {
     protected static final String CMD_UPDATE_ADMIN_PASS
             = "UPDATE administrators SET pass = ?"
             + "WHERE admin_id = ?; ";
-        protected static final String CMD_UPDATE_ADMIN_ID
+    protected static final String CMD_UPDATE_ADMIN_ID
             = "UPDATE administrators SET pass = ?"
             + "WHERE admin_id = ?; ";
-        protected static final String CMD_DELETE
+    protected static final String CMD_DELETE
             = "DELETE FROM administrators "
             + "WHERE admin_id = ?; ";
+    protected static final String CMD_COUNT =
+            "SELECT COUNT(*) AS total_admins FROM administrators;";
 }
-

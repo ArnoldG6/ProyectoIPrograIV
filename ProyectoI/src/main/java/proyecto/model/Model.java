@@ -1,7 +1,7 @@
 package proyecto.model;
 
 import java.util.HashMap;
-import java.util.Map;
+import proyecto.model.entities.AdministratorDAO;
 
 /**
  *
@@ -10,23 +10,79 @@ import java.util.Map;
 public class Model {
 
     private static Model instance;
-    HashMap<String, Student> students;
-    HashMap<String, Groups> groups;
-    HashMap<String, Subject> subjects;
-    HashMap<String, Teacher> teachers;
-    HashMap<String, Administrator> admins;
+    private HashMap<String, Student> students;
+    private HashMap<String, Groups> groups;
+    private HashMap<String, Subject> subjects;
+    private HashMap<String, Teacher> teachers;
+    private HashMap<String, Administrator> admins;
 
     public Model() {
-        students = new HashMap<String, Student>();
-        groups = new HashMap<String, Groups>();
-        subjects = new HashMap<String, Subject>();
-        teachers = new HashMap<String, Teacher>();
-        admins = new HashMap<String, Administrator>();
-
+        students = new HashMap<>();
+        groups = new HashMap<>();
+        subjects = new HashMap<>();
+        teachers = new HashMap<>();
+        admins = new HashMap<>();
+        /*
         //Some dummy objects in order to test the login and logout feature.
         students.put("1234", new Student("Juan Papu", "1234", "jp@gmail.com", "555", "1234"));
         teachers.put("4321", new Teacher("Cristian Aguilar", "4321", "ca@gmail.com", "665", "5678"));
         admins.put("0", new Administrator("admin", "0", "root0@gmail.com", "123", "1111"));
+         */
+    }
+
+    public final void updateModel() throws Exception {
+        if (AdministratorDAO.getInstance().getCount() != admins.size()) {
+            this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+            //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+            //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
+            //this.getInstance().setStudents(StudentDAO.getInstance().listAll());
+            //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
+            //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+        }
+    }
+
+    public static void setInstance(Model aInstance) {
+        instance = aInstance;
+    }
+
+    public HashMap<String, Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(HashMap<String, Student> students) {
+        this.students = students;
+    }
+
+    public HashMap<String, Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(HashMap<String, Groups> groups) {
+        this.groups = groups;
+    }
+
+    public HashMap<String, Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(HashMap<String, Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public HashMap<String, Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(HashMap<String, Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
+    public HashMap<String, Administrator> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(HashMap<String, Administrator> admins) {
+        this.admins = admins;
     }
 
     public static Model getInstance() {
@@ -36,11 +92,17 @@ public class Model {
         return instance;
     }
 
-    HashMap<String, User> getUsersMap() {
+    HashMap<String, User> getUsersMap() throws Exception {
         HashMap<String, User> users = new HashMap<String, User>();
-        users.putAll(students);
-        users.putAll(admins);
-        users.putAll(teachers);
+        try {
+            updateModel();
+            users.putAll(getStudents());
+            users.putAll(getAdmins());
+            users.putAll(getTeachers());
+        } catch (Exception e) {
+            throw e;
+        }
+
         return users;
     }
 
@@ -48,28 +110,22 @@ public class Model {
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
         if (u != null) {
-            if (u.getId().equals(cedula)) {
-                if (this.valPass(u, clave)) 
-                    return u;
-                 else 
-                    throw new Exception("El usuario digitado no existe");
-                
+            if (u.valPass(clave)) {
+                return u;
+            } else {
+                throw new Exception("El usuario digitado no existe");
             }
-        }
 
+        }
         return null;
     }
 
-    public boolean valPass(User u, String pass) throws Exception {
-        return u.getPass().equals(pass);
-    }
-
     public String showSubjects() {
-        return subjects.toString();
+        return getSubjects().toString();
     }
 
     public String showSubject(String id) {
-        return subjects.get(id).show();
+        return getSubjects().get(id).show();
     }
 
     public String randomPass() {
