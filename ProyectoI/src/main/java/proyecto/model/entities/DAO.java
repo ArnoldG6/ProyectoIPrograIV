@@ -1,13 +1,13 @@
 package proyecto.model.entities;
 
-import java.util.List;
+import java.util.HashMap;
 /**
  *
  * @author GONCAR4
  */
 public interface DAO<K, V> { // DAO (Data Access Object Interface)
 
-    public List<V> listAll();
+    public HashMap<K,V> listAll();
 
     // CRUD         (IMEC)
     // C(reate)     I(nsertar)

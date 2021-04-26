@@ -2,8 +2,7 @@ package proyecto.model.entities;
 
 public class AdministratorCRUD {
     protected static final String CMD_LIST
-            = "SELECT admin_id, username, email, pho_num, pass FROM administrators "
-            + "ORDER BY admin_id;";
+            = "SELECT admin_id, username, email, pho_num, pass FROM administrators;";
     protected static final String CMD_ADD
             = "INSERT INTO administrators (admin_id, username, email, pho_num, pass) "
             + "VALUES (?, ?, ?, ?, ?); ";

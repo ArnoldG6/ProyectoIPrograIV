@@ -32,15 +32,13 @@ public class View extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Usuario</h1>");
-            out.println("<div>Usuario digitado: "+request.getParameter("id")+"</div>");
-            out.println("<div>Contraseña digitada: "+request.getParameter("pass")+"</div>");
+            //out.println("<div>Usuario digitado: "+request.getParameter("id")+"</div>");
+            //out.println("<div>Contraseña digitada: "+request.getParameter("pass")+"</div>");
             try{
-                System.out.println("HOLA 12");
                 out.println("<div>Cantidad de administradores: "+ String.valueOf
-                (AdministratorDAO.getInstance().listAll().size())+"/div");
+                (AdministratorDAO.getInstance().listAll().toString())+"</div>");
             }catch(Exception e){
-                System.out.println("HOLA 13");
-                out.println("<div>ERROR EN LA BD. Excepcion: "+e.getMessage()+ "</div>");
+                out.println("<div>Excepcion: "+e.getMessage()+ "</div>");
             }
 
             out.println("</body>");

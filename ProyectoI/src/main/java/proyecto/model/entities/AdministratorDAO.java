@@ -7,11 +7,11 @@ package proyecto.model.entities;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyecto.model.Administrator;
@@ -22,50 +22,39 @@ import proyecto.model.Administrator;
  */
 public class AdministratorDAO implements DAO<String, Administrator> {
 
-    private BaseDatos bd;
     private static AdministratorDAO instance = null;
-
-    private AdministratorDAO() {
-        try {
-            System.out.println("HOLA 4\n");
-            bd = BaseDatos.getInstance();
-        } catch (IOException ex) {
-            System.out.println("HOLA 5\n");
-            Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    //bd_connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
     @Override
-    public List<Administrator> listAll() {
-        System.out.println("HOLA 6\n");
-        List<Administrator> u = new ArrayList<>();
-        try (Connection cnx = bd.getConnection();
-                Statement stm = cnx.createStatement();
-                ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_LIST)) {
-            while (rs.next()) {
-                u.add(new Administrator(rs.getString("username"), rs.getString("admin_id"),
-                        rs.getString("email"), rs.getString("pho_num"), rs.getString("pass")));
+    public HashMap<String, Administrator> listAll() {
+        HashMap<String, Administrator> u = new HashMap<>();
+        String username;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+                    Statement stm = cnx.createStatement();
+                    ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_LIST)) {
+                while (rs.next()) {
+                    username = rs.getString("username");
+                    u.put(username, (new Administrator(username, rs.getString("admin_id"),
+                            rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"))));
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return u;
             }
-            //public Administrator(String name, String id, String email, String telNum, String pass) {
-        } catch (SQLException ex) {
-            System.out.println("HOLA 7\n");
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
             return u;
         }
+
         return u;
     }
 
-    public static AdministratorDAO getInstance() {
-        System.out.println("HOLA 8\n");
-        try {
-            if (instance == null) {
-                System.out.println("HOLA 9\n");
-                instance = new AdministratorDAO();
-            }
-        } catch (Exception e) {
-            System.out.println("HOLA 11\n");
+    public static AdministratorDAO getInstance() throws Exception {
+        if (instance == null) {
+            instance = new AdministratorDAO();
         }
-        System.out.println("HOLA 12\n");
         return instance;
     }
 
