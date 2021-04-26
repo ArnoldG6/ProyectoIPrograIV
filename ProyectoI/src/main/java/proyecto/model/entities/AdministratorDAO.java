@@ -41,11 +41,9 @@ public class AdministratorDAO implements DAO<String, Administrator> {
 
             } catch (SQLException ex) {
                 Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
-                return u;
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return u;
         }
 
         return u;
