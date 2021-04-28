@@ -20,7 +20,7 @@ public class Groups {
         this.teacher = tea;
         this.numStu = numS;
         this.nrc = n;
-        this.status=true;
+        this.status = true;
     }
 
     public void insertStudents(Student stu) {
@@ -85,6 +85,14 @@ public class Groups {
         }
 
         return f;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }

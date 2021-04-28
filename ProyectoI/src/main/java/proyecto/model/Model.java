@@ -124,15 +124,72 @@ public class Model {
         return getSubjects().toString();
     }
 
+    public String showTeachers() {
+        return getTeachers().toString();
+    }
+
+    public String showHistory(String id) {
+        return getStudents().get(id).show();
+    }
+
     public String showSubject(String id) {
         return getSubjects().get(id).show();
     }
-
-    public String randomPass() {
+    
+    public String showGrps(String id) {
+        //return getTeachers().get(id);
         return "";
     }
 
-    public String insertStudent(String id, String nom, String em, String cllph) {
+    public String searchSubject(String name) {
+        //iterando solo sobre valores
+        String idSub = "";
+        for (Subject value : subjects.values()) {
+            //System.out.println("Value = " + value.getNameSubj());
+            if (value.getNameSubj().equals(name)) {
+                idSub = value.getIdSub();
+            }
+        }
+        return idSub;
+    }
+
+    public String insertStudent(String nom, String id, String em, String cllph) {
+        Student st = new Student(nom, id, em, cllph, "");
+        String pss = st.generateRandomPassword(4);
+        st.setPass(pss);
+        students.put(id, st);
+        return pss;
+    }
+
+    public String searchTeacher(String name) {
+        //iterando solo sobre valores
+        for (Teacher value : teachers.values()) {
+            System.out.println("Value = " + value.getName());
+            return value.getName();
+        }
+        return "";
+    }
+
+    public String insertTeacher(String nom, String id, String em, String cllph) {
+        Teacher tc = new Teacher(nom, id, em, cllph, "");
+        String pss = tc.generateRandomPassword(4);
+        tc.setPass(pss);
+        teachers.put(id, tc);
+        return pss;
+    }
+
+    public String insertAdmin(String nom, String id, String em, String cllph) {
+        Administrator ad = new Administrator(nom, id, em, cllph, "");
+        String pss = ad.generateRandomPassword(4);
+        ad.setPass(pss);
+        admins.put(id, ad);
+        return pss;
+    }
+
+    public String insertGroup(Teacher tea, double numS, String n) {
+        //Teacher tea, double numS, String n
+        Groups gp = new Groups(tea, numS, n);
+        groups.put(n, gp);
         return "";
     }
 

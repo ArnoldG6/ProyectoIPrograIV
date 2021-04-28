@@ -25,5 +25,15 @@ public class Teacher extends User {
         this("", "", "", "", "");
     }
 
- 
+    public String showGroups() {
+        String f = "";
+        f = f
+                + "\n" + "Grupos:"
+                + "\n";
+        for (int i = 0; i < groups.size(); i++) {
+            f += groups.get(i).show() + "\n";
+        }
+        return f;
+    }
+
 }
