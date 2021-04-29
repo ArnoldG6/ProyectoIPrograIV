@@ -2,6 +2,7 @@ package proyecto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.util.Pair;
 
 /**
  *
@@ -10,6 +11,7 @@ import java.util.List;
 public class Student extends User {
 
     public List<Groups> groups;
+    public List<Pair<Groups, Integer>> grades;
 
     public Student(String name, String id, String email, String telNum, String pass) {
         this.username = name;
@@ -18,8 +20,14 @@ public class Student extends User {
         this.telNum = telNum;
         this.pass = pass;
         this.groups = new ArrayList<>();
+        this.grades = new ArrayList<Pair<Groups,Integer>>();
         this.type = 2;
     }
+    
+    //Nota: validar el rango de la nota
+    //public void insertGrade(){
+    //    grades.add(new Pair<Groups,Integer>(groups.get(1),1));
+    //}
 
     public Student() {
         this("", "", "", "", "");
