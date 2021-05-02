@@ -10,8 +10,8 @@ import javafx.util.Pair;
  */
 public class Student extends User {
 
-    public List<Groups> groups;
-    public List<Pair<Groups, Integer>> grades;
+    public List<Group> groups;
+    public List<Pair<Group, Integer>> grades;
 
     public Student(String name, String id, String email, String telNum, String pass) {
         this.username = name;
@@ -20,7 +20,7 @@ public class Student extends User {
         this.telNum = telNum;
         this.pass = pass;
         this.groups = new ArrayList<>();
-        this.grades = new ArrayList<Pair<Groups,Integer>>();
+        this.grades = new ArrayList<Pair<Group,Integer>>();
         this.type = 2;
     }
     

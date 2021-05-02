@@ -5,26 +5,27 @@
  */
 package proyecto.presentacion.login;
 import proyecto.model.User;
-/**
- *
- * @author jsanchez
- */
+
 public final class Model {
 
     User current;
-
     public Model() {
         this.reset();
     }
-
-    public void login(String id, String pass) throws Exception{
+    public void updateCurrentUser(User u){
+        proyecto.model.Model.getInstance().setCurrent(u);
+    }
+    public User login(String id, String pass) throws Exception{
         try{
             User u = proyecto.model.Model.getInstance().seekUser(id, pass);
-            if (u != null)
+            if (u != null){
                 current = u;
+                updateCurrentUser(u);
+            }
         }catch(Exception e){
             throw e;
         }
+        return current;
     }
   
     public void reset() {

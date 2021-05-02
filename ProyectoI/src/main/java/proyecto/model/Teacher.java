@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Teacher extends User {
 
-    public List<Groups> groups;
+    public List<Group> groups;
 
     public Teacher(String name, String id, String email, String telNum, String pas) {
         this.username = name;

@@ -1,5 +1,6 @@
 package proyecto.model;
 
+import java.io.IOException;
 import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
 
@@ -8,15 +9,16 @@ import proyecto.model.entities.AdministratorDAO;
  * @author arnoldgq
  */
 public class Model {
-
+    private User current;
     private static Model instance;
     private HashMap<String, Student> students;
-    private HashMap<String, Groups> groups;
+    private HashMap<String, Group> groups;
     private HashMap<String, Subject> subjects;
     private HashMap<String, Teacher> teachers;
     private HashMap<String, Administrator> admins;
 
     public Model() {
+        current = null;
         students = new HashMap<>();
         groups = new HashMap<>();
         subjects = new HashMap<>();
@@ -53,11 +55,11 @@ public class Model {
         this.students = students;
     }
 
-    public HashMap<String, Groups> getGroups() {
+    public HashMap<String, Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(HashMap<String, Groups> groups) {
+    public void setGroups(HashMap<String, Group> groups) {
         this.groups = groups;
     }
 
@@ -109,15 +111,13 @@ public class Model {
     public User seekUser(String cedula, String clave) throws Exception {
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
-        if (u != null) {
-            if (u.valPass(clave)) {
+        if (u != null) 
+            if (u.valPass(clave)) 
                 return u;
-            } else {
-                throw new Exception("El usuario digitado no existe");
-            }
-
-        }
-        return null;
+             else 
+                throw new IOException("La contraseña digitada no es correcta");
+        else 
+            throw new IOException("El usuario digitado no existe");
     }
 
     public String showSubjects() {
@@ -188,9 +188,11 @@ public class Model {
 
     public String insertGroup(Teacher tea, double numS, String n) {
         //Teacher tea, double numS, String n
-        Groups gp = new Groups(tea, numS, n);
+        Group gp = new Group(tea, numS, n);
         groups.put(n, gp);
         return "";
     }
-
+    public void setCurrent(User u){
+        this.current = u;
+    }
 }

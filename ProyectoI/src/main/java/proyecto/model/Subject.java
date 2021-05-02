@@ -11,7 +11,7 @@ public class Subject {
 
     private String idSub;
     private String nameSubj;
-    private List<Groups> groups;
+    private List<Group> groups;
 
     public Subject(String ID, String nameS) {
         this.idSub = ID;
@@ -23,7 +23,7 @@ public class Subject {
         this("", "");
     }
 
-    public void insertGroups(Groups gr) {
+    public void insertGroups(Group gr) {
         groups.add(gr);
     }
 
@@ -48,11 +48,11 @@ public class Subject {
         return f;
     }
 
-    public List<Groups> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Groups> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 

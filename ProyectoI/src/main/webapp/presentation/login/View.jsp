@@ -1,8 +1,7 @@
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
 <%@page import="proyecto.presentacion.login.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<% String passError = (String) request.getAttribute("passError"),
+          idError = (String) request.getAttribute("idError"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,9 +15,27 @@
         <form name = "form" class = "container center_div w-75 p-3" action="/ProyectoI/presentation/login/login" method="post">
             <div class = "form-group">
                 <label for = "id">&nbsp;Identificación:</label>
-                <input type="text" class ="form-control  text-center" name = "id" placeholder = "Número de identificación" id = "id">
+                <input type="text" class ="form-control  
+                       text-center" name = "id" id = "id"
+                       <% if (idError == null) { %>
+                            placeholder = "Número de identificación" 
+                       <% }else{%>
+                             placeholder = <%=idError%>
+                       <% }%>
+                >
                 <label for = "pass">&nbsp; Contraseña:</label>
-                <input type="password" class ="form-control text-center" name = "pass" placeholder = "Contraseña" id = "pass" >
+                <input type="password" 
+                       class ="form-control text-center" 
+                       name = "pass" 
+                       id = "pass" 
+                       
+                       <% if (idError == null) { %>
+                            placeholder = "Contraseña" 
+                       <% }else{%>
+                             placeholder = <%=passError%>
+                       <% }%>
+                >
+                      
                 <div class="text-center">
                     <div>&nbsp;</div>
                     <button class ="btn btn-outline-light form-control w-50">Ingresar los datos</button>

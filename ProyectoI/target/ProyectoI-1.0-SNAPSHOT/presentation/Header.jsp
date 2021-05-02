@@ -1,5 +1,6 @@
 <%@page import="proyecto.model.User"%>
-<% User user = (User) session.getAttribute("user");%>
+<%@page import="proyecto.presentacion.login.Model"%>
+<% User user = (User) request.getAttribute("user");%>
 <%@ include file="/presentation/Head.jsp" %>
 <header class="bg-dark text-center text-white">
     <div class="d-grid gap-3">
@@ -16,16 +17,30 @@
             <% if (user != null) { %>
                 <% if (!(user.getId().equals(""))) { %>
                 <li class="list-inline-item">
-                    <div><%=user.getId()%></div>
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
+                </li>
+                <% } else {%>
+                    <li class="list-inline-item">
+                        <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
+                    </li>
                 <% } %>
-            <% }%>
-            <li class="list-inline-item">
-                <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
-            </li>
+            <% } else { %>
+                <li class="list-inline-item">
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
+                </li>
+            <% } %>
             <li class="list-inline-item">
                 <a class ="btn btn-outline-light" href="/ProyectoI/">Inicio</a>
             </li>
-
+        </ul>
+        <ul class ="list-inline"> 
+            <% if (user != null) { %>
+                <% if (!(user.getId().equals(""))) {%>
+                <li class="list-inline-item">
+                    <div>Usuario actual: &nbsp; <%=user.getId()%></div>
+                </li>
+                <% } %>
+            <% }%>
         </ul>
     </div>
 </header>          

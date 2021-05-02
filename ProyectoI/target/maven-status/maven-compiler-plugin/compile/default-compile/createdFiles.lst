@@ -11,5 +11,4 @@ proyecto\model\entities\AdministratorDAO.class
 proyecto\model\entities\AdministratorCRUD.class
 proyecto\model\entities\DAO.class
 proyecto\model\entities\GroupsCRUD.class
-proyecto\model\Groups.class
 proyecto\model\Administrator.class

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author victo
  */
-public class Groups {
+public class Group {
 
     private List<Student> students;
     private Teacher teacher;
@@ -15,7 +15,7 @@ public class Groups {
     private String nrc;
     private boolean status;
 
-    public Groups(Teacher tea, double numS, String n) {
+    public Group(Teacher tea, double numS, String n) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
