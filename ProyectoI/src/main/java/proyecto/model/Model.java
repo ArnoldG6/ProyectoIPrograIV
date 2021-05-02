@@ -3,6 +3,7 @@ package proyecto.model;
 import java.io.IOException;
 import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
+import proyecto.model.entities.StudentDAO;
 
 /**
  *
@@ -119,7 +120,24 @@ public class Model {
         else 
             throw new IOException("El usuario digitado no existe");
     }
+    public String registerStudent(String name, String id, String email, String telNum)
+            throws Exception{
+        String pass = "";
+        try{
+            Student stu = new Student(name, id, email, telNum, "");
+            pass = Student.generateRandomPassword(4);
+            stu.setPass(pass);
+            StudentDAO.getInstance().add(stu.getId(), stu);
+            students.put(id, stu);
+            return pass;
+            
+        }catch(Exception e){
+            throw new IOException("Este ID ya está registrado");
+        }
+    }
 
+
+    
     public String showSubjects() {
         return getSubjects().toString();
     }
@@ -153,13 +171,6 @@ public class Model {
         return idSub;
     }
 
-    public String insertStudent(String nom, String id, String em, String cllph) {
-        Student st = new Student(nom, id, em, cllph, "");
-        String pss = st.generateRandomPassword(4);
-        st.setPass(pss);
-        students.put(id, st);
-        return pss;
-    }
 
     public String searchTeacher(String name) {
         //iterando solo sobre valores

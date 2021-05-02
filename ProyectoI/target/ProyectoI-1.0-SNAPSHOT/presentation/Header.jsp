@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="proyecto.model.User"%>
 <%@page import="proyecto.presentacion.login.Model"%>
 <% User user = (User) request.getAttribute("user");%>
@@ -17,7 +18,7 @@
             <% if (user != null) { %>
                 <% if (!(user.getId().equals(""))) { %>
                 <li class="list-inline-item">
-                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesiÃ³n</a>
                 </li>
                 <% } else {%>
                     <li class="list-inline-item">
