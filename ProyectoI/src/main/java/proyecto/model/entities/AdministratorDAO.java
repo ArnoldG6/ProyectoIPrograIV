@@ -31,9 +31,9 @@ public class AdministratorDAO implements DAO<String, Administrator> {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_COUNT)) {
-                if (rs.next()) {
+                if (rs.next()) 
                     return rs.getInt("total_admins");
-                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -34,11 +34,12 @@ public class Model {
     }
 
     public final void updateModel() throws Exception {
-        if (AdministratorDAO.getInstance().getCount() != admins.size()) {
+        if ((AdministratorDAO.getInstance().getCount()
+                + StudentDAO.getInstance().getCount()) 
+            != getUsersMap().size()) {
             this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
-            //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-            //this.getInstance().setStudents(StudentDAO.getInstance().listAll());
+            this.getInstance().setStudents(StudentDAO.getInstance().listAll());
             //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         }
@@ -127,12 +128,15 @@ public class Model {
             Student stu = new Student(name, id, email, telNum, "");
             pass = Student.generateRandomPassword(4);
             stu.setPass(pass);
+
             StudentDAO.getInstance().add(stu.getId(), stu);
-            students.put(id, stu);
+            //students.put(id, stu);
+            updateModel();
             return pass;
             
         }catch(Exception e){
-            throw new IOException("Este ID ya está registrado");
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
         }
     }
 
@@ -189,11 +193,12 @@ public class Model {
         return pss;
     }
 
-    public String insertAdmin(String nom, String id, String em, String cllph) {
+    public String insertAdmin(String nom, String id, String em, String cllph) throws Exception {
         Administrator ad = new Administrator(nom, id, em, cllph, "");
         String pss = ad.generateRandomPassword(4);
         ad.setPass(pss);
-        admins.put(id, ad);
+        //admins.put(id, ad);
+        updateModel();
         return pss;
     }
 

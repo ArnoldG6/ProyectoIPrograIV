@@ -1,8 +1,8 @@
 <%@page import="proyecto.presentacion.login.Model"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% String genPass = (String) request.getAttribute("genPass");
-   %>
-<!DOCTYPE html>
+<% String genPass = (String) request.getAttribute("genPass");%>
+<% ArrayList<String> errors = (ArrayList<String>) request.getAttribute("errors");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,17 +23,22 @@
                 <label for = "regTel">Número telefónico</label>
                 <input type="text" class ="form-control  text-center" name = "regTel" placeholder = "Número telefónico" id = "regTel">
                 <label for = "regEmail"> Dirección de correo electrónico</label>
-                <input type="text" class ="form-control text-center" name = "reg_pass" placeholder = "Dirección de correo electrónico" id = "regEmail" >
+                <input type="text" class ="form-control text-center" name = "regEmail" placeholder = "Dirección de correo electrónico" id = "regEmail" >
                 <div class="text-center">
                     <div>&nbsp;</div>
                     <% if (genPass != null) { %>
-                        <label>Contraseña generada: <%=user.getId()%></label>
+                        <div><label>Contraseña generada: <%=genPass%></label></div>
                     <%}%>
 
                     <div>&nbsp;</div>
                     <button class ="btn btn-outline-light form-control w-50">Completar registro</button>
                 </div>
-
+                <% if (errors != null) { %>
+                <div>&nbsp;</div>
+                 <div class="text-center"><label>Error: <%=errors.toString()%></label></div>
+                 <% request.removeAttribute("errors"); %>
+                 <div>&nbsp;</div>
+                <%}%>
             </div>
         </form>
         <%@ include file="/presentation/Footer.jsp" %>

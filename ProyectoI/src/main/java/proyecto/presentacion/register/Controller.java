@@ -1,5 +1,6 @@
 package proyecto.presentacion.register;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,10 +19,10 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException, Exception {
         try{
             registerStudent(request,response);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
 
-        } catch (IOException | ServletException e) {
-            request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
         }
 
     }
@@ -34,7 +35,9 @@ public class Controller extends HttpServlet {
                     request.getParameter("regEmail"),request.getParameter("regTel"));
             request.setAttribute("genPass", pass); //append de la contraseña creada
         }catch(Exception e){
-           request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
+           ArrayList<String> errors = new ArrayList<>();
+           errors.add(e.getMessage());
+           request.setAttribute("errors",errors);
         }
     }
 

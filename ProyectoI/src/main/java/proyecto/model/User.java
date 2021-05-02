@@ -2,10 +2,7 @@ package proyecto.model;
 
 import java.security.SecureRandom;
 
-/**
- *
- * @author victo
- */
+
 public class User implements java.io.Serializable {
 
     String username;
@@ -75,19 +72,13 @@ public class User implements java.io.Serializable {
 
     // Method to generate a random alphanumeric password of a specific length
     public static String generateRandomPassword(int len) {
-        // ASCII range – alphanumeric (0-9, a-z, A-Z)
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder();
         String pass1 = "";
-        // each iteration of the loop randomly chooses a character from the given
-        // ASCII range and appends it to the `StringBuilder` instance
-        for (int i = 0; i < len; i++) {
-            int randomIndex = random.nextInt(chars.length());
-            sb.append(chars.charAt(randomIndex));
-        }
-        pass1 = sb.toString();
+        for (int i = 0; i < len; i++) 
+            pass1 += chars.charAt(random.nextInt(chars.length()));
         return pass1;
+
     }
 
 }

@@ -19,20 +19,22 @@ public class StudentDAO implements DAO<String, Student> {
     
     private static StudentDAO instance = null;
 
-    public int getCount() {
+    public int getCount() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(StudentCRUD.CMD_COUNT)) {
-                if (rs.next()) {
+                if (rs.next()) 
                     return rs.getInt("total_students");
-                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
         return 0;
     }
@@ -72,8 +74,8 @@ public class StudentDAO implements DAO<String, Student> {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_ADD)) {
             stm.clearParameters();
-            stm.setString(1, value.getName());
-            stm.setString(2, value.getId());
+            stm.setString(1, value.getId());
+            stm.setString(2, value.getName());
             stm.setString(3, value.getEmail());
             stm.setString(4, value.getTelNum());
             stm.setString(5, value.getPass());
