@@ -14,50 +14,34 @@
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
         <%@ include file="/presentation/Header.jsp" %>
 
-        <!--<a href="#" id="texto1" class="p-3 bg-dark ">
-            <small class="card-title"> Religion </small>  
-        </a>-->
-
-            <!--<div class="card">
+        <div class="card-group p-3 bg-dark col-6 row mb-3" >
+            <div class="card p-3 bg-dark col-6 themed-grid-col" >
                 <a href="#" id="imagen1" class="p-3 bg-dark " >
                     <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "20" alt="Card image cap" >
                 </a>
                 <div class="card-body">
-                    <small class="card-title">Materia 1</small>
-                    <a href="#" id="texto1" class="p-3 bg-dark " >
-                        <small class="card-text"> Matricular ahora </small> 
-                    </a>
-                </div>
-            </div>-->
-
-            <div class="card-group p-3 bg-dark" >
-                <div class="card p-3 bg-dark " >
-                    <a href="#" id="imagen1" class="p-3 bg-dark " >
-                        <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "20" alt="Card image cap" >
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">Materia 1</h5>
-                        <div>&nbsp;</div>
-                        <a class ="btn btn-outline-light row justify-content-center" href="/ProyectoI/presentation/">Matricular ahora</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
+                    <h5 class="card-title">Materia 1</h5>
+                    <div>&nbsp;</div>
+                    <a class ="btn btn-outline-light row justify-content-center" href="/ProyectoI/presentation/">Matricular ahora</a>
                 </div>
             </div>
+            <div class="card col-6 bg-dark themed-grid-col">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card bg-dark themed-grid-col">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
 
 
             <!--<div class="card-columns">
