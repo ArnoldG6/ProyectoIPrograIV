@@ -76,7 +76,7 @@ public class SubjectDAO implements DAO<String, Subject> {
             stm.clearParameters();
             stm.setString(1, value.getIdSub());
             stm.setString(2, value.getNameSubj());
-            stm.setString(3, value.getDescSub());
+            stm.setString(3, value.getDesc());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
