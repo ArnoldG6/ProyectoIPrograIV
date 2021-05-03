@@ -170,7 +170,16 @@ public class Model {
         }
         return idSub;
     }
-
+    
+    public String searchStudent(String id) {
+        String idSub = "";
+        for (Student value : students.values()) {
+            //System.out.println("Value = " + value.getNameSubj());
+            if (value.getId().equals(id)) 
+                idSub = value.getId();
+        }
+        return idSub;
+    }
 
     public Teacher searchTeacher(String id) {
         //iterando solo sobre valores
@@ -185,7 +194,7 @@ public class Model {
         Teacher tc = new Teacher(nom, id, em, cllph, "");
         String pss = tc.generateRandomPassword(4);
         tc.setPass(pss);
-        teachers.put(id, tc);
+        //teachers.put(id, tc);
         return pss;
     }
 
@@ -201,7 +210,7 @@ public class Model {
     public String insertGroup( String n, Teacher tea, int numS) {
         //Teacher tea, double numS, String n
         Group gp = new Group(n, tea, numS);
-        groups.put(n, gp);
+        //groups.put(n, gp);
         return "";
     }
     public void setCurrent(User u){

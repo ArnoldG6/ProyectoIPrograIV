@@ -15,18 +15,19 @@
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
         <%@ include file="/presentation/Header.jsp" %>
 
-        <p align='center' class="w-75 p-3">
+        <div align='center' class="w-200 p-10 bg-dark">
+            
+            <input style="width: 900px; height: 35px; text-align: center" type="search" name="busquedacursos" placeholder="Buscar cursos" >
 
-            <input class="width: 300px; height: 5000px;" type="search" name="busquedacursos" placeholder="Buscar cursos" >
+            <input style="width: 100px; height: 35px;" type="submit" value="Buscar">
 
-            <input type="submit" value="Buscar">
+        </div>
 
-        </p>
         <div class="container">
             <div class="card-group p-3 bg-dark row row-col-2" >
                 <div class="card p-3 bg-dark col " >
                     <a href="#" id="imagen1" class="p-3 bg-dark " >
-                        <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "100" alt="Card image cap" >
+                        <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "10" alt="Card image cap" >
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">Materia 1</h5>
