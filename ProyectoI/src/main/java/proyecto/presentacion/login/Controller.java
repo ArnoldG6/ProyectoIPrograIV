@@ -24,10 +24,10 @@ public class Controller extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
-            if (request.getParameter("user") == null) {
+            if (request.getParameter("user") == null) 
                 current = new Model();
-            }
-
+            
+           
             switch (request.getServletPath()) {
                 case "/presentation/login/login":
                     login(request, response);
@@ -57,8 +57,10 @@ public class Controller extends HttpServlet {
             }
 
             User user = current.login(id, pass);
-            request.setAttribute("user", user);
-            request.setAttribute("login_model", current);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
+            session.setAttribute("login_model", current);
+            
 
         } catch (Exception e) {
             String error1 = "Usuario o contraseña incorrectos".replaceAll(" ","&#160;");

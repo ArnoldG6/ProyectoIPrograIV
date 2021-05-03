@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="proyecto.model.User"%>
 <%@page import="proyecto.presentacion.login.Model"%>
-<% User user = (User) request.getAttribute("user");%>
+<% User user = (User) session.getAttribute("user");%>
 <%@ include file="/presentation/Head.jsp" %>
 <header class="bg-dark text-center text-white">
     <div class="d-grid gap-3">
