@@ -37,9 +37,9 @@ public class Model {
         if ((AdministratorDAO.getInstance().getCount()
                 + StudentDAO.getInstance().getCount()) 
             != getUsersMap().size()) {
-            this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+            Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-            this.getInstance().setStudents(StudentDAO.getInstance().listAll());
+            Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         }
@@ -90,24 +90,24 @@ public class Model {
     }
 
     public static Model getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new Model();
-        }
+        
         return instance;
     }
 
     HashMap<String, User> getUsersMap() throws Exception {
-        HashMap<String, User> users = new HashMap<String, User>();
+        HashMap<String, User> users = new HashMap<>();
         try {
             updateModel();
             users.putAll(getStudents());
             users.putAll(getAdmins());
             users.putAll(getTeachers());
+            return users;
         } catch (Exception e) {
             throw e;
         }
-
-        return users;
+   
     }
 
     public User seekUser(String cedula, String clave) throws Exception {
@@ -128,9 +128,7 @@ public class Model {
             Student stu = new Student(name, id, email, telNum, "");
             pass = Student.generateRandomPassword(4);
             stu.setPass(pass);
-
             StudentDAO.getInstance().add(stu.getId(), stu);
-            //students.put(id, stu);
             updateModel();
             return pass;
             
@@ -164,13 +162,11 @@ public class Model {
     }
 
     public String searchSubject(String name) {
-        //iterando solo sobre valores
         String idSub = "";
         for (Subject value : subjects.values()) {
             //System.out.println("Value = " + value.getNameSubj());
-            if (value.getNameSubj().equals(name)) {
+            if (value.getNameSubj().equals(name)) 
                 idSub = value.getIdSub();
-            }
         }
         return idSub;
     }

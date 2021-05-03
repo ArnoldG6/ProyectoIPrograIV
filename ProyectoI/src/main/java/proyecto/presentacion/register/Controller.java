@@ -19,8 +19,6 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException, Exception {
         try{
             registerStudent(request,response);
-            request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
-
         } catch (Exception e) {
             request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
         }
@@ -33,11 +31,13 @@ public class Controller extends HttpServlet {
             String pass = Model.getInstance().registerStudent(
                     request.getParameter("regNom"),request.getParameter("regId"),
                     request.getParameter("regEmail"),request.getParameter("regTel"));
-            request.setAttribute("genPass", pass); //append de la contraseña creada
+            request.setAttribute("genPass", pass); 
+            request.getRequestDispatcher("/presentation/login/GenPassword.jsp").forward(request, response);
         }catch(Exception e){
            ArrayList<String> errors = new ArrayList<>();
            errors.add(e.getMessage());
            request.setAttribute("errors",errors);
+           throw e;
         }
     }
 

@@ -1,7 +1,7 @@
 <%@page import="proyecto.presentacion.login.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String passError = (String) request.getAttribute("passError"),
-          idError = (String) request.getAttribute("idError"); %>
+            idError = (String) request.getAttribute("idError"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,31 +18,32 @@
                 <input type="text" class ="form-control  
                        text-center" name = "id" id = "id"
                        <% if (idError == null) { %>
-                            placeholder = "Número de identificación" 
-                       <% }else{%>
-                             placeholder = <%=idError%>
+                       placeholder = "Número de identificación" 
+                       <% } else {%>
+                       placeholder = <%=idError%>
                        <% }%>
-                >
+                       >
                 <label for = "pass">&nbsp; Contraseña:</label>
                 <input type="password" 
                        class ="form-control text-center" 
                        name = "pass" 
                        id = "pass" 
-                       
+
                        <% if (idError == null) { %>
-                            placeholder = "Contraseña" 
-                       <% }else{%>
-                             placeholder = <%=passError%>
+                       placeholder = "Contraseña" 
+                       <% } else {%>
+                       placeholder = <%=passError%>
                        <% }%>
-                >
-                      
+                       >
+
                 <div class="text-center">
                     <div>&nbsp;</div>
                     <button class ="btn btn-outline-light form-control w-50">Ingresar los datos</button>
                 </div>
 
             </div>
-        </form>
+        </form>   
+
         <div class = "col-md-12 text-center">
             <a class="link-info" href="/ProyectoI/presentation/register/View.jsp">
                 <label for "regBtn" >¿No tiene una cuenta? ¡Registrese aquí!</label>
