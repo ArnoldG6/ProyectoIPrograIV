@@ -42,7 +42,7 @@ public class StudentDAO implements DAO<String, Student> {
     @Override
     public HashMap<String, Student> listAll() {
         HashMap<String, Student> u = new HashMap<>();
-        String username;
+        String username,id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
@@ -50,7 +50,8 @@ public class StudentDAO implements DAO<String, Student> {
                     ResultSet rs = stm.executeQuery(StudentCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     username = rs.getString("username");
-                    u.put(username, (new Student(username, rs.getString("stu_id"),
+                    id = rs.getString("stu_id");
+                    u.put(id, (new Student(username, id,
                             rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"))));
                 }
             } catch (SQLException ex) {

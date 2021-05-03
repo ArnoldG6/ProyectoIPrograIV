@@ -121,7 +121,7 @@ public class Model {
         else 
             throw new IOException("El usuario digitado no existe");
     }
-    public String registerStudent(String name, String id, String email, String telNum)
+    public String insertStudent(String name, String id, String email, String telNum)
             throws Exception{
         String pass = "";
         try{

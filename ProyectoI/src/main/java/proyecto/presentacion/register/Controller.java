@@ -28,7 +28,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException, Exception {
         try{
             // registerStudent(String name, String id, String email, String telNum)
-            String pass = Model.getInstance().registerStudent(
+            String pass = Model.getInstance().insertStudent(
                     request.getParameter("regNom"),request.getParameter("regId"),
                     request.getParameter("regEmail"),request.getParameter("regTel"));
             request.setAttribute("genPass", pass); 
