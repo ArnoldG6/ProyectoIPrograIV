@@ -172,13 +172,13 @@ public class Model {
     }
 
 
-    public String searchTeacher(String name) {
+    public Teacher searchTeacher(String id) {
         //iterando solo sobre valores
         for (Teacher value : teachers.values()) {
-            System.out.println("Value = " + value.getName());
-            return value.getName();
+            System.out.println("Value = " + value.getId());
+            return value;
         }
-        return "";
+        return null;
     }
 
     public String insertTeacher(String nom, String id, String em, String cllph) {
@@ -198,13 +198,15 @@ public class Model {
         return pss;
     }
 
-    public String insertGroup(Teacher tea, double numS, String n) {
+    public String insertGroup( String n, Teacher tea, int numS) {
         //Teacher tea, double numS, String n
-        Group gp = new Group(tea, numS, n);
+        Group gp = new Group(n, tea, numS);
         groups.put(n, gp);
         return "";
     }
     public void setCurrent(User u){
         this.current = u;
     }
+    
+    
 }

@@ -11,15 +11,15 @@ public class Group {
 
     private List<Student> students;
     private Teacher teacher;
-    private double numStu;
+    private int numStu;
     private String nrc;
     private boolean status;
 
-    public Group(Teacher tea, double numS, String n) {
+    public Group(String id,Teacher tea, int numS) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
-        this.nrc = n;
+        this.nrc = id;
         this.status = true;
     }
 
@@ -55,11 +55,11 @@ public class Group {
         this.teacher = teacher;
     }
 
-    public double getNumStu() {
+    public int getNumStu() {
         return numStu;
     }
 
-    public void setNumStu(double numStu) {
+    public void setNumStu(int numStu) {
         this.numStu = numStu;
     }
 

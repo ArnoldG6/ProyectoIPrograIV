@@ -17,9 +17,6 @@ public class SubjectCRUD {
     protected static final String CMD_UPDATE_SUB_NAME
             = "UPDATE subjects SET sub_name = ?"
             + "WHERE sub_id = ?; ";
-    protected static final String CMD_UPDATE_TEA_ID
-            = "UPDATE subjects SET pass = ?"
-            + "WHERE sub_id = ?; ";
     protected static final String CMD_DELETE
             = "DELETE FROM subjects "
             + "WHERE sub_id = ?; ";
