@@ -18,10 +18,9 @@
     
     <dependencies>
         <dependency>
-            <groupId>mysql-connector-java</groupId>
-            <artifactId>mysql</artifactId>
+            <groupId>MySQL</groupId>
+            <artifactId>connector</artifactId>
             <version>8.0.22</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
