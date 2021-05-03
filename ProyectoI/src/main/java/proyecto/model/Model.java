@@ -172,13 +172,13 @@ public class Model {
     }
 
 
-    public String searchTeacher(String name) {
+    public Teacher searchTeacher(String id) {
         //iterando solo sobre valores
         for (Teacher value : teachers.values()) {
-            System.out.println("Value = " + value.getName());
-            return value.getName();
+            System.out.println("Value = " + value.getId());
+            return value;
         }
-        return "";
+        return null;
     }
 
     public String insertTeacher(String nom, String id, String em, String cllph) {
