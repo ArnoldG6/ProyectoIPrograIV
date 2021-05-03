@@ -3,23 +3,18 @@ package proyecto.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author arnoldgq
- */
 public class Subject {
-
     private String idSub;
     private String nameSubj;
-    private String descSub;
+    private String desc;
     private List<Group> groups;
-
-    public Subject(String ID, String nameS, String des) {
-        this.idSub = ID;
-        this.nameSubj = nameS;
-        this.descSub = des;
-        groups = new ArrayList<>();
+    public Subject(String idSub, String nameSubj, String desc) {
+        this.idSub = idSub;
+        this.nameSubj = nameSubj;
+        this.desc = desc;
+        this.groups = new ArrayList<>();
     }
+
 
     public Subject() {
         this("", "", "");
@@ -65,7 +60,6 @@ public class Subject {
     public void setIdSub(String ID) {
         this.idSub = ID;
     }
-
     public String getNameSubj() {
         return nameSubj;
     }
@@ -77,17 +71,18 @@ public class Subject {
     /**
      * @return the descSub
      */
-    public String getDescSub() {
-        return descSub;
+    public String getDesc() {
+        return desc;
     }
 
-    /**
-     * @param descSub the descSub to set
-     */
-    public void setDescSub(String descSub) {
-        this.descSub = descSub;
+    public void setDes(String desc) {
+        this.desc = desc;
     }
+
+
     
-    
+  
 
 }
+
+
