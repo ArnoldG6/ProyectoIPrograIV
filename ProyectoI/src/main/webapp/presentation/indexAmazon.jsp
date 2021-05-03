@@ -4,6 +4,8 @@
     Author     : victo
 --%>
 
+<%@page import="proyecto.model.Subject"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,9 +15,21 @@
     </head>
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
         <%@ include file="/presentation/Header.jsp" %>
+        
+        <p>
+
+            <input type="search" name="busquedacursos" placeholder="Buscar cursos">
+
+            <input type="submit" value="Buscar">
+
+        </p>
 
         <div class="card-group p-3 bg-dark col-6 row mb-3" >
             <div class="card p-3 bg-dark col-6 themed-grid-col" >
+                <!--<% List<Subject> subjects = (List<Subject>) request.getAttribute("subjects");
+                    for (Subject c : subjects) {%>
+                <!--<tr ><td><a target='_blank' href='/CursosImagenPdf/presentation/cursos/print?codigo=<%=c.getIdSub()%>'><%=c.getIdSub()%></a></td> <td><%=c.getNameSubj()%></td> <td><img src='/CursosImagenPdf/presentation/cursos/image?codigo=<%=c.getIdSub()%>'></td> </tr>-->
+                <%}%>-->
                 <a href="#" id="imagen1" class="p-3 bg-dark " >
                     <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "20" alt="Card image cap" >
                 </a>
@@ -25,91 +39,8 @@
                     <a class ="btn btn-outline-light row justify-content-center" href="/ProyectoI/presentation/">Matricular ahora</a>
                 </div>
             </div>
-            <div class="card col-6 bg-dark themed-grid-col">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card bg-dark themed-grid-col">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
         </div>
 
-
-            <!--<div class="card-columns">
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title that wraps to a new line</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-                <div class="card p-3">
-                    <blockquote class="blockquote mb-0 card-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">
-                            <small class="text-muted">
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card bg-primary text-white text-center p-3">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-                        <footer class="blockquote-footer">
-                            <small>
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img" src="..." alt="Card image">
-                </div>
-                <div class="card p-3 text-right">
-                    <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        <footer class="blockquote-footer">
-                            <small class="text-muted">
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </small>
-                        </footer>
-                    </blockquote>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>-->
-
-
-            <%@ include file="/presentation/Footer.jsp" %>
+        <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>
