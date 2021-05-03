@@ -11,16 +11,18 @@ public class Subject {
 
     private String idSub;
     private String nameSubj;
+    private String descSub;
     private List<Group> groups;
 
-    public Subject(String ID, String nameS) {
+    public Subject(String ID, String nameS, String des) {
         this.idSub = ID;
         this.nameSubj = nameS;
+        this.descSub = des;
         groups = new ArrayList<>();
     }
 
     public Subject() {
-        this("", "");
+        this("", "", "");
     }
 
     public void insertGroups(Group gr) {
@@ -71,5 +73,21 @@ public class Subject {
     public void setNameSubj(String nameSubj) {
         this.nameSubj = nameSubj;
     }
+
+    /**
+     * @return the descSub
+     */
+    public String getDescSub() {
+        return descSub;
+    }
+
+    /**
+     * @param descSub the descSub to set
+     */
+    public void setDescSub(String descSub) {
+        this.descSub = descSub;
+    }
+    
+    
 
 }
