@@ -137,9 +137,7 @@ public class Model {
             throw e;
         }
     }
-
-
-    
+  
     public String showSubjects() {
         return getSubjects().toString();
     }

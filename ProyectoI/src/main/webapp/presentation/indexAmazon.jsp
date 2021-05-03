@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Materia 1</h5>
                         <div>&nbsp;</div>
-                        <a class ="btn btn-outline-light row justify-content-center" href="/ProyectoI/presentation/">Matricular ahora</a>
+                        <a class ="btn btn-outline-light row justify-content-center" href="#">Matricular ahora</a>
                     </div>
                 </div>
             </div>
