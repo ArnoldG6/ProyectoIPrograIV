@@ -14,6 +14,13 @@
             <% if (genPass != null) {%>
             <li class="list-inline-item">
                 <div>Contraseña generada: &nbsp; <%=genPass%></div>
+                <div>&nbsp;</div>
+                <div>Debe guardar esta contraseña puesto que no se volverá a mostrar.</div>
+                <div>&nbsp;</div>
+                <div>Si la pierde debe hablar con el administrador.</div>
+                <div>&nbsp;</div>
+                <div>Digite el botón de ingresar para entrar a su cuenta.</div>
+                <div>&nbsp;</div>
             </li>
             <% } %>
         </div>  

@@ -20,7 +20,7 @@ public class Controller extends HttpServlet {
         try{
             registerStudent(request,response);
         } catch (Exception e) {
-            request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
         }
 
     }
@@ -32,7 +32,7 @@ public class Controller extends HttpServlet {
                     request.getParameter("regNom"),request.getParameter("regId"),
                     request.getParameter("regEmail"),request.getParameter("regTel"));
             request.setAttribute("genPass", pass); 
-            request.getRequestDispatcher("/presentation/login/GenPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
         }catch(Exception e){
            ArrayList<String> errors = new ArrayList<>();
            errors.add(e.getMessage());

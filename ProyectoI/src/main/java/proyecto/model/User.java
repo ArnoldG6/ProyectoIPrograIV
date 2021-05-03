@@ -72,7 +72,7 @@ public class User implements java.io.Serializable {
 
     // Method to generate a random alphanumeric password of a specific length
     public static String generateRandomPassword(int len) {
-         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
         String pass1 = "";
         for (int i = 0; i < len; i++) 

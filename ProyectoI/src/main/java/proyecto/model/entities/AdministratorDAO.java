@@ -57,7 +57,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
                     u.put(username, (new Administrator(username, rs.getString("admin_id"),
                             rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"))));
                 }
-
+                
             } catch (SQLException ex) {
                 Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -69,9 +69,9 @@ public class AdministratorDAO implements DAO<String, Administrator> {
     }
 
     public static AdministratorDAO getInstance() throws Exception {
-        if (instance == null) {
+        if (instance == null) 
             instance = new AdministratorDAO();
-        }
+        
         return instance;
     }
 

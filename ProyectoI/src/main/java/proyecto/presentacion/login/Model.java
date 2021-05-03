@@ -4,16 +4,24 @@
  * and open the template in the editor.
  */
 package proyecto.presentacion.login;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import proyecto.model.User;
 
 public final class Model {
 
     User current;
     public Model() {
-        this.reset();
+        //this.reset();
     }
-    public void updateCurrentUser(User u){
-        proyecto.model.Model.getInstance().setCurrent(u);
+    public void updateCurrentUser(User u) throws Exception{
+        try {
+            proyecto.model.Model.getInstance().setCurrent(u);
+        } catch (Exception ex) {
+            
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
     }
     public User login(String id, String pass) throws Exception{
         try{

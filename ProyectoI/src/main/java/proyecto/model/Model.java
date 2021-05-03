@@ -25,6 +25,7 @@ public class Model {
         subjects = new HashMap<>();
         teachers = new HashMap<>();
         admins = new HashMap<>();
+        
         /*
         //Some dummy objects in order to test the login and logout feature.
         students.put("1234", new Student("Juan Papu", "1234", "jp@gmail.com", "555", "1234"));
@@ -34,11 +35,12 @@ public class Model {
     }
 
     public final void updateModel() throws Exception {
-        if ((AdministratorDAO.getInstance().getCount()) 
+        if ((AdministratorDAO.getInstance().getCount()
+            + StudentDAO.getInstance().getCount()) 
             != getUsersMap().size()) {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-            //Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
+            Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         }
@@ -91,14 +93,12 @@ public class Model {
     public static Model getInstance() {
         if (instance == null) 
             instance = new Model();
-        
         return instance;
     }
 
     HashMap<String, User> getUsersMap() throws Exception {
         HashMap<String, User> users = new HashMap<>();
         try {
-            updateModel();
             users.putAll(getStudents());
             users.putAll(getAdmins());
             users.putAll(getTeachers());
@@ -110,6 +110,7 @@ public class Model {
     }
 
     public User seekUser(String cedula, String clave) throws Exception {
+        updateModel();
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
         if (u != null) 
@@ -193,7 +194,7 @@ public class Model {
         String pss = ad.generateRandomPassword(4);
         ad.setPass(pss);
         //admins.put(id, ad);
-        updateModel();
+        
         return pss;
     }
 
