@@ -15,32 +15,40 @@
     </div> 
     <div>
         <ul class ="list-inline"> 
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" href="/ProyectoI/">Inicio</a>
+            </li>
             <% if (user != null) { %>
                 <% if (!(user.getId().equals(""))) { %>
-                <li class="list-inline-item">
-                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
+                    <li class="list-inline-item">
+                        <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
+                    </li>
+                    <% if (user.getType() == 3) { %>
+                        <li class="list-inline-item">
+                        <a class ="btn btn-outline-light" 
+                        href="/ProyectoI/presentation/subjects/registerSubject.jsp">
+                            Ingresar cursos
+                        </a> 
                 </li>
+                    <% } %>
                 <% } else {%>
                     <li class="list-inline-item">
                         <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
                     </li>
                 <% } %>
             <% } else { %>
-                <li class="list-inline-item">
-                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
-                </li>
-            <% } %>
             <li class="list-inline-item">
-                <a class ="btn btn-outline-light" href="/ProyectoI/">Inicio</a>
+                <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
             </li>
+            <% } %>
         </ul>
         <ul class ="list-inline"> 
             <% if (user != null) { %>
-                <% if (!(user.getId().equals(""))) {%>
-                <li class="list-inline-item">
-                    <div>Usuario actual: &nbsp; <%=user.getId()%></div>
-                </li>
-                <% } %>
+            <% if (!(user.getId().equals(""))) {%>
+            <li class="list-inline-item">
+                <div>Usuario actual: &nbsp; <%=user.getId()%></div>
+            </li>
+            <% } %>
             <% }%>
         </ul>
     </div>
