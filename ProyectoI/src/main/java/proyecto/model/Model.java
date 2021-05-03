@@ -34,12 +34,11 @@ public class Model {
     }
 
     public final void updateModel() throws Exception {
-        if ((AdministratorDAO.getInstance().getCount()
-                + StudentDAO.getInstance().getCount()) 
+        if ((AdministratorDAO.getInstance().getCount()) 
             != getUsersMap().size()) {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-            Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
+            //Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         }
