@@ -41,7 +41,7 @@ public class SubjectDAO implements DAO<String, Subject> {
     @Override
     public HashMap<String, Subject> listAll() {
         HashMap<String, Subject> u = new HashMap<>();
-        String sub_name,id,desc;
+        String sub_name,id,desc,stat;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
@@ -51,7 +51,8 @@ public class SubjectDAO implements DAO<String, Subject> {
                     sub_name = rs.getString("sub_name");
                     id = rs.getString("sub_id");
                     desc = rs.getString("sub_desc");
-                    u.put(id, (new Subject(id,sub_name,desc)));
+                    stat = rs.getString("sub_status");
+                    u.put(id, (new Subject(id,sub_name,desc,stat)));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +108,7 @@ public class SubjectDAO implements DAO<String, Subject> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         subname = rs.getString("sub_name");
-                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"));
+                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"),rs.getString("sub_status"));
                     }
                 }
             }

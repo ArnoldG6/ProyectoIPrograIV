@@ -169,14 +169,15 @@ public class Model {
         return idSub;
     }
     
-    public String searchStudent(String id) {
+    public Student searchStudent(String id) {
         String idSub = "";
+        Student s=null;
         for (Student value : students.values()) {
             //System.out.println("Value = " + value.getNameSubj());
             if (value.getId().equals(id)) 
-                idSub = value.getId();
+                s = value;
         }
-        return idSub;
+        return s;
     }
 
     public Teacher searchTeacher(String id) {
@@ -211,6 +212,11 @@ public class Model {
         //groups.put(n, gp);
         return "";
     }
+    
+    public void insertGrpSt(String id, Group g){
+         searchStudent(id).insertGrp(g);
+    }
+    
     public void setCurrent(User u){
         this.current = u;
     }

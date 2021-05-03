@@ -32,6 +32,10 @@ public class Student extends User {
     public Student() {
         this("", "", "", "", "");
     }
+    
+    public void insertGrp(Group g){
+        groups.add(g);
+    }
 
     public String show() {
         String f = "", tn = username, tc = id, numS = email, nr = telNum;
