@@ -6,7 +6,7 @@
 <%@page import="java.awt.Image"%>
 <%@page import="proyecto.model.Subject"%>
 <% User user = (User) session.getAttribute("user");%>
- <%HashMap<String,Subject> subjects = (HashMap<String,Subject>)session.getAttribute("subjects"); %>
+<%HashMap<String, Subject> subjects = (HashMap<String, Subject>) session.getAttribute("subjects"); %>
 
 <!DOCTYPE html>
 <html>
@@ -23,33 +23,35 @@
                 <input  type="submit" class = "container center_div w-25 p-1" value="Buscar">
             </form> 
         </div>
-        
+
         <div class="container">
             <h1 class="text-white text-center">Cursos registrados en el sistema</h1>
             <% if (subjects != null) { %>
-                <%for(Map.Entry<String, Subject> entry : subjects.entrySet()) { %>   
-                    <% Subject sub = subjects.get(entry.getKey()); %>
-                    <div class="card p-3 bg-dark col ">
-                        <a href="#" id="imagen1" class="p-3 bg-dark " >
-                            <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "100" alt="Card image cap" >
-                        </a>
-                    <div class="card-body">
-                        <label class="card-title"><%= sub.getIdSub()%></label>
-                        <div>&nbsp;</div>
-                        <label class="card-title"><%= sub.getNameSubj()%></label>
-                        <div>&nbsp;</div>
-                        <label class="card-title"><%= sub.getDesc()%></label>
+            <%for (Map.Entry<String, Subject> entry : subjects.entrySet()) { %>   
+            <% Subject sub = subjects.get(entry.getKey());%>
+
+            <div class="row p-1 bg-dark column card-body">
+                <div class="card p-3 bg-dark col">
+                    <a href="#" id="imagen1" class="p-3 bg-dark " >
+                        <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "100" alt="Card image cap" >
+                    </a>
+                    <div><label class="card-title text-center"><%= sub.getNameSubj()%></label></div>
+                    <div>&nbsp;</div>
+                    <div><label class="text-center"><%= sub.getIdSub()%></label></div>
+                    <div>&nbsp;</div>
+                    <div><label class="text-center"><%= sub.getDesc()%></label></div>
                         <% if (user == null) {%>
-                            <a class ="btn btn-outline-light row justify-content-center" href="#">Matricular ahora</a>
-                        <%}else{%>
-                             <% if (user.getType() != 3) {%>
-                                 <a class ="btn btn-outline-light row justify-content-center" href="#">Matricular ahora</a>
-                             <%}%>
-                        <%}%>
-                    </div>
-                </div>   
-                <% } %>
-                <% //session.removeAttribute("subjects"); %>
+                    <div><a class ="btn btn-outline-light container center_div w-25 p-1 " href="#">Matricular ahora</a></div>
+                    <%} else {%>
+                    <% if (user.getType() != 3) {%>
+                    <div><a class ="btn btn-outline-light container center_div w-25 p-1" href="#">Matricular ahora</a></div>
+                    <%}%>
+                    <%}%>
+                </div>
+            </div>
+
+            <% } %>
+            <% //session.removeAttribute("subjects"); %>
             <% }else { %>
             <div class="text-white text-center"></div>
             <% }%>
