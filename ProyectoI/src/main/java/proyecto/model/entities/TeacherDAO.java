@@ -49,7 +49,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
                 while (rs.next()) {
                     username = rs.getString("username");
                     u.put(username, (new Teacher(username, rs.getString("tea_id"),
-                            rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"))));
+                            rs.getString("email"), rs.getString("phone_num"), rs.getString("pass"))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,7 +108,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
                     if (rs.next()) {
                         username = rs.getString("username");
                         result = new Teacher(username, rs.getString("tea_id"),
-                                rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"));
+                                rs.getString("email"), rs.getString("phone_num"), rs.getString("pass"));
                     }
                 }
             }
