@@ -1,5 +1,6 @@
 package proyecto.model;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ public class Subject {
     private String nameSubj;
     private String desc;
     private String status;
+    private Image img;
     private List<Group> groups;
+    
     public Subject(String idSub, String nameSubj, String desc, String stat) {
         this.idSub = idSub;
         this.nameSubj = nameSubj;
@@ -86,6 +89,22 @@ public class Subject {
         this.status = status;
     }
 
+    /**
+     * @return the img
+     */
+    public Image getImg() {
+        return img;
+    }
+
+    /**
+     * @param img the img to set
+     */
+    public void setImg(Image img) {
+        this.img = img;
+    }
+
+    
+    
 }
 
 
