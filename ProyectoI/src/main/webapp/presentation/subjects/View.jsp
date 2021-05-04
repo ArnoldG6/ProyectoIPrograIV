@@ -25,14 +25,16 @@
         </div>
 
         <div class="container">
-            <h1 class="text-white text-center">Cursos registrados en el sistema</h1>
+            
             <% if (subjects != null) { %>
+            <h1 class="text-white text-center">Cursos registrados en el sistema</h1>
+            <div class="row p-1 bg-dark column card-body w-15">
             <%for (Map.Entry<String, Subject> entry : subjects.entrySet()) { %>   
             <% Subject sub = subjects.get(entry.getKey());%>
 
-            <div class="row p-1 bg-dark column card-body">
-                <div class="card p-3 bg-dark col">
-                    <a href="#" id="imagen1" class="p-3 bg-dark " >
+            
+                <div class="card p-3 bg-dark col w-15">
+                    <a href="#" id="imagen1" class="p-3 bg-dark text-center" >
                         <img src='/ProyectoI/presentation/subjects/image?subId=<%=sub.getIdSub()%>' height="150" width = "150">
                     </a>
                     <div><label class="card-title text-center"><%= sub.getNameSubj()%></label></div>
@@ -41,17 +43,19 @@
                     <div>&nbsp;</div>
                     <div><label class="text-center"><%= sub.getDesc()%></label></div>
                         <% if (user == null) {%>
-                    <div><a class ="btn btn-outline-light container center_div w-25 p-1 " href="#">Matricular ahora</a></div>
+                    <div><a class ="btn btn-outline-light container center_div w-75 p-1 " href="#">Matricular ahora</a></div>
                     <%} else {%>
                     <% if (user.getType() != 3) {%>
-                    <div><a class ="btn btn-outline-light container center_div w-25 p-1" href="#">Matricular ahora</a></div>
+                    <div><a class ="btn btn-outline-light container center_div w-75 p-1" href="#">Matricular ahora</a></div>
                     <%}%>
                     <%}%>
                 </div>
-            </div>
+            
 
             <% } %>
+            
             <% //session.removeAttribute("subjects"); %>
+            </div>
             <% }else { %>
             <div class="text-white text-center"></div>
             <% }%>
