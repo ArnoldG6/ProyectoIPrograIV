@@ -19,7 +19,7 @@
         </div>
 
         <div class="container">
-
+            <h1 class="text-white text-center">Cursos registrados en el sistema</h1>
         </div>
     </body>
 </html>
