@@ -20,17 +20,21 @@ public class Controller extends HttpServlet {
         try{
             registerStudent(request,response);
         } catch (Exception e) {
-            request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/register/View.jsp").forward(request, response);
         }
 
     }
     public void registerStudent (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try{
-            // registerStudent(String name, String id, String email, String telNum)
-            String pass = Model.getInstance().insertStudent(
-                    request.getParameter("regNom"),request.getParameter("regId"),
-                    request.getParameter("regEmail"),request.getParameter("regTel"));
+            String name = request.getParameter("regNom"),  
+                    id = request.getParameter("regId"), 
+                    email =   request.getParameter("regEmail"), 
+                    telNum = request.getParameter("regTel");
+            if(name.isEmpty() || id.isEmpty() || email.isEmpty()
+                    ||telNum.isEmpty()) throw new IOException("Ninguno "
+                            + "de los campos debe estar vacío.");
+            String pass = Model.getInstance().insertStudent(name,id,email,telNum);
             request.setAttribute("genPass", pass); 
             request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
         }catch(Exception e){

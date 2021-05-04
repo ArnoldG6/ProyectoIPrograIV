@@ -53,7 +53,7 @@ public class Controller extends HttpServlet {
             if (id.equals("") || pass.equals("")) {
                 idError = "Debe&#160;digitar&#160;un&#160;nombre&#160;de&#160;usuario.";
                 passError = "Debe&#160;digitar&#160;una&#160;contraseña.";
-                throw new IOException();
+                throw new IOException("Campos vacios");
             }
 
             User user = current.login(id, pass);
