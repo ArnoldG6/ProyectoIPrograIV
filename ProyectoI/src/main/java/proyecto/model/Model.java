@@ -162,6 +162,7 @@ public class Model {
         try{
             Subject s = new Subject(subId,subName,subDesc,SUB_STATUS);
             SubjectDAO.getInstance().add(s);
+            updateModel();
         }catch(Exception e){
 
             throw e;

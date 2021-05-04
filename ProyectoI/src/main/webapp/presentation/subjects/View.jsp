@@ -6,7 +6,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.awt.Image"%>
 <%@page import="proyecto.model.Subject"%>
- <%HashMap<String,Subject> subjects = (HashMap<String,Subject>)request.getAttribute("subjects"); %>
+ <%HashMap<String,Subject> subjects = (HashMap<String,Subject>)session.getAttribute("subjects"); %>
 
 <!DOCTYPE html>
 <html>
@@ -43,6 +43,7 @@
                     </div>
                 </div>   
                 <% } %>
+                <% session.removeAttribute("subjects"); %>
             <% } %>
         </div>
     </body>

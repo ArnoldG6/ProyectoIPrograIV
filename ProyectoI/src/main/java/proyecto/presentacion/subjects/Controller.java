@@ -27,18 +27,21 @@ public class Controller extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try{
-                //registerSubject(request,response);
-            String viewUrl=null;
+            String viewUrl="/index.jsp";
             switch(request.getServletPath()){
-               // case "/presentation/subjects/show":
-                 //   viewUrl=this.show(request);
-                   // break;              
+                /*
+               case "/presentation/subjects/show":
+                    viewUrl=this.show(request);
+                    break;            
+                */
                 case "/presentation/subjects/register":
                     viewUrl=this.registerSubject(request,response);
-                    break;            
-                //case "/presentation/subjects/image":
-                 //   viewUrl=this.image(request,response);
-                   // break;
+                    break;      
+                    /*
+               case "/presentation/subjects/image":
+                    viewUrl=this.image(request,response);
+                    break;
+                    */
                 default: viewUrl = "/index.jsp"; break;
             }
             if(viewUrl!=null)
@@ -57,9 +60,9 @@ public class Controller extends HttpServlet {
             String subId = request.getParameter("subId"),
                    subName = request.getParameter("subName"),
                    subDesc = request.getParameter("subDesc");
-            //final Part imagen = request.getPart("subImg");
+            final Part imagen = request.getPart("subImg");
             Model.getInstance().insertSubject(subId, subName, subDesc);
-            //imagen.write(subId);
+            imagen.write(subId);
             session.setAttribute("subjects",  Model.getInstance().getSubjects());
             //request.getRequestDispatcher("/index.jsp").forward(request, response);
         }catch(Exception e){
@@ -67,7 +70,7 @@ public class Controller extends HttpServlet {
            session.setAttribute("exc",e.getMessage());
            throw e;
         }
-        return "/index.jsp";
+        return "/presentation/subjects/registerSubject.jsp";
     }
 
     @Override
@@ -99,8 +102,8 @@ public class Controller extends HttpServlet {
         }
         return null;
     }    
-*/
-    
+
+    */
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
