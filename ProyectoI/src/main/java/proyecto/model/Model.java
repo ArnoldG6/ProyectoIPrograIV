@@ -28,19 +28,13 @@ public class Model {
         subjects = new HashMap<>();
         teachers = new HashMap<>();
         admins = new HashMap<>();
-        
-        /*
-        //Some dummy objects in order to test the login and logout feature.
-        students.put("1234", new Student("Juan Papu", "1234", "jp@gmail.com", "555", "1234"));
-        teachers.put("4321", new Teacher("Cristian Aguilar", "4321", "ca@gmail.com", "665", "5678"));
-        admins.put("0", new Administrator("admin", "0", "root0@gmail.com", "123", "1111"));
-         */
     }
-    public HashMap<String, Subject> getSubjectList(User u) throws Exception{
+    public HashMap<String, Subject> getSubjectsMap(User u) throws Exception{
         try{
         updateModel();
-        HashMap<String, Subject> result = new HashMap<String, Subject>();
-        result.putAll(result);
+        //HashMap<String, Subject> result = new HashMap<String, Subject>();
+        HashMap<String, Subject> result = SubjectDAO.getInstance().listAll();
+        result.putAll(subjects);
         if(u != null){
             if(u.getType() == 3) return result; //admin
             result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));

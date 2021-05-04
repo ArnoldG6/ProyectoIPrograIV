@@ -2,14 +2,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sistema de matricula</title>
+        <meta http-equiv="refresh" content="0; url=/ProyectoI/presentation/subjects/show" />
+        <title></title>
     </head>
-    <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
-        <%@ include file="/presentation/Header.jsp" %>
-        <h1 class = "text-center">¡Bienvenido!</h1>
-        <jsp:include page="/presentation/subjects/View.jsp"/>
-        <%@ include file="/presentation/Footer.jsp" %>
+    <body> 
     </body>
             
 </html>

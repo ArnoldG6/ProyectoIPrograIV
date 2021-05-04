@@ -29,23 +29,18 @@ public class Controller extends HttpServlet {
         try{
             String viewUrl="/index.jsp";
             switch(request.getServletPath()){
-                /*
                case "/presentation/subjects/show":
                     viewUrl=this.show(request);
-                    break;            
-                */
+                    break;              
                 case "/presentation/subjects/register":
                     viewUrl=this.registerSubject(request,response);
-                    break;      
-                    /*
+                    break;            
                case "/presentation/subjects/image":
                     viewUrl=this.image(request,response);
                     break;
-                    */
                 default: viewUrl = "/index.jsp"; break;
             }
-            if(viewUrl!=null)
-                request.getRequestDispatcher(viewUrl).forward( request, response);
+            request.getRequestDispatcher(viewUrl).forward( request, response);
             
             
         } catch (Exception e) {
@@ -83,12 +78,12 @@ public class Controller extends HttpServlet {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    /*
+    
         private String show(HttpServletRequest request) throws Exception {     
             HttpSession session = request.getSession(true);
             User u = (User) session.getAttribute("user");
-            request.setAttribute("cursos", Model.getInstance().getSubjectList(u));
-            return "/index.jsp";
+            session.setAttribute("subjects", Model.getInstance().getSubjectsMap(u));
+            return "/presentation/mainpage.jsp";
     }
         
     private String image(HttpServletRequest request,  HttpServletResponse response) throws IOException {     
@@ -103,7 +98,7 @@ public class Controller extends HttpServlet {
         return null;
     }    
 
-    */
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
