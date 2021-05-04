@@ -24,7 +24,7 @@ public class SubjectDAO implements DAO<String, Subject> {
     public int getCount() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(SubjectCRUD.CMD_COUNT)) {
                 if (rs.next()) 
@@ -46,7 +46,7 @@ public class SubjectDAO implements DAO<String, Subject> {
         String sub_name,id,desc,stat;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(SubjectCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -77,7 +77,7 @@ public class SubjectDAO implements DAO<String, Subject> {
 
     @Override
     public void add(String id, Subject value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getIdSub());
@@ -108,7 +108,7 @@ public class SubjectDAO implements DAO<String, Subject> {
         Subject result = null;
         String subname;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -127,7 +127,7 @@ public class SubjectDAO implements DAO<String, Subject> {
 
     @Override
     public void update(String id, Subject value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_UPDATE_SUB_NAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -148,7 +148,7 @@ public class SubjectDAO implements DAO<String, Subject> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

@@ -22,7 +22,7 @@ public class StudentDAO implements DAO<String, Student> {
     public int getCount() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(StudentCRUD.CMD_COUNT)) {
                 if (rs.next()) 
@@ -45,7 +45,7 @@ public class StudentDAO implements DAO<String, Student> {
         String username,id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(StudentCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -72,7 +72,7 @@ public class StudentDAO implements DAO<String, Student> {
 
     @Override
     public void add(String id, Student value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
@@ -102,7 +102,7 @@ public class StudentDAO implements DAO<String, Student> {
         Student result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -124,7 +124,7 @@ public class StudentDAO implements DAO<String, Student> {
     @Override
     //This update only updates stu pass, not sure about updating stu id
     public void update(String id, Student value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_UPDATE_STU_PASS)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -145,7 +145,7 @@ public class StudentDAO implements DAO<String, Student> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

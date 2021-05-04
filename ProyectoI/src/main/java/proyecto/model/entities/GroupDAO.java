@@ -27,7 +27,7 @@ public class GroupDAO implements DAO<String, Group> {
         String id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(GroupCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -46,7 +46,7 @@ public class GroupDAO implements DAO<String, Group> {
     @Override
     //We have to see how add due to the relationships
     public void add(String id, Group value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_ADD)) {
             stm.clearParameters();
 //            stm.setString(1, value.getNrc());
@@ -75,7 +75,7 @@ public class GroupDAO implements DAO<String, Group> {
         Group result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -96,7 +96,7 @@ public class GroupDAO implements DAO<String, Group> {
 
     @Override
     public void update(String id, Group value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_UPDATE_NUM_STU)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -117,7 +117,7 @@ public class GroupDAO implements DAO<String, Group> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/universidad?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);
