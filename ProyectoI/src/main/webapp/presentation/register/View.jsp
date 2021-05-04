@@ -13,7 +13,7 @@
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Registrar cuenta estudiantil</h1>
 
-        <form class = "container center_div w-75 p-3"name = "regForm" action="/ProyectoI/presentation/login/register" method="POST">
+        <form class = "container center_div w-75 p-3" name = "regForm" action="/ProyectoI/presentation/login/register" method="POST">
             <div class = "form-group">
                 <label for = "regId">Número de identificación</label>
                 <input type="text" class ="form-control  text-center" name = "regId" placeholder = "Número de identificación" id = "regId">
