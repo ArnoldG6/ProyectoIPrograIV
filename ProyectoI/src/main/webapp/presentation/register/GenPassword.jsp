@@ -12,7 +12,7 @@
         <h1 class = "text-center">Contraseña autogenerada</h1>
         <div class="text-center">
             <% if (genPass != null) {%>
-            <li class="list-inline-item">
+            <li class = "list-inline-item">
                 <div>Contraseña generada: &nbsp; <%=genPass%></div>
                 <div>&nbsp;</div>
                 <div>Debe guardar esta contraseña puesto que no se volverá a mostrar.</div>

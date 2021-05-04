@@ -1,5 +1,5 @@
-<%@page import="proyecto.presentacion.login.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="proyecto.presentacion.login.Model"%>
 <% String passError = (String) request.getAttribute("passError"),
             idError = (String) request.getAttribute("idError"); %>
 <!DOCTYPE html>
@@ -18,9 +18,9 @@
                 <input type="text" class ="form-control  
                        text-center" name = "id" id = "id"
                        <% if (idError == null) { %>
-                       placeholder = "Número de identificación" 
+                             placeholder = "Número de identificación" 
                        <% } else {%>
-                       placeholder = <%=idError%>
+                             placeholder = <%=idError%>
                        <% }%>
                        >
                 <label for = "pass">&nbsp; Contraseña:</label>
@@ -46,7 +46,7 @@
 
         <div class = "col-md-12 text-center">
             <a class="link-info" href="/ProyectoI/presentation/register/View.jsp">
-                <label for "regBtn" >¿No tiene una cuenta? ¡Registrese aquí!</label>
+                <label for = "regBtn" >¿No tiene una cuenta? ¡Registrese aquí!</label>
             </a>
         </div>
         <%@ include file="/presentation/Footer.jsp" %>
