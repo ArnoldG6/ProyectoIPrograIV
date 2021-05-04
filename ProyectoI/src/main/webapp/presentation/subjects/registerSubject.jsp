@@ -14,11 +14,11 @@
                   method="POST" enctype="multipart/form-data" 
                   action="/ProyectoI/presentation/subjects/register">
                 <label for = "subId">Código del curso</label>
-                <input type="text" class ="form-control  text-center" name = "subId" id = "subId">
+                <input type="text" class ="form-control  text-center" name = "subId" id = "subId" placeholder="Digite el codigo del curso">
                 <label for = "subName"> Nombre del curso</label>
-                <input type="text" class ="form-control text-center" name = "subName"  id = "subName" >
+                <input type="text" class ="form-control text-center" name = "subName"  id = "subName" placeholder="Digite el nombre del curso" >
                 <label for = "subDesc">Descripción del curso</label>
-                <input type="text" class ="form-control  text-center" name = "subDesc"  id = "subDesc">
+                <input type="text" class ="form-control  text-center" name = "subDesc"  id = "subDesc" placeholder="Digite la descripcion del curso" >
                 <label for = "subImg">Archivo de imagen</label>
                 <input type="file" class ="form-control text-center" name = "subImg"  id = "subImg" >
                 <div class="text-center">

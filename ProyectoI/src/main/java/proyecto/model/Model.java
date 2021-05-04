@@ -7,6 +7,7 @@ import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.StudentDAO;
 import proyecto.model.entities.SubjectDAO;
+import proyecto.model.entities.TeacherDAO;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Model {
             + StudentDAO.getInstance().getCount()) 
             != getUsersMap().size()) {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
-            //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
+            Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
@@ -213,12 +214,20 @@ public class Model {
         return null;
     }
 
-    public String insertTeacher(String nom, String id, String em, String cllph) {
-        Teacher tc = new Teacher(nom, id, em, cllph, "");
-        String pss = tc.generateRandomPassword(4);
-        tc.setPass(pss);
-        //teachers.put(id, tc);
-        return pss;
+    public String insertTeacher(String nom, String id, String em, String cllph) throws Exception {
+        String pass = "";
+        try{
+            Teacher tea = new Teacher(nom, id, em, cllph, "");
+            pass = User.generateRandomPassword(4);
+            tea.setPass(pass);
+            TeacherDAO.getInstance().add(tea.getId(), tea);
+            updateModel();
+            return pass;
+            
+        }catch(Exception e){
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
+        }
     }
 
     public String insertAdmin(String nom, String id, String em, String cllph) throws Exception {
