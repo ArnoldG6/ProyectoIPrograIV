@@ -25,11 +25,17 @@
                     </li>
                     <% if (user.getType() == 3) { %>
                         <li class="list-inline-item">
-                        <a class ="btn btn-outline-light" 
-                        href="/ProyectoI/presentation/subjects/registerSubject.jsp">
-                            Ingresar cursos
-                        </a> 
-                </li>
+                            <a class ="btn btn-outline-light" 
+                            href="/ProyectoI/presentation/subjects/registerSubject.jsp">
+                                Ingresar cursos
+                            </a> 
+                        </li>
+                        <li class="list-inline-item">
+                            <a class ="btn btn-outline-light" 
+                            href="/ProyectoI/presentation/user/teacher/View.jsp">
+                                Listado y registro de profesores
+                            </a> 
+                        </li>
                     <% } %>
                 <% } else {%>
                     <li class="list-inline-item">
