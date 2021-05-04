@@ -10,7 +10,6 @@ public class Subject {
     private String nameSubj;
     private String desc;
     private String status;
-    private Blob img;
     private List<Group> groups;
     
     public Subject(String idSub, String nameSubj, String desc, String stat) {
@@ -18,7 +17,6 @@ public class Subject {
         this.nameSubj = nameSubj;
         this.desc = desc;
         this.status = stat;
-        this.img = null;
         this.groups = new ArrayList<>();
     }
 
@@ -91,13 +89,6 @@ public class Subject {
         this.status = status;
     }
 
-    public Blob getImg() {
-        return img;
-    }
-
-    public void setImg(Blob img) {
-        this.img = img;
-    }
 
     
     

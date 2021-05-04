@@ -55,8 +55,6 @@ public class SubjectDAO implements DAO<String, Subject> {
                     desc = rs.getString("sub_desc");
                     stat = rs.getString("sub_status");
                     Subject s = (new Subject(id,sub_name,desc,stat));
-                    Blob img = (Blob) rs.getBlob("sub_img");
-                    s.setImg(img);
                     u.put(id, s);
                 }
             } catch (SQLException ex) {
@@ -84,7 +82,6 @@ public class SubjectDAO implements DAO<String, Subject> {
             stm.setString(2, value.getNameSubj());
             stm.setString(3, value.getDesc());
             stm.setString(4, value.getStatus());
-            stm.setBlob(5, value.getImg());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
@@ -124,7 +121,7 @@ public class SubjectDAO implements DAO<String, Subject> {
         }
         return result;
     }
-
+    
     @Override
     public void update(String id, Subject value) {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");

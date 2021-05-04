@@ -157,11 +157,10 @@ public class Model {
         }
     }
       public void insertSubject(String subId, String subName, 
-              String subDesc, Blob subImg ) 
+              String subDesc) 
             throws Exception{
         try{
             Subject s = new Subject(subId,subName,subDesc,SUB_STATUS);
-            s.setImg(subImg);
             SubjectDAO.getInstance().add(s);
         }catch(Exception e){
 
