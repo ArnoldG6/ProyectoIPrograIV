@@ -1,20 +1,21 @@
 package proyecto.presentacion.subjects;
 import java.awt.Image;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Blob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import proyecto.model.Model;
-import proyecto.model.Subject;
 
 @WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register"})
-
+@MultipartConfig()
+//@MultipartConfig(location="C:/AAA/images")
 public class Controller extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request,
@@ -30,17 +31,24 @@ public class Controller extends HttpServlet {
     public void registerSubject (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try{
+            
+            /*
+            final Part imagen = request.getPart("imagen");           
+            imagen.write(curso.getCodigo());
+            */
             HttpSession session = request.getSession(true);
             String subId = request.getParameter("subId"),
                    subName = request.getParameter("subName"),
                    subDesc = request.getParameter("subDesc");
             Image subImg = (Image) request.getPart("subImg");
-            Model.getInstance().insertSubject(subId, subName, subDesc, subImg);
+            //final Part imagen = request.getPart("subImg");  
+            //imagen.write(subId);
+            Model.getInstance().insertSubject(subId, subName, subDesc, null);
+            session.setAttribute("subjects",  Model.getInstance().getSubjects());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }catch(Exception e){
-           ArrayList<String> errors = new ArrayList<>();
-           errors.add(e.getMessage());
-           request.setAttribute("errors",errors);
+           HttpSession session = request.getSession(true);
+           session.setAttribute("exc",e.getMessage());
            throw e;
         }
     }

@@ -1,6 +1,7 @@
 package proyecto.model;
 
 import java.awt.Image;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Subject {
     private String nameSubj;
     private String desc;
     private String status;
-    private Image img;
+    private Blob img;
     private List<Group> groups;
     
     public Subject(String idSub, String nameSubj, String desc, String stat) {
@@ -90,11 +91,11 @@ public class Subject {
         this.status = status;
     }
 
-    public Image getImg() {
+    public Blob getImg() {
         return img;
     }
 
-    public void setImg(Image img) {
+    public void setImg(Blob img) {
         this.img = img;
     }
 

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%String exc = (String)session.getAttribute("exc");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,6 +9,10 @@
     <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Ha ocurrido un error</h1>
+        <% if (exc != null) {%>
+            <div><%=exc%></div>
+            <%session.removeAttribute("exc");%>
+        <% }%>
         <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>

@@ -2,6 +2,7 @@ package proyecto.model;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.StudentDAO;
@@ -156,7 +157,7 @@ public class Model {
         }
     }
       public void insertSubject(String subId, String subName, 
-              String subDesc, Image subImg ) 
+              String subDesc, Blob subImg ) 
             throws Exception{
         try{
             Subject s = new Subject(subId,subName,subDesc,SUB_STATUS);

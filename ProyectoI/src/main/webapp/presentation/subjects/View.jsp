@@ -4,6 +4,7 @@
 <% User user = (User) session.getAttribute("user");%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.awt.Image"%>
 <%@page import="proyecto.model.Subject"%>
  <%HashMap<String,Subject> subjects = (HashMap<String,Subject>)request.getAttribute("subjects"); %>
 
@@ -30,7 +31,7 @@
                     <% Subject sub = subjects.get(entry.getKey()); %>
                     <div class="card p-3 bg-dark col ">
                         <a href="#" id="imagen1" class="p-3 bg-dark " >
-                            <img class="card-img-top" src="<%=sub.getImg()%>" height="50" width = "50" alt="Card image cap" >
+                            <img class="card-img-top" src="<%= sub.getImg()%>" height="50" width = "50" alt="Card image cap" >
                         </a>
                     <div class="card-body">
                         <label class="card-title"><%= sub.getIdSub()%></label>
