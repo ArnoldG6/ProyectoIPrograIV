@@ -20,7 +20,7 @@ import proyecto.model.User;
 
 @WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register",
 "/presentation/subjects/show","/presentation/subjects/image","/presentation/subjects/print"})
-@MultipartConfig(location="C:/PROYECTO/images")
+@MultipartConfig(location="C:/PROYECTO")
 public class Controller extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request,
@@ -87,8 +87,8 @@ public class Controller extends HttpServlet {
     }
         
     private String image(HttpServletRequest request,  HttpServletResponse response) throws IOException {     
-        String code = request.getParameter("subId");
-        Path path = FileSystems.getDefault().getPath("C:/PROYECTO/images", code);
+        String subId = request.getParameter("subId");
+        Path path = FileSystems.getDefault().getPath("C:/PROYECTO", subId);
         try (OutputStream out = response.getOutputStream()) {
             Files.copy(path, out);
             out.flush();

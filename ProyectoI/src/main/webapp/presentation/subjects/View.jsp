@@ -33,7 +33,7 @@
             <div class="row p-1 bg-dark column card-body">
                 <div class="card p-3 bg-dark col">
                     <a href="#" id="imagen1" class="p-3 bg-dark " >
-                        <img class="card-img-top" src="/ProyectoI/images/Buda.jpg" height="100" width = "100" alt="Card image cap" >
+                        <img src='/ProyectoI/presentation/subjects/image?subId=<%=sub.getIdSub()%>' height="100" width = "100">
                     </a>
                     <div><label class="card-title text-center"><%= sub.getNameSubj()%></label></div>
                     <div>&nbsp;</div>
