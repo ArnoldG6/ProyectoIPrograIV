@@ -7,6 +7,7 @@ import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.StudentDAO;
 import proyecto.model.entities.SubjectDAO;
+import proyecto.model.entities.TeacherDAO;
 
 /**
  *
@@ -28,19 +29,13 @@ public class Model {
         subjects = new HashMap<>();
         teachers = new HashMap<>();
         admins = new HashMap<>();
-        
-        /*
-        //Some dummy objects in order to test the login and logout feature.
-        students.put("1234", new Student("Juan Papu", "1234", "jp@gmail.com", "555", "1234"));
-        teachers.put("4321", new Teacher("Cristian Aguilar", "4321", "ca@gmail.com", "665", "5678"));
-        admins.put("0", new Administrator("admin", "0", "root0@gmail.com", "123", "1111"));
-         */
     }
-    public HashMap<String, Subject> getSubjectList(User u) throws Exception{
+    public HashMap<String, Subject> getSubjectsMap(User u) throws Exception{
         try{
         updateModel();
-        HashMap<String, Subject> result = new HashMap<String, Subject>();
-        result.putAll(result);
+        //HashMap<String, Subject> result = new HashMap<String, Subject>();
+        HashMap<String, Subject> result = SubjectDAO.getInstance().listAll();
+        result.putAll(subjects);
         if(u != null){
             if(u.getType() == 3) return result; //admin
             result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
@@ -58,7 +53,7 @@ public class Model {
             + StudentDAO.getInstance().getCount()) 
             != getUsersMap().size()) {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
-            //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
+            Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
@@ -219,12 +214,20 @@ public class Model {
         return null;
     }
 
-    public String insertTeacher(String nom, String id, String em, String cllph) {
-        Teacher tc = new Teacher(nom, id, em, cllph, "");
-        String pss = tc.generateRandomPassword(4);
-        tc.setPass(pss);
-        //teachers.put(id, tc);
-        return pss;
+    public String insertTeacher(String nom, String id, String em, String cllph) throws Exception {
+        String pass = "";
+        try{
+            Teacher tea = new Teacher(nom, id, em, cllph, "");
+            pass = User.generateRandomPassword(4);
+            tea.setPass(pass);
+            TeacherDAO.getInstance().add(tea.getId(), tea);
+            updateModel();
+            return pass;
+            
+        }catch(Exception e){
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
+        }
     }
 
     public String insertAdmin(String nom, String id, String em, String cllph) throws Exception {
