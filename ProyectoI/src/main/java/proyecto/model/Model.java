@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.StudentDAO;
+import proyecto.model.entities.SubjectDAO;
 
 /**
  *
@@ -33,7 +34,23 @@ public class Model {
         admins.put("0", new Administrator("admin", "0", "root0@gmail.com", "123", "1111"));
          */
     }
-
+    public HashMap<String, Subject> getSubjectList(User u) throws Exception{
+        try{
+        updateModel();
+        HashMap<String, Subject> result = new HashMap<String, Subject>();
+        result.putAll(result);
+        if(u != null){
+            if(u.getType() == 3) return result; //admin
+            result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
+            return result;
+        }else{
+            result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
+            return result;
+        }
+        }catch(Exception e){
+            throw e;
+        }
+    }
     public final void updateModel() throws Exception {
         if ((AdministratorDAO.getInstance().getCount()
             + StudentDAO.getInstance().getCount()) 
@@ -41,7 +58,7 @@ public class Model {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             //this.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
-            //this.getInstance().setSubjects(SubjectsDAO.getInstance().listAll());
+            Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         }
     }

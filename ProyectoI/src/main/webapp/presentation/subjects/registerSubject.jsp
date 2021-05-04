@@ -10,9 +10,9 @@
         <h1 class = "text-center">Ingresar cursos</h1>   
         
         <div> 
-            <form name = "subForm"class = "container center_div w-75 p-3" 
+            <form name = "subForm" class = "container center_div w-75 p-3" 
                   method="POST" enctype="multipart/form-data" 
-                  action="/ProyectoI/presentation/subjects/register" method="POST"">
+                  action="/ProyectoI/presentation/subjects/register" method="POST">
    
                 <label for = "subId">Código del curso</label>
                 <input type="text" class ="form-control  text-center" name = "subId" id = "subId">

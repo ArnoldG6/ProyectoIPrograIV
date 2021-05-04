@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Listado de cursos</title>
     </head>
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
 

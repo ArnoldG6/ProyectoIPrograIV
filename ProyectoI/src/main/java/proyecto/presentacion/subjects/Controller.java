@@ -1,7 +1,7 @@
 package proyecto.presentacion.subjects;
-import proyecto.presentacion.register.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import proyecto.model.Model;
+import proyecto.model.Subject;
+import proyecto.model.User;
 
-@WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register"})
+@WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/View"})
 
 public class Controller extends HttpServlet {
 
@@ -28,11 +31,9 @@ public class Controller extends HttpServlet {
     public void registerSubject (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try{
-            
-            String pass = Model.getInstance().insertStudent(
-                    request.getParameter("regNom"),request.getParameter("regId"),
-                    request.getParameter("regEmail"),request.getParameter("regTel"));
-            request.setAttribute("genPass", pass); 
+            HttpSession session = request.getSession(true);
+            HashMap<String, Subject> result = Model.getInstance().getSubjectList
+                    ((User) session.getAttribute("user"));
             request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
         }catch(Exception e){
            ArrayList<String> errors = new ArrayList<>();
