@@ -1,5 +1,7 @@
 package proyecto.model.entities;
 
+import java.awt.Image;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,11 +50,14 @@ public class SubjectDAO implements DAO<String, Subject> {
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(SubjectCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    sub_name = rs.getString("sub_name");
                     id = rs.getString("sub_id");
+                    sub_name = rs.getString("sub_name");
                     desc = rs.getString("sub_desc");
                     stat = rs.getString("sub_status");
-                    u.put(id, (new Subject(id,sub_name,desc,stat)));
+                    Subject s = (new Subject(id,sub_name,desc,stat));
+                    Image img = (Image) rs.getBlob("sub_img");
+                    s.setImg(img);
+                    u.put(id, s);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,6 +83,8 @@ public class SubjectDAO implements DAO<String, Subject> {
             stm.setString(1, value.getIdSub());
             stm.setString(2, value.getNameSubj());
             stm.setString(3, value.getDesc());
+            stm.setString(4, value.getStatus());
+            stm.setBlob(5, (Blob) value.getImg());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));

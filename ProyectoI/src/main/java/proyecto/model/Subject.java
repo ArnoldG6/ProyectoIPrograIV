@@ -17,6 +17,7 @@ public class Subject {
         this.nameSubj = nameSubj;
         this.desc = desc;
         this.status = stat;
+        this.img = null;
         this.groups = new ArrayList<>();
     }
 
@@ -89,16 +90,10 @@ public class Subject {
         this.status = status;
     }
 
-    /**
-     * @return the img
-     */
     public Image getImg() {
         return img;
     }
 
-    /**
-     * @param img the img to set
-     */
     public void setImg(Image img) {
         this.img = img;
     }

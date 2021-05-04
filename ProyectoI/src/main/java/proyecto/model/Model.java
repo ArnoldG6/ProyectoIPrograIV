@@ -1,5 +1,6 @@
 package proyecto.model;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.util.HashMap;
 import proyecto.model.entities.AdministratorDAO;
@@ -18,7 +19,7 @@ public class Model {
     private HashMap<String, Subject> subjects;
     private HashMap<String, Teacher> teachers;
     private HashMap<String, Administrator> admins;
-
+    private final static String SUB_STATUS = "OFERTA";
     public Model() {
         current = null;
         students = new HashMap<>();
@@ -154,7 +155,18 @@ public class Model {
             throw e;
         }
     }
-  
+      public void insertSubject(String subId, String subName, 
+              String subDesc, Image subImg ) 
+            throws Exception{
+        try{
+            Subject s = new Subject(subId,subName,subDesc,SUB_STATUS);
+            s.setImg(subImg);
+            SubjectDAO.getInstance().add(s);
+        }catch(Exception e){
+
+            throw e;
+        }
+    }
     public String showSubjects() {
         return getSubjects().toString();
     }
