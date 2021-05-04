@@ -51,7 +51,7 @@ public class SubjectDAO implements DAO<String, Subject> {
                     sub_name = rs.getString("sub_name");
                     id = rs.getString("sub_id");
                     desc = rs.getString("sub_desc");
-                    stat = rs.getString("sub_status");
+                    stat = rs.getString("sub_statu");
                     u.put(id, (new Subject(id,sub_name,desc,stat)));
                 }
             } catch (SQLException ex) {
@@ -108,7 +108,7 @@ public class SubjectDAO implements DAO<String, Subject> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         subname = rs.getString("sub_name");
-                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"),rs.getString("sub_status"));
+                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"),rs.getString("sub_statu"));
                     }
                 }
             }
