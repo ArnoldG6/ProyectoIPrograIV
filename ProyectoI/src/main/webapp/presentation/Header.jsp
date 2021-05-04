@@ -37,6 +37,20 @@
                             </a> 
                         </li>
                     <% } %>
+                    <% if (user.getType() == 2) { %>
+                        <li class="list-inline-item">
+                            <a class ="btn btn-outline-light" 
+                            href="/ProyectoI/presentation/user/student/record.jsp">
+                                Historial de cursos
+                            </a> 
+                        </li>
+                        <li class="list-inline-item">
+                            <a class ="btn btn-outline-light" 
+                            href="/ProyectoI/presentation/user/student/constancy.jsp">
+                                Constancia
+                            </a> 
+                        </li>
+                    <% } %>
                 <% } else {%>
                     <li class="list-inline-item">
                         <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
