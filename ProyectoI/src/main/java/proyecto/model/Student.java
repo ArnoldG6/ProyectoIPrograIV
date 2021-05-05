@@ -11,7 +11,7 @@ import javafx.util.Pair;
 public class Student extends User {
 
     public List<Group> groups;
-    public List<Pair<Group, Integer>> grades;
+    public List<Pair<Group, Float>> grades;
 
     public Student(String name, String id, String email, String telNum, String pass) {
         this.username = name;
@@ -20,7 +20,7 @@ public class Student extends User {
         this.telNum = telNum;
         this.pass = pass;
         this.groups = new ArrayList<>();
-        this.grades = new ArrayList<Pair<Group,Integer>>();
+        this.grades = new ArrayList<Pair<Group,Float>>();
         this.type = 2;
     }
     
@@ -28,7 +28,8 @@ public class Student extends User {
     //public void insertGrade(){
     //    grades.add(new Pair<Groups,Integer>(groups.get(1),1));
     //}
-
+    List<Group> getGroups(){return groups;}
+    List<Pair<Group, Float>> getGrades(){return grades;}
     public Student() {
         this("", "", "", "", "");
     }

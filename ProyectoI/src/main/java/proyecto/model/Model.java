@@ -1,9 +1,12 @@
 package proyecto.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.util.Pair;
 import proyecto.model.entities.AdministratorDAO;
+import proyecto.model.entities.GROUPS_STUDENTSDAO;
 import proyecto.model.entities.StudentDAO;
 import proyecto.model.entities.SubjectDAO;
 import proyecto.model.entities.TeacherDAO;
@@ -61,10 +64,35 @@ public class Model {
             Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
-            //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+            Model.getInstance().updateStudentsGroups();
+            
         }
     }
-
+    public void linkStudentGroup(Student s, Group g, Float grade) throws Exception{
+        if(s == null || g == null || grade == null) 
+            throw new Exception("Null pointer in linkStudentGroup method");
+        if(!g.getStudents().contains(s))
+            g.getStudents().add(s);
+        if(!s.getGroups().contains(g))
+            s.getGroups().add(g);
+        Pair<Group,Float> gra= new Pair<>(g,grade);
+        if(!s.getGrades().contains(gra))
+            s.getGrades().add(gra);
+    }
+    public void updateStudentsGroups() throws Exception{
+            try {
+            HashMap<String, Subject> result = new HashMap < String, Subject>();
+            ArrayList<String[]> groupsHasStu = GROUPS_STUDENTSDAO.getInstance().listAll();
+            for (int i = 0; i < groupsHasStu.size(); i++) 
+                linkStudentGroup(
+                        students.get(groupsHasStu.get(i)[0]),
+                groups.get(groupsHasStu.get(i)[1]),
+                Float.parseFloat(groupsHasStu.get(i)[2]));
+            
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     public HashMap<String, Subject> searchSubjects(User u, String pattern) throws Exception {
         try {
             Subject value;
