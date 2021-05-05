@@ -10,7 +10,7 @@
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Ha ocurrido un error</h1>
         <% if (exc != null) {%>
-            <div><%=exc%></div>
+            <div class = "text-center"><%=exc%></div>
             <%session.removeAttribute("exc");%>
         <% }%>
         <%@ include file="/presentation/Footer.jsp" %>

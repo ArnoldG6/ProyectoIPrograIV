@@ -1,9 +1,8 @@
 package proyecto.model;
 
-import java.awt.Image;
 import java.io.IOException;
-import java.sql.Blob;
 import java.util.HashMap;
+import java.util.Map;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.StudentDAO;
 import proyecto.model.entities.SubjectDAO;
@@ -14,6 +13,7 @@ import proyecto.model.entities.TeacherDAO;
  * @author arnoldgq
  */
 public class Model {
+
     private User current;
     private static Model instance;
     private HashMap<String, Student> students;
@@ -22,6 +22,7 @@ public class Model {
     private HashMap<String, Teacher> teachers;
     private HashMap<String, Administrator> admins;
     private final static String SUB_STATUS = "OFERTA";
+
     public Model() {
         current = null;
         students = new HashMap<>();
@@ -30,33 +31,55 @@ public class Model {
         teachers = new HashMap<>();
         admins = new HashMap<>();
     }
-    public HashMap<String, Subject> getSubjectsMap(User u) throws Exception{
-        try{
-        updateModel();
-        //HashMap<String, Subject> result = new HashMap<String, Subject>();
-        HashMap<String, Subject> result = SubjectDAO.getInstance().listAll();
-        result.putAll(subjects);
-        if(u != null){
-            if(u.getType() == 3) return result; //admin
-            result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
-            return result;
-        }else{
-            result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
-            return result;
-        }
-        }catch(Exception e){
+
+    public HashMap<String, Subject> getSubjectsMap(User u) throws Exception {
+        try {
+            updateModel();
+            //HashMap<String, Subject> result = new HashMap<String, Subject>();
+            HashMap<String, Subject> result = SubjectDAO.getInstance().listAll();
+            result.putAll(subjects);
+            if (u != null) {
+                if (u.getType() == 3) {
+                    return result; //admin
+                }
+                result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
+                return result;
+            } else {
+                result.values().removeIf(s -> !s.getStatus().equals("OFERTA"));
+                return result;
+            }
+        } catch (Exception e) {
             throw e;
         }
     }
+
     public final void updateModel() throws Exception {
         if ((AdministratorDAO.getInstance().getCount()
-            + StudentDAO.getInstance().getCount()) 
-            != getUsersMap().size()) {
+                + StudentDAO.getInstance().getCount())
+                != getUsersMap().size()) {
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
             //this.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+        }
+    }
+
+    public HashMap<String, Subject> searchSubjects(User u, String pattern) throws Exception {
+        try {
+            Subject value;
+            pattern = pattern.toUpperCase();
+            HashMap<String, Subject> result = new HashMap < String, Subject>();
+            for (Map.Entry<String, Subject> entry : getSubjectsMap(u).entrySet()) { 
+                value = subjects.get(entry.getKey());
+                if(value.getDesc().toUpperCase().contains(pattern) 
+                        || value.getIdSub().toUpperCase().contains(pattern) 
+                        ||value.getNameSubj().toUpperCase().contains(pattern))
+                    result.put(value.getIdSub(), value);
+            }
+            return result;
+        } catch (Exception e) {
+            throw e;
         }
     }
 
@@ -105,8 +128,9 @@ public class Model {
     }
 
     public static Model getInstance() {
-        if (instance == null) 
+        if (instance == null) {
             instance = new Model();
+        }
         return instance;
     }
 
@@ -120,49 +144,54 @@ public class Model {
         } catch (Exception e) {
             throw e;
         }
-   
+
     }
 
     public User seekUser(String cedula, String clave) throws Exception {
         updateModel();
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
-        if (u != null) 
-            if (u.valPass(clave)) 
+        if (u != null) {
+            if (u.valPass(clave)) {
                 return u;
-             else 
+            } else {
                 throw new IOException("La contraseña digitada no es correcta");
-        else 
+            }
+        } else {
             throw new IOException("El usuario digitado no existe");
+        }
     }
+
     public String insertStudent(String name, String id, String email, String telNum)
-            throws Exception{
+            throws Exception {
         String pass = "";
-        try{
+        try {
             Student stu = new Student(name, id, email, telNum, "");
             pass = Student.generateRandomPassword(4);
             stu.setPass(pass);
             StudentDAO.getInstance().add(stu.getId(), stu);
             updateModel();
             return pass;
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             //throw new IOException("Este ID ya está registrado");
             throw e;
         }
     }
-      public void insertSubject(String subId, String subName, 
-              String subDesc) 
-            throws Exception{
-        try{
-            Subject s = new Subject(subId,subName,subDesc,SUB_STATUS);
+
+    public void insertSubject(String subId, String subName,
+            String subDesc)
+            throws Exception {
+        try {
+            Subject s = new Subject(subId, subName, subDesc, SUB_STATUS);
             SubjectDAO.getInstance().add(s);
             updateModel();
-        }catch(Exception e){
+        } catch (Exception e) {
 
             throw e;
         }
     }
+
     public String showSubjects() {
         return getSubjects().toString();
     }
@@ -178,7 +207,7 @@ public class Model {
     public String showSubject(String id) {
         return getSubjects().get(id).show();
     }
-    
+
     public String showGrps(String id) {
         //return getTeachers().get(id);
         return "";
@@ -188,19 +217,21 @@ public class Model {
         String idSub = "";
         for (Subject value : subjects.values()) {
             //System.out.println("Value = " + value.getNameSubj());
-            if (value.getNameSubj().equals(name)) 
+            if (value.getNameSubj().equals(name)) {
                 idSub = value.getIdSub();
+            }
         }
         return idSub;
     }
-    
+
     public Student searchStudent(String id) {
         String idSub = "";
-        Student s=null;
+        Student s = null;
         for (Student value : students.values()) {
             //System.out.println("Value = " + value.getNameSubj());
-            if (value.getId().equals(id)) 
+            if (value.getId().equals(id)) {
                 s = value;
+            }
         }
         return s;
     }
@@ -216,15 +247,15 @@ public class Model {
 
     public String insertTeacher(String nom, String id, String em, String cllph) throws Exception {
         String pass = "";
-        try{
+        try {
             Teacher tea = new Teacher(nom, id, em, cllph, "");
             pass = User.generateRandomPassword(4);
             tea.setPass(pass);
             TeacherDAO.getInstance().add(tea.getId(), tea);
             updateModel();
             return pass;
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             //throw new IOException("Este ID ya está registrado");
             throw e;
         }
@@ -235,24 +266,23 @@ public class Model {
         String pss = ad.generateRandomPassword(4);
         ad.setPass(pss);
         //admins.put(id, ad);
-        
+
         return pss;
     }
 
-    public String insertGroup( String n, Teacher tea, int numS) {
+    public String insertGroup(String n, Teacher tea, int numS) {
         //Teacher tea, double numS, String n
         Group gp = new Group(n, tea, numS);
         //groups.put(n, gp);
         return "";
     }
-    
-    public void insertGrpSt(String id, Group g){
-         searchStudent(id).insertGrp(g);
+
+    public void insertGrpSt(String id, Group g) {
+        searchStudent(id).insertGrp(g);
     }
-    
-    public void setCurrent(User u){
+
+    public void setCurrent(User u) {
         this.current = u;
     }
-    
-    
+
 }

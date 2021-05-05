@@ -4,7 +4,6 @@ import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.Provider.Service;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,7 +18,8 @@ import proyecto.model.Model;
 import proyecto.model.User;
 
 @WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register",
-"/presentation/subjects/show","/presentation/subjects/image","/presentation/subjects/print"})
+"/presentation/subjects/show","/presentation/subjects/image","/presentation/subjects/print",
+"/presentation/subjects/search"})
 @MultipartConfig(location="C:/PROYECTO")
 public class Controller extends HttpServlet {
    
@@ -37,6 +37,9 @@ public class Controller extends HttpServlet {
                     break;            
                case "/presentation/subjects/image":
                     viewUrl=this.image(request,response);
+                    break;
+               case "/presentation/subjects/search":
+                    viewUrl=this.searchSubject(request,response);
                     break;
                 default: viewUrl = "/index.jsp"; break;
             }
@@ -67,7 +70,23 @@ public class Controller extends HttpServlet {
         }
         return "/presentation/subjects/registerSubject.jsp";
     }
-
+    public String searchSubject (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        try{
+            HttpSession session = request.getSession(true);
+            String searchCriteria = (String) request.getParameter("searchCriteria");
+            if(searchCriteria == null)
+                throw new IOException("El campo de búsqueda no debe estar vacío");
+            session.setAttribute("searchedSbjts",  
+                    Model.getInstance().searchSubjects((User)session.getAttribute("user"), 
+                            searchCriteria));
+        }catch(Exception e){
+           HttpSession session = request.getSession(true);
+           session.setAttribute("exc",e.getMessage());
+           throw e;
+        }
+        return "/presentation/subjects/search.jsp";
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
