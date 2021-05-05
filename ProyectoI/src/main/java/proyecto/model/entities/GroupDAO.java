@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import proyecto.model.Group;
 import proyecto.model.Model;
 import proyecto.model.Teacher;
+import static proyecto.model.entities.SubjectDAO.recover2;
 
 /**
  *
@@ -32,7 +33,7 @@ public class GroupDAO implements DAO<String, Group> {
                     ResultSet rs = stm.executeQuery(GroupCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     id = rs.getString("gro_id");
-                    u.put(id, (new Group( id, searchTeacher(rs.getString("teachers_gro_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    u.put(id, (new Group( id, recover2(rs.getString("subject_id")), Integer.parseInt(rs.getString("num_stu")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,10 +50,9 @@ public class GroupDAO implements DAO<String, Group> {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_ADD)) {
             stm.clearParameters();
-//            stm.setString(1, value.getNrc());
-//            stm.setString(2, value.);
-//            stm.setString(3, value.getEmail());
-//            stm.setString(4, value.getTelNum());
+            stm.setString(1, value.getNrc());
+            stm.setString(2, value.getTeacher().getIdSub());
+            stm.setString(3, Integer.toString(value.getNumStu()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));

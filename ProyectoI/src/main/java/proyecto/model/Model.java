@@ -321,7 +321,7 @@ public class Model {
         return pss;
     }
 
-    public String insertGroup(String n, Teacher tea, int numS) {
+    public String insertGroup(String n, Subject tea, int numS) {
         //Teacher tea, double numS, String n
         Group gp = new Group(n, tea, numS);
         //groups.put(n, gp);
