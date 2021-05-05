@@ -1,6 +1,7 @@
 package proyecto.presentacion.login;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,7 +25,8 @@ public class Controller extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
-            if (request.getParameter("user") == null) 
+            HttpSession session = request.getSession(true);
+            if (session.getAttribute("user") == null) 
                 current = new Model();
             
            
@@ -80,6 +82,13 @@ public class Controller extends HttpServlet {
 
             }
             request.getRequestDispatcher("/presentation/login/View.jsp").forward(request, response);
+            /*
+            HttpSession session = request.getSession(true);
+            String exc = (e.getMessage());
+            session.setAttribute("exc",exc);
+            request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
+            */
+            throw e;
         }
     }
 

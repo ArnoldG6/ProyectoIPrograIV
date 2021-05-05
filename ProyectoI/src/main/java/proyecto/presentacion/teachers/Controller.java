@@ -50,7 +50,7 @@ public class Controller extends HttpServlet {
                     telNum = request.getParameter("regTeaTel");
             if(name.isEmpty() || id.isEmpty() || email.isEmpty()
                     ||telNum.isEmpty()) throw new IOException("Ninguno "
-                            + "de los campos debe estar vacÃ­o.");
+                            + "de los campos debe estar vacios.");
             String pass = Model.getInstance().insertTeacher(name,id,email,telNum);
             request.setAttribute("genPass", pass); 
             request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);

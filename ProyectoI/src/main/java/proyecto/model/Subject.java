@@ -26,6 +26,7 @@ public class Subject {
     }
 
     public void insertGroups(Group gr) {
+        gr.setSubName(nameSubj);
         groups.add(gr);
     }
 

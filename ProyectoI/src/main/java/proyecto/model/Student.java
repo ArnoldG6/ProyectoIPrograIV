@@ -28,7 +28,7 @@ public class Student extends User {
     //public void insertGrade(){
     //    grades.add(new Pair<Groups,Integer>(groups.get(1),1));
     //}
-    List<Group> getGroups(){return groups;}
+    public List<Group> getGroups(){return groups;}
     List<Pair<Group, Float>> getGrades(){return grades;}
     public Student() {
         this("", "", "", "", "");

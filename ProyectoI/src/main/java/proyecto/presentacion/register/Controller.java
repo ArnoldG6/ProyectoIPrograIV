@@ -34,6 +34,8 @@ public class Controller extends HttpServlet {
             if(name.isEmpty() || id.isEmpty() || email.isEmpty()
                     ||telNum.isEmpty()) throw new IOException("Ninguno "
                             + "de los campos debe estar vacío.");
+            if(Model.getInstance().getUsersMap().get(id) != null)
+                throw new IOException("El usuario digitado ya existe");
             String pass = Model.getInstance().insertStudent(name,id,email,telNum);
             request.setAttribute("genPass", pass); 
             request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);

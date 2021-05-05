@@ -40,7 +40,7 @@
                     <% if (user.getType() == 2) { %>
                         <li class="list-inline-item">
                             <a class ="btn btn-outline-light" 
-                            href="/ProyectoI/presentation/user/student/record.jsp">
+                            href="/ProyectoI/presentation/user/student/record">
                                 Historial de cursos
                             </a> 
                         </li>

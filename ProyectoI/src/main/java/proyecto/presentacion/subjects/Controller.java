@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import proyecto.model.Model;
+import proyecto.model.Student;
 import proyecto.model.User;
 
 @WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register",
 "/presentation/subjects/show","/presentation/subjects/image","/presentation/subjects/print",
-"/presentation/subjects/search"})
+"/presentation/subjects/search","/presentation/user/student/record"})
 @MultipartConfig(location="C:/PROYECTO")
 public class Controller extends HttpServlet {
    
@@ -40,6 +41,9 @@ public class Controller extends HttpServlet {
                     break;
                case "/presentation/subjects/search":
                     viewUrl=this.searchSubject(request,response);
+                    break;
+                case "/presentation/user/student/record":
+                    viewUrl=this.getRecord(request,response);
                     break;
                 default: viewUrl = "/index.jsp"; break;
             }
@@ -69,6 +73,23 @@ public class Controller extends HttpServlet {
            throw e;
         }
         return "/presentation/subjects/registerSubject.jsp";
+    }
+    public String getRecord (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        try{
+            HttpSession session = request.getSession(true);
+            User user = (User)session.getAttribute("user");
+            if(user == null) throw new IOException("Sesion expirada");
+            if(user.getId().isEmpty()) throw new IOException("Sesion expirada");
+                session.setAttribute("groups",
+                        Model.getInstance().getStudents().get(user.getId()).getGroups());
+            return "/presentation/user/student/record.jsp";
+        }catch(Exception e){
+           HttpSession session = request.getSession(true);
+           session.setAttribute("exc",e.getMessage());
+           throw e;
+        }
+        
     }
     public String searchSubject (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {

@@ -59,16 +59,14 @@ public class Model {
 
     
     public final void updateModel() throws Exception {
-        if ((AdministratorDAO.getInstance().getCount()
-                + StudentDAO.getInstance().getCount())
-                != getUsersMap().size()) {
+
             Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
             Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
             Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
             Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
-            Model.getInstance().updateStudentsGroups();
+            //Model.getInstance().updateStudentsGroups();
             
-        }
+        
     }
     public void linkStudentGroup(Student s, Group g, Float grade) throws Exception{
         if(s == null || g == null || grade == null) 
@@ -185,7 +183,7 @@ public class Model {
         return instance;
     }
 
-    HashMap<String, User> getUsersMap() throws Exception {
+    public HashMap<String, User> getUsersMap() throws Exception {
         HashMap<String, User> users = new HashMap<>();
         try {
             users.putAll(getStudents());
@@ -203,11 +201,11 @@ public class Model {
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
         if (u != null) {
-            if (u.valPass(clave)) {
+            if (u.valPass(clave)) 
                 return u;
-            } else {
+             else 
                 throw new IOException("La contraseña digitada no es correcta");
-            }
+            
         } else {
             throw new IOException("El usuario digitado no existe");
         }

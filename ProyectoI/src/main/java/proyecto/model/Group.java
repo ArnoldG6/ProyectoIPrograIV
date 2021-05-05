@@ -14,15 +14,15 @@ public class Group {
     private int numStu;
     private String nrc;
     private boolean status;
-
+    private String subName;
     public Group(String id,Teacher tea, int numS) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
         this.nrc = id;
         this.status = true;
+        this.subName = "Nombre&#160;&#160;del&#160;curso";
     }
-
     public void insertStudents(Student stu) {
         students.add(stu);
     }
@@ -34,7 +34,9 @@ public class Group {
             }
         }
     }
-
+    public void setSubName(String subName){
+        this.subName = subName;
+    }
     public String showStudent(int pos) {
         return "";
     }

@@ -49,8 +49,9 @@ public class StudentDAO implements DAO<String, Student> {
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(StudentCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    username = rs.getString("username");
+                    
                     id = rs.getString("stu_id");
+                    username = rs.getString("username");
                     u.put(id, (new Student(username, id,
                             rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"))));
                 }
