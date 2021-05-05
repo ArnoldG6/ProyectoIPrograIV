@@ -3,6 +3,7 @@ package proyecto.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
 import proyecto.model.entities.AdministratorDAO;
@@ -56,6 +57,7 @@ public class Model {
         }
     }
 
+    
     public final void updateModel() throws Exception {
         if ((AdministratorDAO.getInstance().getCount()
                 + StudentDAO.getInstance().getCount())
@@ -109,6 +111,15 @@ public class Model {
         } catch (Exception e) {
             throw e;
         }
+    }
+    List<Pair<Group, Float>> getHistory(String stuId) throws IOException{
+        try{
+        if(students.get(stuId) != null)
+            return students.get(stuId).getGrades();
+        throw new IOException("El ID del estudiante digitado no existe");
+        }
+        catch(Exception e){throw e;}
+        
     }
     public HashMap<String, Teacher> getTeachersMap(User u) throws Exception{
         try{
