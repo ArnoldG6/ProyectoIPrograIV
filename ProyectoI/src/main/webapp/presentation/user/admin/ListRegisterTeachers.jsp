@@ -9,18 +9,18 @@
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Registro y listado de Profesores</h1>
         <div>
-            <ul >
+            <ul class ="list-inline">
                 <li class="list-inline-item">
                     <a class ="btn btn-outline-light" href="/ProyectoI/presentation/register/RegisterTeachers.jsp">
                         Registro de Profesores
                     </a> 
                 </li>
                 <li class="list-inline-item">
-                    <a class ="btn btn-outline-light" >
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/user/admin/ListTeachers">
                         Listado de Profesores
                     </a> 
                 </li>
-            </ul>  
+            </ul>
         </div>
         <%@ include file="/presentation/Footer.jsp" %>
     </body>

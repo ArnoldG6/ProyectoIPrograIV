@@ -10,26 +10,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import proyecto.model.Model;
+import proyecto.model.User;
 
 /**
  *
  * @author GONCAR4
  */
-@WebServlet(name = "RegisterTeacherController", urlPatterns = {"/presentation/register/RegisterTeachers"})
+@WebServlet(name = "RegisterTeacherController", urlPatterns = {"/presentation/register/RegisterTeachers", 
+    "/presentation/user/admin/ListTeachers"})
 public class Controller extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, Exception {
         try{
-            registerTeacher(request,response);
+            String viewURL = "/presentation/user/admin/ListRegisterTeachers.jsp";
+            switch(request.getServletPath()){
+                case "/presentation/user/admin/ListTeachers":
+                    viewURL=this.show(request);
+                    break;              
+                case "/presentation/register/RegisterTeachers":
+                    viewURL=this.registerTeacher(request,response);
+                    break;
+                default: viewURL = "/presentation/user/admin/ListRegisterTeachers.jsp";
+            }
+            request.getRequestDispatcher(viewURL).forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("/presentation/register/RegisterTeachers.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
         }
-
     }
 
-    public void registerTeacher (HttpServletRequest request, HttpServletResponse response)
+    public String registerTeacher (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try{
             String name = request.getParameter("regTeaNom"),  
@@ -38,7 +50,7 @@ public class Controller extends HttpServlet {
                     telNum = request.getParameter("regTeaTel");
             if(name.isEmpty() || id.isEmpty() || email.isEmpty()
                     ||telNum.isEmpty()) throw new IOException("Ninguno "
-                            + "de los campos debe estar vacío.");
+                            + "de los campos debe estar vacÃ­o.");
             String pass = Model.getInstance().insertTeacher(name,id,email,telNum);
             request.setAttribute("genPass", pass); 
             request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
@@ -48,6 +60,7 @@ public class Controller extends HttpServlet {
            request.setAttribute("errors",errors);
            throw e;
         }
+        return "/presentation/register/RegisterTeachers.jsp";
     }
 
     @Override
@@ -76,6 +89,13 @@ public class Controller extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+    
+    private String show(HttpServletRequest request) throws Exception {     
+            HttpSession session = request.getSession(true);
+            User u = (User) session.getAttribute("user");
+            session.setAttribute("teachers", Model.getInstance().getTeachersMap(u));
+            return "/presentation/user/admin/ListTeachers.jsp";
     }
     
 }

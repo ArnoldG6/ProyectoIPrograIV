@@ -82,7 +82,19 @@ public class Model {
             throw e;
         }
     }
-
+    public HashMap<String, Teacher> getTeachersMap(User u) throws Exception{
+        try{
+        updateModel();
+        //HashMap<String, Subject> result = new HashMap<String, Subject>();
+        HashMap<String, Teacher> result = TeacherDAO.getInstance().listAll();
+        result.putAll(teachers);
+        if(u != null)
+            if(u.getType() == 3) return result; 
+        }catch(Exception e){
+            throw e;
+        }
+        return null;
+    }
     public static void setInstance(Model aInstance) {
         instance = aInstance;
     }

@@ -14,7 +14,7 @@
         <div></div>
     </div> 
     <div>
-        <ul class ="list-inline"> 
+        <ul class ="list-inline "> 
             <li class="list-inline-item">
                 <a class ="btn btn-outline-light" href="/ProyectoI/">Inicio</a>
             </li>
