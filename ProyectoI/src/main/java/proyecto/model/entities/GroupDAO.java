@@ -78,15 +78,27 @@ public class GroupDAO implements DAO<String, Group> {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Exception: '%s'%n", ex.getMessage());
+        }
+        return result;
+    }
+    
+    public Group recover3(String id) {
+        Group result = null;
+        String username;
+        try {
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+                    PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_RECOVER)) {
+                stm.clearParameters();
                 stm.setString(1, id);
-                stm.setString(2, pass);
-//                try (ResultSet rs = stm.executeQuery()) {
-//                    if (rs.next()) {
-//                        username = rs.getString("username");
-//                        result = new Student(username, rs.getString("stu_id"),
-//                                rs.getString("email"), rs.getString("pho_num"), rs.getString("pass"));
-//                    }
-//                }
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        username = rs.getString("gro_id");
+                        result = new Group(username, recover2(rs.getString("subject_id")), Integer.parseInt(rs.getString("num_stu")));
+                    }
+                }
             }
         } catch (SQLException ex) {
             System.err.printf("Exception: '%s'%n", ex.getMessage());
