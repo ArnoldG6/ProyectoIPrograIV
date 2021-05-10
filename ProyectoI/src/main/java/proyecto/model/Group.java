@@ -13,6 +13,7 @@ public class Group {
     private Subject teacher;
     private int numStu;
     private String nrc;
+    private String subName;
     private boolean status;
 
     public Group(String id,Subject tea, int numS) {
