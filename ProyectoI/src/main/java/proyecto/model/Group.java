@@ -10,12 +10,12 @@ import java.util.List;
 public class Group {
 
     private List<Student> students;
-    private Teacher teacher;
+    private Subject teacher;
     private int numStu;
     private String nrc;
     private boolean status;
-    private String subName;
-    public Group(String id,Teacher tea, int numS) {
+
+    public Group(String id,Subject tea, int numS) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
@@ -49,11 +49,11 @@ public class Group {
         this.students = students;
     }
 
-    public Teacher getTeacher() {
+    public Subject getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(Subject teacher) {
         this.teacher = teacher;
     }
 
@@ -74,10 +74,10 @@ public class Group {
     }
 
     public String show() {
-        String f = "", tn = teacher.getName(), tc = teacher.getEmail(), numS = Double.toString(numStu), nr = nrc;
+        String f = "", tn = teacher.getNameSubj(), tc = teacher.getIdSub(), numS = Double.toString(numStu), nr = nrc;
         f = f
-                + "Nombre del profesor: " + tn
-                + "\n" + "Correo del profesor: " + tc
+                + "Nombre de la materia: " + tn
+                + "\n" + "Identificador de materia: " + tc
                 + "\n" + "Numero de estudiantes matriculados: " + numS
                 + "\n" + "NRC: " + nr
                 + "\n" + "Lista de estudiantes:"

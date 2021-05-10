@@ -159,4 +159,25 @@ public class SubjectDAO implements DAO<String, Subject> {
         }
     }
     
+    public static Subject recover2(String id){
+        Subject result = null;
+        String subname;
+        try {
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+                    PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_RECOVER)) {
+                stm.clearParameters();
+                stm.setString(1, id);
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        subname = rs.getString("sub_name");
+                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"),rs.getString("sub_status"));
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Exception: '%s'%n", ex.getMessage());
+        }
+        return result;
+    }
+    
 }
