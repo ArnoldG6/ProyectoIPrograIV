@@ -142,6 +142,13 @@ public class GroupDAO implements DAO<String, Group> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
+    
+    public static GroupDAO getInstance() throws Exception {
+        if (instance == null) {
+            instance = new GroupDAO();
+        }
+        return instance;
+    }
 
     private Teacher searchTeacher(String string) {
         return Model.getInstance().searchTeacher(string);

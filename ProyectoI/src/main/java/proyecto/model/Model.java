@@ -8,6 +8,7 @@ import java.util.Map;
 import javafx.util.Pair;
 import proyecto.model.entities.AdministratorDAO;
 import proyecto.model.entities.GROUPS_STUDENTSDAO;
+import proyecto.model.entities.GroupDAO;
 import proyecto.model.entities.StudentDAO;
 import proyecto.model.entities.SubjectDAO;
 import proyecto.model.entities.TeacherDAO;
@@ -57,81 +58,115 @@ public class Model {
         }
     }
 
-    
-    public final void updateModel() throws Exception {
-
-            Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
-            Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-            Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
-            Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
-            //Model.getInstance().updateStudentsGroups();
-            
-        
-    }
-    public void linkStudentGroup(Student s, Group g, Float grade) throws Exception{
-        if(s == null || g == null || grade == null) 
-            throw new Exception("Null pointer in linkStudentGroup method");
-        if(!g.getStudents().contains(s))
-            g.getStudents().add(s);
-        if(!s.getGroups().contains(g))
-            s.getGroups().add(g);
-        Pair<Group,Float> gra= new Pair<>(g,grade);
-        if(!s.getGrades().contains(gra))
-            s.getGrades().add(gra);
-    }
-    public void updateStudentsGroups() throws Exception{
-            try {
-            HashMap<String, Subject> result = new HashMap < String, Subject>();
-            ArrayList<String[]> groupsHasStu = GROUPS_STUDENTSDAO.getInstance().listAll();
-            for (int i = 0; i < groupsHasStu.size(); i++) 
-                linkStudentGroup(
-                        students.get(groupsHasStu.get(i)[0]),
-                groups.get(groupsHasStu.get(i)[1]),
-                Float.parseFloat(groupsHasStu.get(i)[2]));
-            
+    public HashMap<String, Group> getSGroupsMap(User u) throws Exception {
+        try {
+            updateModel();
+            //HashMap<String, Subject> result = new HashMap<String, Subject>();
+            HashMap<String, Group> result = GroupDAO.getInstance().listAll();
+            result.putAll(groups);
+            if (u != null) {
+                if (u.getType() == 1) {
+                    return result; //admin
+                }
+                return result;
+            } else {
+                return result;
+            }
         } catch (Exception e) {
             throw e;
         }
     }
+
+    public final void updateModel() throws Exception {
+
+        Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+        Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
+        Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
+        Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
+        Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
+
+    }
+
+    public void linkStudentGroup(Student s, Group g, Float grade) throws Exception {
+        if (s == null || g == null || grade == null) {
+            throw new Exception("Null pointer in linkStudentGroup method");
+        }
+        if (!g.getStudents().contains(s)) {
+            g.getStudents().add(s);
+        }
+        if (!s.getGroups().contains(g)) {
+            s.getGroups().add(g);
+        }
+        Pair<Group, Float> gra = new Pair<>(g, grade);
+        if (!s.getGrades().contains(gra)) {
+            s.getGrades().add(gra);
+        }
+    }
+
+    public void updateStudentsGroups() throws Exception {
+        try {
+            HashMap<String, Subject> result = new HashMap< String, Subject>();
+            ArrayList<String[]> groupsHasStu = GROUPS_STUDENTSDAO.getInstance().listAll();
+            for (int i = 0; i < groupsHasStu.size(); i++) {
+                linkStudentGroup(
+                        students.get(groupsHasStu.get(i)[0]),
+                        groups.get(groupsHasStu.get(i)[1]),
+                        Float.parseFloat(groupsHasStu.get(i)[2]));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public HashMap<String, Subject> searchSubjects(User u, String pattern) throws Exception {
         try {
             Subject value;
             pattern = pattern.toUpperCase();
-            HashMap<String, Subject> result = new HashMap < String, Subject>();
-            for (Map.Entry<String, Subject> entry : getSubjectsMap(u).entrySet()) { 
+            HashMap<String, Subject> result = new HashMap< String, Subject>();
+            for (Map.Entry<String, Subject> entry : getSubjectsMap(u).entrySet()) {
                 value = subjects.get(entry.getKey());
-                if(value.getDesc().toUpperCase().contains(pattern) 
-                        || value.getIdSub().toUpperCase().contains(pattern) 
-                        ||value.getNameSubj().toUpperCase().contains(pattern))
+                if (value.getDesc().toUpperCase().contains(pattern)
+                        || value.getIdSub().toUpperCase().contains(pattern)
+                        || value.getNameSubj().toUpperCase().contains(pattern)) {
                     result.put(value.getIdSub(), value);
+                }
             }
             return result;
         } catch (Exception e) {
             throw e;
         }
     }
-    List<Pair<Group, Float>> getHistory(String stuId) throws IOException{
-        try{
-        if(students.get(stuId) != null)
-            return students.get(stuId).getGrades();
-        throw new IOException("El ID del estudiante digitado no existe");
+
+    List<Pair<Group, Float>> getHistory(String stuId) throws IOException {
+        try {
+            if (students.get(stuId) != null) {
+                return students.get(stuId).getGrades();
+            }
+            throw new IOException("El ID del estudiante digitado no existe");
+        } catch (Exception e) {
+            throw e;
         }
-        catch(Exception e){throw e;}
-        
+
     }
-    public HashMap<String, Teacher> getTeachersMap(User u) throws Exception{
-        try{
-        updateModel();
-        //HashMap<String, Subject> result = new HashMap<String, Subject>();
-        HashMap<String, Teacher> result = TeacherDAO.getInstance().listAll();
-        result.putAll(teachers);
-        if(u != null)
-            if(u.getType() == 3) return result; 
-        }catch(Exception e){
+
+    public HashMap<String, Teacher> getTeachersMap(User u) throws Exception {
+        try {
+            updateModel();
+            //HashMap<String, Subject> result = new HashMap<String, Subject>();
+            HashMap<String, Teacher> result = TeacherDAO.getInstance().listAll();
+            result.putAll(teachers);
+            if (u != null) {
+                if (u.getType() == 3) {
+                    return result;
+                }
+            }
+        } catch (Exception e) {
             throw e;
         }
         return null;
     }
+
     public static void setInstance(Model aInstance) {
         instance = aInstance;
     }
@@ -201,11 +236,12 @@ public class Model {
         HashMap<String, User> users = getUsersMap();
         User u = users.get(cedula);
         if (u != null) {
-            if (u.valPass(clave)) 
+            if (u.valPass(clave)) {
                 return u;
-             else 
+            } else {
                 throw new IOException("La contraseña digitada no es correcta");
-            
+            }
+
         } else {
             throw new IOException("El usuario digitado no existe");
         }
