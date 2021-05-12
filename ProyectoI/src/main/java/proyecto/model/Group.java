@@ -16,7 +16,7 @@ public class Group {
     private String subName;
     private boolean status;
 
-    public Group(String id,Subject tea, int numS) {
+    public Group(String id, Subject tea, int numS) {
         this.students = new ArrayList<>();
         this.teacher = tea;
         this.numStu = numS;
@@ -24,6 +24,7 @@ public class Group {
         this.status = true;
         this.subName = "Nombre&#160;&#160;del&#160;curso";
     }
+
     public void insertStudents(Student stu) {
         students.add(stu);
     }
@@ -35,9 +36,11 @@ public class Group {
             }
         }
     }
-    public void setSubName(String subName){
+
+    public void setSubName(String subName) {
         this.subName = subName;
     }
+
     public String showStudent(int pos) {
         return "";
     }
@@ -96,6 +99,14 @@ public class Group {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getSubName() {
+        return subName;
+    }
+
+    public void SetSubName(String s) {
+        subName = s;
     }
 
 }

@@ -51,6 +51,14 @@
                             </a> 
                         </li>
                     <% } %>
+                    <% if (user.getType() == 1) { %>
+                        <li class="list-inline-item">
+                            <a class ="btn btn-outline-light" 
+                            href="/ProyectoI/presentation/teacher/groups.jsp">
+                                Historial de cursos
+                            </a> 
+                        </li>
+                    <% } %>
                 <% } else {%>
                     <li class="list-inline-item">
                         <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
