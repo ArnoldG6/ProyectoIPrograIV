@@ -34,7 +34,7 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = generateID();
     }
-    public final String generateID(){
+    public final String generateID(){ //forDisplay its only 
         //One example of this sequence is: "HU1234"
         int zerosQuan = 4 - String.valueOf(count).length();
         String nrcNum = String.valueOf(count);
