@@ -325,7 +325,9 @@ public class Model {
         updateModel();
         return teachers.get(id);
     }
-
+    public final String generateGroupID(String sub){
+        return Group.generateID(sub);
+    }
     public String insertTeacher(String nom, String id, String em, String cllph) throws Exception {
         String pass;
         try {

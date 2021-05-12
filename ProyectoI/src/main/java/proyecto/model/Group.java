@@ -34,24 +34,33 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = generateID();
     }
-    public final String generateID(){ //forDisplay its only 
+    public final String generateID(){
         //One example of this sequence is: "HU1234"
+        count += 1;
         int zerosQuan = 4 - String.valueOf(count).length();
         String nrcNum = String.valueOf(count);
         for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
-        count += 1;
         return subName.charAt(0)+subName.charAt(1)+nrcNum;
+    }
+    public static final String generateID(String sub){ //only for displaying the generated id
+        //One example of this sequence is: "HU1234"
+        int countCopy = count+1;
+        int zerosQuan = 4 - String.valueOf(countCopy).length();
+        String nrcNum = String.valueOf(countCopy);
+        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
+        
+        return sub.charAt(0)+sub.charAt(1)+nrcNum;
     }
     public void insertStudents(Student stu) {
         students.add(stu);
     }
 
     public void deleteGroups(String id) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId().equals(id)) {
+        for (int i = 0; i < students.size(); i++) 
+            if (students.get(i).getId().equals(id)) 
                 students.remove(i);
-            }
-        }
+            
+       
     }
 
     public void setSubName(String subName) {
