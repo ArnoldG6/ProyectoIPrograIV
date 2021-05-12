@@ -19,9 +19,9 @@ import static proyecto.model.entities.SubjectDAO.recover2;
  * @author GONCAR4
  */
 public class GroupDAO implements DAO<String, Group> {
-    
+
     private static GroupDAO instance = null;
-    
+
     @Override
     public HashMap<String, Group> listAll() {
         HashMap<String, Group> u = new HashMap<>();
@@ -33,7 +33,7 @@ public class GroupDAO implements DAO<String, Group> {
                     ResultSet rs = stm.executeQuery(GroupCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     id = rs.getString("gro_id");
-                    u.put(id, (new Group( id, recover2(rs.getString("subject_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class GroupDAO implements DAO<String, Group> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
+
     public void add(Group u) throws IllegalArgumentException {
         try {
             add(u.getNrc(), u);
@@ -84,7 +84,7 @@ public class GroupDAO implements DAO<String, Group> {
         }
         return result;
     }
-    
+
     public Group recover3(String id) {
         Group result = null;
         String username;
@@ -96,7 +96,7 @@ public class GroupDAO implements DAO<String, Group> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         username = rs.getString("gro_id");
-                        result = new Group(username, recover2(rs.getString("subject_id")), Integer.parseInt(rs.getString("num_stu")));
+                        result = new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")));
                     }
                 }
             }
@@ -121,7 +121,7 @@ public class GroupDAO implements DAO<String, Group> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
+
     public void update(Group u) {
         update(u.getNrc(), u);
     }
@@ -142,7 +142,7 @@ public class GroupDAO implements DAO<String, Group> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
+
     public static GroupDAO getInstance() throws Exception {
         if (instance == null) {
             instance = new GroupDAO();
@@ -153,5 +153,9 @@ public class GroupDAO implements DAO<String, Group> {
     private Teacher searchTeacher(String string) {
         return Model.getInstance().searchTeacher(string);
     }
-    
+
+    private Teacher recover4(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
