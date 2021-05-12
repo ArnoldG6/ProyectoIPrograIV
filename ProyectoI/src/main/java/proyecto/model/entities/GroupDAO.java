@@ -151,7 +151,7 @@ public class GroupDAO implements DAO<String, Group> {
         return instance;
     }
 
-    private Teacher searchTeacher(String string) {
+    private Teacher searchTeacher(String string) throws Exception {
         return Model.getInstance().searchTeacher(string);
     }
 

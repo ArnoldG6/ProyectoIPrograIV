@@ -321,17 +321,13 @@ public class Model {
         return s;
     }
 
-    public Teacher searchTeacher(String id) {
-        //iterando solo sobre valores
-        for (Teacher value : teachers.values()) {
-            System.out.println("Value = " + value.getId());
-            return value;
-        }
-        return null;
+    public Teacher searchTeacher(String id) throws Exception {
+        updateModel();
+        return teachers.get(id);
     }
 
     public String insertTeacher(String nom, String id, String em, String cllph) throws Exception {
-        String pass = "";
+        String pass;
         try {
             Teacher tea = new Teacher(nom, id, em, cllph, "");
             pass = User.generateRandomPassword(4);
@@ -350,20 +346,23 @@ public class Model {
         Administrator ad = new Administrator(nom, id, em, cllph, "");
         String pss = ad.generateRandomPassword(4);
         ad.setPass(pss);
-        //admins.put(id, ad);
-
+        updateModel();
         return pss;
     }
 
-    public String insertGroup(String n, Subject tea, Teacher t, int numS) {
-        //Teacher tea, double numS, String n
-        Group gp = new Group(n, tea, t, numS);
-        //groups.put(n, gp);
-        return "";
+    public void insertGroup(Subject subj, Teacher teach, int numStu) throws IOException {
+        try{
+        Group g = new Group(subj,teach,numStu);
+        GroupDAO.getInstance().add(g);
+        updateModel();
+        }catch(Exception e){
+            throw new IOException("Error al insertar el grupo");
+        }
     }
 
     public void insertGrpSt(String id, Group g) {
         searchStudent(id).insertGrp(g);
+        
     }
 
     public void setCurrent(User u) {

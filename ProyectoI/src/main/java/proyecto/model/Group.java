@@ -8,7 +8,6 @@ import java.util.List;
  * @author victo
  */
 public class Group {
-
     private List<Student> students;
     private Subject subj;
     private Teacher teach;
@@ -16,17 +15,33 @@ public class Group {
     private String nrc;
     private String subName;
     private boolean status;
-
-    public Group(String id, Subject tea, Teacher t, int numS) {
+    private static int count = 0;
+    public Group(String nrc, Subject subj, Teacher teach, int numStu) {
         this.students = new ArrayList<>();
-        this.subj = tea;
-        this.teach = t;
-        this.numStu = numS;
-        this.nrc = id;
+        this.subj = subj;
+        this.teach = teach;
+        this.numStu = numStu;
         this.status = true;
-        this.subName = "Nombre&#160;&#160;del&#160;curso";
+        this.subName = subj.getNameSubj();
+        this.nrc = nrc;
     }
-
+    public Group(Subject subj, Teacher teach, int numStu) {
+        this.students = new ArrayList<>();
+        this.subj = subj;
+        this.teach = teach;
+        this.numStu = numStu;
+        this.status = true;
+        this.subName = subj.getNameSubj();
+        this.nrc = generateID();
+    }
+    public final String generateID(){
+        //One example of this sequence is: "HU1234"
+        int zerosQuan = 4 - String.valueOf(count).length();
+        String nrcNum = String.valueOf(count);
+        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
+        count += 1;
+        return subName.charAt(0)+subName.charAt(1)+nrcNum;
+    }
     public void insertStudents(Student stu) {
         students.add(stu);
     }
