@@ -19,51 +19,51 @@
                 <a class ="btn btn-outline-light" href="/ProyectoI/">Inicio</a>
             </li>
             <% if (user != null) { %>
-                <% if (!(user.getId().equals(""))) { %>
-                    <li class="list-inline-item">
-                        <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
-                    </li>
-                    <% if (user.getType() == 3) { %>
-                        <li class="list-inline-item">
-                            <a class ="btn btn-outline-light" 
-                            href="/ProyectoI/presentation/subjects/registerSubject.jsp">
-                                Ingresar cursos
-                            </a> 
-                        </li>
-                        <li class="list-inline-item">
-                            <a class ="btn btn-outline-light" 
-                               href="/ProyectoI/presentation/user/admin/ListRegisterTeachers.jsp">
-                                Listado y registro de profesores
-                            </a> 
-                        </li>
-                    <% } %>
-                    <% if (user.getType() == 2) { %>
-                        <li class="list-inline-item">
-                            <a class ="btn btn-outline-light" 
-                            href="/ProyectoI/presentation/user/student/record">
-                                Historial de cursos
-                            </a> 
-                        </li>
-                        <li class="list-inline-item">
-                            <a class ="btn btn-outline-light" 
-                            href="/ProyectoI/presentation/user/student/constancy.jsp">
-                                Constancia
-                            </a> 
-                        </li>
-                    <% } %>
-                    <% if (user.getType() == 1) { %>
-                        <li class="list-inline-item">
-                            <a class ="btn btn-outline-light" 
-                            href="/ProyectoI/presentation/teacher/groups.jsp">
-                                Historial de cursos
-                            </a> 
-                        </li>
-                    <% } %>
-                <% } else {%>
-                    <li class="list-inline-item">
-                        <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
-                    </li>
-                <% } %>
+            <% if (!(user.getId().equals(""))) { %>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/logout">Cerrar sesión</a>
+            </li>
+            <% if (user.getType() == 3) { %>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/subjects/registerSubject.jsp">
+                    Ingresar cursos
+                </a> 
+            </li>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/user/admin/ListRegisterTeachers.jsp">
+                    Listado y registro de profesores
+                </a> 
+            </li>
+            <% } %>
+            <% if (user.getType() == 2) { %>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/user/student/record">
+                    Historial de cursos
+                </a> 
+            </li>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/user/student/constancy.jsp">
+                    Constancia
+                </a> 
+            </li>
+            <% } %>
+            <% if (user.getType() == 1) { %>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/user/teacher/groups">
+                    Historial Grupos
+                </a> 
+            </li>
+            <% } %>
+            <% } else {%>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>
+            </li>
+            <% } %>
             <% } else { %>
             <li class="list-inline-item">
                 <a class ="btn btn-outline-light" href="/ProyectoI/presentation/login/View.jsp">Ingresar</a>

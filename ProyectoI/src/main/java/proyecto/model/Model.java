@@ -62,8 +62,7 @@ public class Model {
         try {
             updateModel();
             //HashMap<String, Subject> result = new HashMap<String, Subject>();
-            HashMap<String, Group> result = GroupDAO.getInstance().listAll();
-            result.putAll(groups);
+            HashMap<String, Group> result = GroupDAO.getInstance().listGroup(u.getId());
             if (u != null) {
                 if (u.getType() == 1) {
                     return result; //admin

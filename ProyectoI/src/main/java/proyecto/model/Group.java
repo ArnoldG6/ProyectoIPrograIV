@@ -8,6 +8,7 @@ import java.util.List;
  * @author victo
  */
 public class Group {
+
     private List<Student> students;
     private Subject subj;
     private Teacher teach;
@@ -16,6 +17,7 @@ public class Group {
     private String subName;
     private boolean status;
     private static int count = 0;
+
     public Group(String nrc, Subject subj, Teacher teach, int numStu) {
         this.students = new ArrayList<>();
         this.subj = subj;
@@ -25,6 +27,7 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = nrc;
     }
+
     public Group(Subject subj, Teacher teach, int numStu) {
         this.students = new ArrayList<>();
         this.subj = subj;
@@ -34,33 +37,41 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = generateID();
     }
-    public final String generateID(){
+
+    public final String generateID() {
         //One example of this sequence is: "HU1234"
         count += 1;
         int zerosQuan = 4 - String.valueOf(count).length();
         String nrcNum = String.valueOf(count);
-        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
-        return subName.charAt(0)+subName.charAt(1)+nrcNum;
+        for (int i = 0; i < zerosQuan; i++) {
+            nrcNum = "0" + nrcNum;
+        }
+        return subName.charAt(0) + subName.charAt(1) + nrcNum;
     }
-    public static final String generateID(String sub){ //only for displaying the generated id
+
+    public static final String generateID(String sub) { //only for displaying the generated id
         //One example of this sequence is: "HU1234"
-        int countCopy = count+1;
+        int countCopy = count + 1;
         int zerosQuan = 4 - String.valueOf(countCopy).length();
         String nrcNum = String.valueOf(countCopy);
-        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
-        
-        return sub.charAt(0)+sub.charAt(1)+nrcNum;
+        for (int i = 0; i < zerosQuan; i++) {
+            nrcNum = "0" + nrcNum;
+        }
+
+        return sub.charAt(0) + sub.charAt(1) + nrcNum;
     }
+
     public void insertStudents(Student stu) {
         students.add(stu);
     }
 
     public void deleteGroups(String id) {
-        for (int i = 0; i < students.size(); i++) 
-            if (students.get(i).getId().equals(id)) 
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(id)) {
                 students.remove(i);
-            
-       
+            }
+        }
+
     }
 
     public void setSubName(String subName) {

@@ -31,7 +31,22 @@
                 <% Group sub = groups.get(entry.getKey());%>
 
                 <div class="card p-3 bg-dark col w-15">
-
+                    <table class = "table table-condensed border">Grupos del profesor
+                        <tr>
+                            <th class="text-left text-white">NRC</th>
+                            <th class="text-left text-white">Nombre del curso</th>
+                            <th class="text-left text-white">Numero de estudiantes</th>
+                            <th class="text-left text-white">Estado</th>
+                        </tr>
+                        <tr>
+                            <%for (Group g : groups.values()) {%>
+                            <td class= "text-left text-white"> <%=g.getNrc()%> </td>
+                            <td class= "text-left text-white"> <%=g.getTeacher().getNameSubj()%> </td>
+                            <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
+                            <td class= "text-left text-white"> <%=g.isStatus()%> </td>
+                        </tr>
+                        <% } %>
+                    </table>
                 </div>
 
                 <% } %>
