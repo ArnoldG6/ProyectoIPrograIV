@@ -30,19 +30,18 @@
                 <%for (Map.Entry<String, Group> entry : groups.entrySet()) { %>   
                 <% Group sub = groups.get(entry.getKey());%>
 
-
                 <div class="card p-3 bg-dark col w-15">
-                    
-                </div>
 
+                </div>
 
                 <% } %>
 
             </div>
-                
+
             <% } else { %>
             <div class="text-white text-center"></div>
             <% }%>
+
         </div>
 
         <jsp:include page="/presentation/Footer.jsp"/>

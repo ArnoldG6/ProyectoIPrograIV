@@ -301,7 +301,6 @@ public class Model {
     public String searchSubject(String name) {
         String idSub = "";
         for (Subject value : subjects.values()) {
-            //System.out.println("Value = " + value.getNameSubj());
             if (value.getNameSubj().equals(name)) {
                 idSub = value.getIdSub();
             }
@@ -309,16 +308,9 @@ public class Model {
         return idSub;
     }
 
-    public Student searchStudent(String id) {
-        String idSub = "";
-        Student s = null;
-        for (Student value : students.values()) {
-            //System.out.println("Value = " + value.getNameSubj());
-            if (value.getId().equals(id)) {
-                s = value;
-            }
-        }
-        return s;
+    public Student searchStudent(String id) throws Exception {
+        updateModel();
+        return students.get(id);
     }
 
     public Teacher searchTeacher(String id) throws Exception {
@@ -362,7 +354,7 @@ public class Model {
         }
     }
 
-    public void insertGrpSt(String id, Group g) {
+    public void insertGrpSt(String id, Group g) throws Exception {
         searchStudent(id).insertGrp(g);
         
     }
