@@ -13,6 +13,7 @@ import proyecto.model.Group;
 import proyecto.model.Model;
 import proyecto.model.Teacher;
 import static proyecto.model.entities.SubjectDAO.recover2;
+import static proyecto.model.entities.TeacherDAO.recover4;
 
 /**
  *
@@ -152,10 +153,6 @@ public class GroupDAO implements DAO<String, Group> {
 
     private Teacher searchTeacher(String string) {
         return Model.getInstance().searchTeacher(string);
-    }
-
-    private Teacher recover4(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
