@@ -10,20 +10,23 @@ import java.util.List;
 public class Group {
 
     private List<Student> students;
-    private Subject teacher;
+    private Subject subj;
+    private Teacher teach;
     private int numStu;
     private String nrc;
     private String subName;
     private boolean status;
 
-    public Group(String id,Subject tea, int numS) {
+    public Group(String id, Subject tea, Teacher t, int numS) {
         this.students = new ArrayList<>();
-        this.teacher = tea;
+        this.subj = tea;
+        this.teach = t;
         this.numStu = numS;
         this.nrc = id;
         this.status = true;
         this.subName = "Nombre&#160;&#160;del&#160;curso";
     }
+
     public void insertStudents(Student stu) {
         students.add(stu);
     }
@@ -35,9 +38,11 @@ public class Group {
             }
         }
     }
-    public void setSubName(String subName){
+
+    public void setSubName(String subName) {
         this.subName = subName;
     }
+
     public String showStudent(int pos) {
         return "";
     }
@@ -51,11 +56,11 @@ public class Group {
     }
 
     public Subject getTeacher() {
-        return teacher;
+        return subj;
     }
 
     public void setTeacher(Subject teacher) {
-        this.teacher = teacher;
+        this.subj = teacher;
     }
 
     public int getNumStu() {
@@ -75,7 +80,7 @@ public class Group {
     }
 
     public String show() {
-        String f = "", tn = teacher.getNameSubj(), tc = teacher.getIdSub(), numS = Double.toString(numStu), nr = nrc;
+        String f = "", tn = subj.getNameSubj(), tc = subj.getIdSub(), numS = Double.toString(numStu), nr = nrc;
         f = f
                 + "Nombre de la materia: " + tn
                 + "\n" + "Identificador de materia: " + tc
@@ -96,6 +101,22 @@ public class Group {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getSubName() {
+        return subName;
+    }
+
+    public void SetSubName(String s) {
+        subName = s;
+    }
+
+    public Teacher getTeach() {
+        return teach;
+    }
+
+    public void setTeach(Teacher teach) {
+        this.teach = teach;
     }
 
 }

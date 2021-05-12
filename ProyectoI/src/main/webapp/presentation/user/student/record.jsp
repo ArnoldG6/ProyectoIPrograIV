@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@page import="javafx.util.Pair"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% List<Group> groups = (List<Group>)session.getAttribute("groups"); %>
+<% List<Group> groups = (List<Group>) session.getAttribute("groups"); %>
 
 <!DOCTYPE html>
 <html>
@@ -16,27 +16,27 @@
     <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
         <jsp:include page="/presentation/Header.jsp"/>
         <h1 class = "text-center">Historial de cursos</h1> 
-                <div class="container">
+        <div class="container">
             <% if (groups != null) { %>
             <div class="card-body bg-dark text-white">
-                    <table class = "table table-condensed">
+                <table class = "table table-condensed">
                     <tr>
                         <th class="text-center text-white">NRC del curso</th>
                         <th class="text-center text-white">Profesor asignado</th>
                         <th class="text-center text-white">Nota obtenida</th>
                     </tr>
-                        
+
                     <tr>
-                        <%for (Group g : groups){ %>
+                        <%for (Group g : groups) {%>
                         <td class= "text-center text-white"> <%=g.getNrc()%> </td>
                         <td class= "text-center text-white"> <%=g.getTeacher()%> </td>
                         <td class= "text-center text-white"> N/A </td>
                     </tr>
                     <% } %>
-             </table>
-             </div>
-             <% } %>
-             <div>&nbsp;</div>
+                </table>
+            </div>
+            <% }%>
+            <div>&nbsp;</div>
         </div>
 
         <jsp:include page="/presentation/Footer.jsp"/>

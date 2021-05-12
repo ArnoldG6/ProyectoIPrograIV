@@ -16,9 +16,9 @@ import proyecto.model.Teacher;
  * @author GONCAR4
  */
 public class TeacherDAO implements DAO<String, Teacher> {
-    
+
     private static TeacherDAO instance = null;
-    
+
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -59,7 +59,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
         }
         return u;
     }
-    
+
     public static TeacherDAO getInstance() throws Exception {
         if (instance == null) {
             instance = new TeacherDAO();
@@ -85,7 +85,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
+
     public void add(Teacher u) throws IllegalArgumentException {
         try {
             add(u.getId(), u);
@@ -138,7 +138,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
     public void update(Teacher u) {
         update(u.getId(), u);
     }
-    
+
     @Override
     public void delete(String id) {
         try {
@@ -155,5 +155,26 @@ public class TeacherDAO implements DAO<String, Teacher> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
+
+    public static Teacher recover4(String id) {
+        Teacher result = null;
+        String username;
+        try {
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+                    PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_RECOVER)) {
+                stm.clearParameters();
+                stm.setString(1, id);
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        username = rs.getString("username");
+                        result = new Teacher(username, rs.getString("tea_id"),
+                                rs.getString("email"), rs.getString("phone_num"), rs.getString("pass"));
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Exception: '%s'%n", ex.getMessage());
+        }
+        return result;
+    }
 }
