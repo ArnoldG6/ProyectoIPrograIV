@@ -22,6 +22,13 @@
                         Listado de Profesores
                     </a> 
                 </div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <div class ="text-center">
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/user/admin/RegisterGroups.jsp">
+                       Apertura de Grupos
+                    </a> 
+                </div>
             
         </div>
         <%@ include file="/presentation/Footer.jsp" %>
