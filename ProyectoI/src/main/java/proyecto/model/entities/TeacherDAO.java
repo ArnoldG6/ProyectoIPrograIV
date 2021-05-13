@@ -40,7 +40,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
     @Override
     public HashMap<String, Teacher> listAll() {
         HashMap<String, Teacher> u = new HashMap<>();
-        String username;
+        String id;
         //a
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -48,8 +48,8 @@ public class TeacherDAO implements DAO<String, Teacher> {
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TeacherCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    username = rs.getString("username");
-                    u.put(username, (new Teacher(username, rs.getString("tea_id"),
+                    id = rs.getString("tea_id");
+                    u.put(id, (new Teacher(rs.getString("username"), id,
                             rs.getString("email"), rs.getString("phone_num"), rs.getString("pass"))));
                 }
             } catch (SQLException ex) {

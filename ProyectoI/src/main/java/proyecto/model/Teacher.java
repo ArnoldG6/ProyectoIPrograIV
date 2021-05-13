@@ -11,12 +11,12 @@ public class Teacher extends User {
 
     public List<Group> groups;
 
-    public Teacher(String name, String id, String email, String telNum, String pas) {
-        this.username = name;
+    public Teacher(String username, String id, String email, String telNum, String pass) {
+        this.username = username;
         this.id = id.toUpperCase(); //Ej: a00 vs A00
         this.email = email;
         this.telNum = telNum;
-        this.pass = pas;
+        this.pass = pass;
         this.groups = new ArrayList<>();
         this.type = 1;
     }
