@@ -1,1 +1,2 @@
 Source of whiteboard_img.jpg: "https://pixabay.com/illustrations/geometry-mathematics-cube-1023846/".
+Source of "landing-page.png": https://www.flaticon.com/free-icon/landing-page_1162285?term=page&page=4&position=31&page=4&position=31&related_id=1162285&origin=tag

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+     <link rel="icon" href="/ProyectoI/images/landing-page.png" >
      <%@ include file="/presentation/Head.jsp" %>
      <title>Error</title> 
     </head>

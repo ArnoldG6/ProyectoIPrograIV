@@ -17,6 +17,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="/ProyectoI/images/landing-page.png" >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Show groups</title>
     </head>
