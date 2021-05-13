@@ -8,8 +8,8 @@
         <div class="p-1 bg-dark border">
             <h1>Sistema de matricula</h1>
         </div>
-        <div class="p-3 bg-dark border">
-            <img src="/ProyectoI/images/whiteboard_img.jpg" height="120" width = "960">
+        <div class="p-3 bg-dark border w-90 mx-auto">
+            <img class="w-75 mx-auto" src="/ProyectoI/images/whiteboard_img.jpg" height="120" width = "960">
         </div>
         <div></div>
     </div> 
@@ -36,6 +36,13 @@
                                 Listado y registro de profesores
                             </a> 
                         </li>
+
+                 <li class="list-inline-item">
+                    <a class ="btn btn-outline-light" href="/ProyectoI/presentation/RegisterGroup/View">
+                       Apertura de Grupos
+                    </a> 
+                     </li>
+
                     <% } %>
                     <% if (user.getType() == 2) { %>
                         <li class="list-inline-item">

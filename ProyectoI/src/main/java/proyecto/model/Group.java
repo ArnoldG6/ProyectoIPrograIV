@@ -35,21 +35,16 @@ public class Group {
         this.nrc = generateID();
     }
     public final String generateID(){
-        //One example of this sequence is: "HU1234"
-        count += 1;
-        int zerosQuan = 4 - String.valueOf(count).length();
-        String nrcNum = String.valueOf(count);
-        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
-        return subName.charAt(0)+subName.charAt(1)+nrcNum;
+        Group.count += 1;
+        return subName.charAt(0)+subName.charAt(1)+String.valueOf(count);
     }
-    public static final String generateID(String sub){ //only for displaying the generated id
-        //One example of this sequence is: "HU1234"
-        int countCopy = count+1;
-        int zerosQuan = 4 - String.valueOf(countCopy).length();
-        String nrcNum = String.valueOf(countCopy);
-        for(int i = 0; i<zerosQuan; i++) nrcNum = "0"+nrcNum;
-        
-        return sub.charAt(0)+sub.charAt(1)+nrcNum;
+    public static final String generateID(String sub) throws Exception{ //only for displaying the generated id
+        try{
+        int countCopy = Group.count+1;
+        return sub.charAt(0)+sub.charAt(1)+String.valueOf(count);
+        }catch(Exception e){
+            throw e;
+        }
     }
     public void insertStudents(Student stu) {
         students.add(stu);
@@ -79,12 +74,12 @@ public class Group {
         this.students = students;
     }
 
-    public Subject getTeacher() {
+    public Subject getSubject() {
         return subj;
     }
 
-    public void setTeacher(Subject teacher) {
-        this.subj = teacher;
+    public void setTeacher(Subject subj) {
+        this.subj = subj;
     }
 
     public int getNumStu() {

@@ -52,12 +52,13 @@ public class GroupDAO implements DAO<String, Group> {
                 PreparedStatement stm = cnx.prepareStatement(GroupCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getNrc());
-            stm.setString(2, value.getTeacher().getIdSub());
-            stm.setString(3, Integer.toString(value.getNumStu()));
-            if (stm.executeUpdate() != 1) {
+            stm.setString(2, value.getSubject().getIdSub());
+            stm.setInt(3, value.getNumStu());
+            stm.setString(4, value.getTeach().getId());
+            if (stm.executeUpdate() != 1) 
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
-            }
+            
         } catch (IllegalArgumentException | SQLException ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }

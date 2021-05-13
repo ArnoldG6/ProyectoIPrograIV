@@ -8,7 +8,7 @@ public class GroupCRUD {
      protected static final String CMD_LIST
             = "SELECT gro_id, subject_id, num_stu, teachers_tea_id FROM groups;";
     protected static final String CMD_ADD
-            = "INSERT INTO groups (gro_id, subject_id,teachers_tea_id, num_stu) "
+            = "INSERT INTO groups (gro_id, subject_id, num_stu, teachers_tea_id) "
             + "VALUES (?, ?, ?, ?); ";
     protected static final String CMD_RECOVER
             = "SELECT gro_id, subject_id, num_stu, teachers_tea_id FROM groups "
@@ -20,5 +20,5 @@ public class GroupCRUD {
             = "DELETE FROM groups "
             + "WHERE gro_id = ?; ";
     protected static final String CMD_COUNT =
-            "SELECT num_stu FROM groups;";
+             "SELECT COUNT(*) AS total_groups FROM groups;";
 }
