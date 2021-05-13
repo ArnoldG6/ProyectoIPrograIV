@@ -42,7 +42,7 @@ public class Controller extends HttpServlet {
                     viewUrl = this.show2(request);
                     break;
                 case "/presentation/user/teacher/grade":
-                    viewUrl = this.show2(request);
+                    viewUrl = this.registerGrade(request, response);
                     break;
                 default:
                     viewUrl = "/index.jsp";
@@ -118,8 +118,9 @@ public class Controller extends HttpServlet {
         return "/presentation/user/teacher/grades.jsp";
     }
 
-    public void registerStudent(HttpServletRequest request, HttpServletResponse response)
+    public String registerGrade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        String url = "";
         try {
             String id = request.getParameter("id"),
                     grade = request.getParameter("grade");
@@ -130,6 +131,10 @@ public class Controller extends HttpServlet {
             if (Model.getInstance().getUsersMap().get(id) != null) {
                 throw new IOException("El usuario digitado ya existe");
             }
+            HashMap<String, Group> groups = (HashMap<String, Group>) request.getAttribute("groups");
+            String G1 = (String) request.getAttribute("pepito");
+            List<Student> pepita = groups.get(G1).getStudents();
+            Student nigga=null;//groups.SearchStu(id).insertNote(pepita,grade)
             //String pass = Model.getInstance().insertStudent(name,id,email,telNum);
             //request.setAttribute("genPass", pass); 
             //request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
@@ -139,6 +144,7 @@ public class Controller extends HttpServlet {
             request.setAttribute("errors", errors);
             throw e;
         }
+        return url;
     }
 
 }
