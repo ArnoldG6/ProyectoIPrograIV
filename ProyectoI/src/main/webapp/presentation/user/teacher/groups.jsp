@@ -37,6 +37,7 @@
                             <th class="text-left text-white">Nombre del curso</th>
                             <th class="text-left text-white">Numero de estudiantes</th>
                             <th class="text-left text-white">Estado</th>
+                            <th class="text-left text-white">Ingresar</th>
                         </tr>
                         <tr>
                             <%for (Group g : groups.values()) {%>
@@ -44,6 +45,10 @@
                             <td class= "text-left text-white"> <%=g.getTeacher().getNameSubj()%> </td>
                             <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
                             <td class= "text-left text-white"> <%=g.isStatus()%> </td>
+                        <a class ="btn btn-outline-light" 
+                           href="/ProyectoI/presentation/user/teacher/grades">
+                            Ingresar
+                        </a> 
                         </tr>
                         <% } %>
                     </table>

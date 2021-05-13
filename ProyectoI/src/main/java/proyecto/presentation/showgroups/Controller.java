@@ -33,6 +33,9 @@ public class Controller extends HttpServlet {
                 case "/presentation/user/teacher/groups":
                     viewUrl = this.show(request);
                     break;
+                case "/presentation/user/teacher/grades":
+                    viewUrl = this.show(request);
+                    break;
                 default:
                     viewUrl = "/index.jsp";
                     break;
