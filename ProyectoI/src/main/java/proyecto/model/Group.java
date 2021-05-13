@@ -8,6 +8,7 @@ import java.util.List;
  * @author victo
  */
 public class Group {
+
     private List<Student> students;
     private Subject subj;
     private Teacher teach;
@@ -16,6 +17,7 @@ public class Group {
     private String subName;
     private boolean status;
     private static int count = 0;
+
     public Group(String nrc, Subject subj, Teacher teach, int numStu) {
         this.students = new ArrayList<>();
         this.subj = subj;
@@ -25,6 +27,7 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = nrc;
     }
+
     public Group(Subject subj, Teacher teach, int numStu) {
         this.students = new ArrayList<>();
         this.subj = subj;
@@ -34,10 +37,14 @@ public class Group {
         this.subName = subj.getNameSubj();
         this.nrc = generateID();
     }
+
     public final String generateID(){
         Group.count += 1;
         return subName.charAt(0)+subName.charAt(1)+String.valueOf(count);
+
+
     }
+
     public static final String generateID(String sub) throws Exception{ //only for displaying the generated id
         try{
         int countCopy = Group.count+1;
@@ -45,17 +52,21 @@ public class Group {
         }catch(Exception e){
             throw e;
         }
+
+
     }
+
     public void insertStudents(Student stu) {
         students.add(stu);
     }
 
     public void deleteGroups(String id) {
-        for (int i = 0; i < students.size(); i++) 
-            if (students.get(i).getId().equals(id)) 
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(id)) {
                 students.remove(i);
-            
-       
+            }
+        }
+
     }
 
     public void setSubName(String subName) {

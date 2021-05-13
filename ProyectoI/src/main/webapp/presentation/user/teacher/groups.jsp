@@ -13,6 +13,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% User user = (User) session.getAttribute("user");%>
 <%HashMap<String, Group> groups = (HashMap<String, Group>) session.getAttribute("groups"); %>
+<% String pepito = (String) session.getAttribute("pepito");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +32,28 @@
                 <% Group sub = groups.get(entry.getKey());%>
 
                 <div class="card p-3 bg-dark col w-15">
-
+                    <table class = "table table-condensed border">Grupos del profesor
+                        <tr>
+                            <th class="text-left text-white">NRC</th>
+                            <th class="text-left text-white">Nombre del curso</th>
+                            <th class="text-left text-white">Numero de estudiantes</th>
+                            <th class="text-left text-white">Estado</th>
+                            <th class="text-left text-white">Ingresar</th>
+                        </tr>
+                        <tr>
+                            <%for (Group g : groups.values()) {%>
+                            <td class= "text-left text-white"> <%=g.getNrc()%> </td>
+                            <td class= "text-left text-white"> <%=g.getTeacher().getNameSubj()%> </td>
+                            <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
+                            <td class= "text-left text-white"> <%=g.isStatus()%> </td>
+                        <a class ="btn btn-outline-light" 
+                           href="/ProyectoI/presentation/user/teacher/grades">
+                            Ingresar
+                            <%=pepito = g.getNrc()%>
+                        </a> 
+                        </tr>
+                        <% } %>
+                    </table>
                 </div>
 
                 <% } %>

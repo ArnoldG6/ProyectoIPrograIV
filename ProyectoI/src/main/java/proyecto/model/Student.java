@@ -37,6 +37,10 @@ public class Student extends User {
     public void insertGrp(Group g){
         groups.add(g);
     }
+    
+    public void insertNote(Pair<Group, Float> j){
+        grades.add(j);
+    }
 
     public String show() {
         String f = "", tn = username, tc = id, numS = email, nr = telNum;

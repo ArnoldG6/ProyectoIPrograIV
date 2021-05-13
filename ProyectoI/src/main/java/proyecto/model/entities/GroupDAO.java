@@ -156,4 +156,27 @@ public class GroupDAO implements DAO<String, Group> {
         return Model.getInstance().searchTeacher(string);
     }
 
+    public HashMap<String, Group> listGroup(String idt) {
+        HashMap<String, Group> u = new HashMap<>();
+        String id;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+                    Statement stm = cnx.createStatement();
+                    ResultSet rs = stm.executeQuery(GroupCRUD.CMD_LIST)) {
+                while (rs.next()) {
+                    if (rs.getString("teachers_tea_id").equals(idt)) {
+                        id = rs.getString("gro_id");
+                        u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return u;
+    }
+
 }
