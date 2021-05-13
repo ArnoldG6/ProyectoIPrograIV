@@ -38,21 +38,19 @@ public class Group {
         this.nrc = generateID();
     }
 
-    public final String generateID(){
+    public final String generateID() {
         Group.count += 1;
-        return subName.charAt(0)+subName.charAt(1)+String.valueOf(count);
-
+        return subName.charAt(0) + subName.charAt(1) + String.valueOf(count);
 
     }
 
-    public static final String generateID(String sub) throws Exception{ //only for displaying the generated id
-        try{
-        int countCopy = Group.count+1;
-        return sub.charAt(0)+sub.charAt(1)+String.valueOf(count);
-        }catch(Exception e){
+    public static final String generateID(String sub) throws Exception { //only for displaying the generated id
+        try {
+            int countCopy = Group.count + 1;
+            return sub.charAt(0) + sub.charAt(1) + String.valueOf(count);
+        } catch (Exception e) {
             throw e;
         }
-
 
     }
 
@@ -67,6 +65,16 @@ public class Group {
             }
         }
 
+    }
+
+    public Student SearchStu(String id) {
+        Student s = null;
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getId().equals(id)) {
+                s = students.get(i);
+            }
+        }
+        return s;
     }
 
     public void setSubName(String subName) {

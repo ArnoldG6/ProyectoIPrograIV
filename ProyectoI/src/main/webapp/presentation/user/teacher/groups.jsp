@@ -43,7 +43,7 @@
                         <tr>
                             <%for (Group g : groups.values()) {%>
                             <td class= "text-left text-white"> <%=g.getNrc()%> </td>
-                            <td class= "text-left text-white"> <%=g.getTeacher().getNameSubj()%> </td>
+                            <td class= "text-left text-white"> <%=g.getSubject().getNameSubj()%> </td>
                             <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
                             <td class= "text-left text-white"> <%=g.isStatus()%> </td>
                         <a class ="btn btn-outline-light" 

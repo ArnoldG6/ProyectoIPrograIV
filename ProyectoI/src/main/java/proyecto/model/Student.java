@@ -20,26 +20,34 @@ public class Student extends User {
         this.telNum = telNum;
         this.pass = pass;
         this.groups = new ArrayList<>();
-        this.grades = new ArrayList<Pair<Group,Float>>();
+        this.grades = new ArrayList<Pair<Group, Float>>();
         this.type = 2;
     }
-    
+
     //Nota: validar el rango de la nota
     //public void insertGrade(){
     //    grades.add(new Pair<Groups,Integer>(groups.get(1),1));
     //}
-    public List<Group> getGroups(){return groups;}
-    List<Pair<Group, Float>> getGrades(){return grades;}
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    List<Pair<Group, Float>> getGrades() {
+        return grades;
+    }
+
     public Student() {
         this("", "", "", "", "");
     }
-    
-    public void insertGrp(Group g){
+
+    public void insertGrp(Group g) {
         groups.add(g);
     }
-    
-    public void insertNote(Pair<Group, Float> j){
-        grades.add(j);
+
+    public void insertNote(Group h, Float j) {
+        if (0 <= j || j <= 100) {
+            grades.add(new Pair<Group, Float>(h, j));
+        }
     }
 
     public String show() {
