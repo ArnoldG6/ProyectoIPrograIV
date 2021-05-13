@@ -31,14 +31,14 @@
                             <%if (subjects != null) {%>
                             <%for (Map.Entry<String, Subject> entry : subjects.entrySet()) { %>
                             <% Subject sub = subjects.get(entry.getKey());%>
-                            <option value =<%= sub.getIdSub()%> >
+                            <option value = <%= sub.getIdSub()%> >
                                 <%= sub.getIdSub() + "-" + sub.getNameSubj()%>
                             </option>
                             <% } %>
                             <% } %>
                         </select>
                         <div>&nbsp;</div>
-                        <label for = "subCapacity">Capacidad de estudiantes: &#160;</label>
+                        <label for = "subCapacity">Capacidad de estudiantes &#160;</label>
                         <div>&nbsp;</div>
                         <select class="combo" name = "subCapacity" id = "subCapacity">
                             <option value="empty" selected="selected">Seleccione la capacidad para el grupo </option>
@@ -55,7 +55,7 @@
                             <%if (teachers != null) {%>
                             <%for (Map.Entry<String, Teacher> entry : teachers.entrySet()) { %>
                             <% Teacher tea = teachers.get(entry.getKey());%>
-                            <option value= <%= tea.getId() %>>
+                            <option value = <%= tea.getId() %> >
                                 <%= tea.getId() + "-" + tea.getName()%>
                             </option>
                             <% } %>
@@ -68,7 +68,7 @@
                     </div>
                     <% if (message != null) {%>
                     <div>&nbsp;</div>
-                    <label class = "text-center" ><%=message%></label></div>
+                    <div class = "text-center" ><label class = "text-center" ><%=message%></label></div>
                     <% request.removeAttribute("message"); %>
                 <div>&nbsp;</div>
                 <%}%>

@@ -26,15 +26,25 @@ public class GroupDAO implements DAO<String, Group> {
     @Override
     public HashMap<String, Group> listAll() {
         HashMap<String, Group> u = new HashMap<>();
-        String id;
+        String gro_id,subject_id,teachers_tea_id;
+        int num_stu;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(GroupCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    id = rs.getString("gro_id");
-                    u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    gro_id = rs.getString("gro_id");
+                    subject_id = rs.getString("subject_id");
+                    num_stu = rs.getInt("num_stu");
+                    teachers_tea_id = rs.getString("teachers_tea_id");
+                    u.put(gro_id,
+                            (new Group(gro_id,
+                            Model.getInstance().getSubjects().get(subject_id),
+                            Model.getInstance().getTeachers().get(teachers_tea_id),
+                            num_stu)));
+                    //String nrc, Subject subj, Teacher teach, int numStu
+                    //u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);

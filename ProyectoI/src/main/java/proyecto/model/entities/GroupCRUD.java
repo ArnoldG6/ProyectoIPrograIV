@@ -8,7 +8,7 @@ public class GroupCRUD {
      protected static final String CMD_LIST
             = "SELECT gro_id, subject_id, num_stu, teachers_tea_id FROM groups;";
     protected static final String CMD_ADD
-            = "INSERT INTO groups (gro_id, subject_id, num_stu, teachers_tea_id) "
+            = "INSERT INTO university.groups (gro_id, subject_id, num_stu, teachers_tea_id) "
             + "VALUES (?, ?, ?, ?); ";
     protected static final String CMD_RECOVER
             = "SELECT gro_id, subject_id, num_stu, teachers_tea_id FROM groups "

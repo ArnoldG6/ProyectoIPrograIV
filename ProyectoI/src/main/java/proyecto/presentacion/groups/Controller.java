@@ -33,10 +33,10 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("/presentation/user/admin/RegisterGroup.jsp").forward(request, response);
 
         } catch (Exception e) {
-            //updateAttributes(request,response);
             HttpSession session = request.getSession(true);
             session.setAttribute("exc", e.getMessage());
-            request.getRequestDispatcher("/presentation/user/admin/RegisterGroup.jsp").forward(request, response);
+            //request.getRequestDispatcher("/presentation/user/admin/RegisterGroup.jsp").forward(request, response);
+            request.getRequestDispatcher("/presentation/RegisterGroup/View").forward(request, response);
         }
 
     }
@@ -63,6 +63,9 @@ public class Controller extends HttpServlet {
             String subId = request.getParameter("subId");
             String teaGroupId = (String) request.getParameter("teaGroupId");
             String nrc = Model.generateGroupID(subId);
+            //String message = "subId: "+subId;
+            
+            
             int subCapacity = Integer.parseInt((String) request.getParameter("subCapacity"));
             Model.getInstance().insertGroup(subId, teaGroupId, subCapacity);
             if (subId.equals("empty")) 
@@ -73,11 +76,8 @@ public class Controller extends HttpServlet {
             
             if (request.getParameter("subCapacity").equals("empty")) 
                 throw new IOException("Debe seleccionar una capacidad");
-            System.out.println("SUBJECT: "+ subId);
-            System.out.println("TEACHER: "+ teaGroupId);
-            System.out.println("NRC: "+ nrc);
-            System.out.printf("Capacity:%d \n"+ subCapacity);
-            String message = "Se ha creado el grupo de NRC: " + nrc + "con éxito.";
+            String message = "Se ha creado el grupo de NRC: " + nrc + " con éxito.";
+            session.setAttribute("message", message);
             session.setAttribute("message", message);
             
         } catch (Exception e) {
