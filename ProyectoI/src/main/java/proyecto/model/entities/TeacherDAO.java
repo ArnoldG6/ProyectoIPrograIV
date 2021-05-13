@@ -41,6 +41,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
     public HashMap<String, Teacher> listAll() {
         HashMap<String, Teacher> u = new HashMap<>();
         String username;
+        //a
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
