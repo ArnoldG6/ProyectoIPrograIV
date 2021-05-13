@@ -73,8 +73,8 @@ public class TeacherDAO implements DAO<String, Teacher> {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TeacherCRUD.CMD_ADD)) {
             stm.clearParameters();
-            stm.setString(1, value.getName());
-            stm.setString(2, value.getId());
+            stm.setString(1, value.getId());
+            stm.setString(2, value.getName());
             stm.setString(3, value.getEmail());
             stm.setString(4, value.getTelNum());
             stm.setString(5, value.getPass());
