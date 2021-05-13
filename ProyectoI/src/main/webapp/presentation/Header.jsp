@@ -32,6 +32,12 @@
             </li>
             <li class="list-inline-item">
                 <a class ="btn btn-outline-light" 
+                   href="/ProyectoI/presentation/RegisterGroup/View">
+                    Apertura de grupos
+                </a> 
+            </li>
+            <li class="list-inline-item">
+                <a class ="btn btn-outline-light" 
                    href="/ProyectoI/presentation/user/admin/ListRegisterTeachers.jsp">
                     Listado y registro de profesores
                 </a> 
