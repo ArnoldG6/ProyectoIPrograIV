@@ -13,6 +13,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% User user = (User) session.getAttribute("user");%>
 <%HashMap<String, Group> groups = (HashMap<String, Group>) session.getAttribute("groups"); %>
+<% String pepito = (String) session.getAttribute("pepito");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,6 +49,7 @@
                         <a class ="btn btn-outline-light" 
                            href="/ProyectoI/presentation/user/teacher/grades">
                             Ingresar
+                            <%=pepito = g.getNrc()%>
                         </a> 
                         </tr>
                         <% } %>
