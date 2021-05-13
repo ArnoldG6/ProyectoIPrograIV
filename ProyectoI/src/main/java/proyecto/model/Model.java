@@ -58,10 +58,9 @@ public class Model {
         }
     }
 
-    public HashMap<String, Group> getSGroupsMap(User u) throws Exception {
+    public HashMap<String, Group> getGroupsMap(User u) throws Exception {
         try {
             updateModel();
-            //HashMap<String, Subject> result = new HashMap<String, Subject>();
             HashMap<String, Group> result = GroupDAO.getInstance().listGroup(u.getId());
             if (u != null) {
                 if (u.getType() == 1) {

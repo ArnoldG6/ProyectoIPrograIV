@@ -33,6 +33,7 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
+
             String viewUrl = "/index.jsp";
             switch (request.getServletPath()) {
                 case "/presentation/user/teacher/groups":
@@ -103,9 +104,17 @@ public class Controller extends HttpServlet {
     }// </editor-fold>
 
     private String show(HttpServletRequest request) throws Exception {
+
+        System.out.println("Goddddddddddddddddddddddddddddddddddd");
         HttpSession session = request.getSession(true);
+
+        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
         User u = (User) session.getAttribute("user");
-        session.setAttribute("groups", Model.getInstance().getSGroupsMap(u));
+
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
+        session.setAttribute("groups", Model.getInstance().getGroupsMap(u));
+
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         return "/presentation/user/teacher/groups.jsp";
     }
 
@@ -134,17 +143,15 @@ public class Controller extends HttpServlet {
             HashMap<String, Group> groups = (HashMap<String, Group>) request.getAttribute("groups");
             String G1 = (String) request.getAttribute("pepito");
             List<Student> pepita = groups.get(G1).getStudents();
-            Student nigga=null;//groups.SearchStu(id).insertNote(pepita,grade)
-            //String pass = Model.getInstance().insertStudent(name,id,email,telNum);
-            //request.setAttribute("genPass", pass); 
-            //request.getRequestDispatcher("/presentation/register/GenPassword.jsp").forward(request, response);
+            Student nigga = groups.get(G1).SearchStu(id);
+            nigga.insertNote(groups.get(G1), Float.parseFloat(grade));
+            return "/presentation/user/teacher/grades.jsp";
         } catch (Exception e) {
             ArrayList<String> errors = new ArrayList<>();
             errors.add(e.getMessage());
             request.setAttribute("errors", errors);
             throw e;
         }
-        return url;
     }
 
 }
