@@ -1,7 +1,5 @@
 package proyecto.model;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  *
@@ -9,7 +7,7 @@ import java.util.List;
  */
 public class Teacher extends User {
 
-    public List<Group> groups;
+    private HashMap<String, Group> groups;
 
     public Teacher(String username, String id, String email, String telNum, String pass) {
         this.username = username;
@@ -17,23 +15,34 @@ public class Teacher extends User {
         this.email = email;
         this.telNum = telNum;
         this.pass = pass;
-        this.groups = new ArrayList<>();
+        this.groups = new HashMap<String, Group>();
         this.type = 1;
     }
 
     public Teacher() {
         this("", "", "", "", "");
     }
-
-    public String showGroups() {
+    @Override
+    public String toString() {
         String f = "";
         f = f
                 + "\n" + "Grupos:"
                 + "\n";
-        for (int i = 0; i < groups.size(); i++) {
-            f += groups.get(i).show() + "\n";
+        for (int i = 0; i < getGroups().size(); i++) {
+            f += getGroups().get(i).show() + "\n";
         }
         return f;
+    }
+    public void insertGroup(Group g){
+        if(groups.get(g.getNrc()) != null)
+            groups.put(g.getNrc(), g);
+    }
+    public HashMap<String, Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(HashMap<String, Group> groups) {
+        this.groups = groups;
     }
 
 }

@@ -82,6 +82,7 @@ public class Model {
         Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
         Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
         Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
+        Model.getInstance().matchGroupsTeachers();
 
     }
 
@@ -148,17 +149,36 @@ public class Model {
 
     }
 
+    public void matchGroupsTeachers() throws Exception {
+        try {
+            Teacher teacher;
+            Group group;
+            for (Map.Entry<String, Teacher> entry : teachers.entrySet()) {
+                teacher = teachers.get(entry.getKey());
+                for (Map.Entry<String, Group> g : groups.entrySet()){ 
+                    group = groups.get(g.getKey());
+                    if(group.getTeach().getId().equals(teacher.getId()))
+                        teacher.insertGroup(group);
+                    
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public HashMap<String, Teacher> getTeachersMap(User u) throws Exception {
         try {
             updateModel();
             //HashMap<String, Subject> result = new HashMap<String, Subject>();
             HashMap<String, Teacher> result = TeacherDAO.getInstance().listAll();
             result.putAll(teachers);
-            if (u != null) 
-                if (u.getType() == 3) 
+            if (u != null) {
+                if (u.getType() == 3) {
                     return result;
-                
-            
+                }
+            }
+
         } catch (Exception e) {
             throw e;
         }
@@ -317,9 +337,9 @@ public class Model {
     }
 
     public static final String generateGroupID(String sub) throws Exception {
-        try{
+        try {
             return Group.generateID(sub);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -353,10 +373,12 @@ public class Model {
             updateModel();//Model needs to updated in order to search for subjects
             Subject subj = subjects.get(subID);
             Teacher teach = teachers.get(teachID);
-            if (teach == null) 
+            if (teach == null) {
                 throw new IOException("Error al insertar el grupo. Profesor no encontrado");
-            if (subj == null) 
+            }
+            if (subj == null) {
                 throw new IOException("Error al insertar el grupo. Curso no encontrado");
+            }
             GroupDAO.getInstance().add(new Group(subj, teach, numStu));
             updateModel();//After adding the group to the DB it is necessary to update the model again
         } catch (Exception e) {
