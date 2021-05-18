@@ -16,7 +16,7 @@ public class Subject {
         this.idSub = idSub;
         this.nameSubj = nameSubj;
         this.desc = desc;
-        this.status = stat;
+        this.status = stat; // "OFERTA" || "INACTIVO"
         this.groups = new ArrayList<>();
     }
 

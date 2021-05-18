@@ -37,6 +37,14 @@ public class Model {
         admins = new HashMap<>();
     }
 
+    public final void updateModel() throws Exception {
+        Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+        Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
+        Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
+        Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
+        Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
+        Model.getInstance().matchGroupsTeachers();
+    }
     public HashMap<String, Subject> getSubjectsMap(User u) throws Exception {
         try {
             updateModel();
@@ -61,30 +69,19 @@ public class Model {
     public HashMap<String, Group> getGroupsMap(User u) throws Exception {
         try {
             updateModel();
-            HashMap<String, Group> result = GroupDAO.getInstance().listGroup(u.getId());
-            if (u != null) {
-                if (u.getType() == 1) {
-                    return result; //admin
-                }
-                return result;
-            } else {
-                return result;
-            }
+            if (u != null){
+                if(teachers.get(u.getId()) != null) 
+                     return teachers.get(u.getId()).getGroups();
+                     
+                 else
+                    throw new Exception("Debe ser usuario de tipo profesor");
+            }    
+            throw new Exception("La sesión ha expirado");
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public final void updateModel() throws Exception {
-
-        Model.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
-        Model.getInstance().setTeachers(TeacherDAO.getInstance().listAll());
-        Model.getInstance().setStudents(StudentDAO.getInstance().listAll());
-        Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
-        Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
-        Model.getInstance().matchGroupsTeachers();
-
-    }
 
     public void linkStudentGroup(Student s, Group g, Float grade) throws Exception {
         if (s == null || g == null || grade == null) {
@@ -153,12 +150,14 @@ public class Model {
         try {
             Teacher teacher;
             Group group;
-            for (Map.Entry<String, Teacher> entry : teachers.entrySet()) {
-                teacher = teachers.get(entry.getKey());
-                for (Map.Entry<String, Group> g : groups.entrySet()){ 
-                    group = groups.get(g.getKey());
-                    if(group.getTeach().getId().equals(teacher.getId()))
+            for (Map.Entry<String, Teacher> entry : Model.getInstance().teachers.entrySet()) {
+                teacher = Model.getInstance().teachers.get(entry.getKey());
+                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()){ 
+                    group = Model.getInstance().groups.get(g.getKey());
+                    if(group.getTeach().getId().equals(teacher.getId())){
                         teacher.insertGroup(group);
+                        group.setTeach(teacher);
+                     }
                     
                 }
             }
@@ -205,16 +204,16 @@ public class Model {
         this.groups = groups;
     }
 
-    public HashMap<String, Subject> getSubjects() {
-        return subjects;
+    public HashMap<String, Subject> getSubjects() throws Exception {
+        return Model.getInstance().subjects;
     }
 
     public void setSubjects(HashMap<String, Subject> subjects) {
         this.subjects = subjects;
     }
 
-    public HashMap<String, Teacher> getTeachers() {
-        return teachers;
+    public HashMap<String, Teacher> getTeachers() throws Exception {
+        return Model.getInstance().teachers;
     }
 
     public void setTeachers(HashMap<String, Teacher> teachers) {
@@ -295,21 +294,7 @@ public class Model {
         }
     }
 
-    public String showSubjects() {
-        return getSubjects().toString();
-    }
 
-    public String showTeachers() {
-        return getTeachers().toString();
-    }
-
-    public String showHistory(String id) {
-        return getStudents().get(id).show();
-    }
-
-    public String showSubject(String id) {
-        return getSubjects().get(id).show();
-    }
 
     public String showGrps(String id) {
         //return getTeachers().get(id);

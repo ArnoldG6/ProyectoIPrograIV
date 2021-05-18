@@ -27,7 +27,8 @@ import proyecto.model.User;
  *
  * @author victo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/presentation/user/teacher/groups"})
+@WebServlet(name = "Controller", urlPatterns = {"/presentation/user/teacher/groups",
+    "/presentation/user/teacher/grades"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -106,26 +107,21 @@ public class Controller extends HttpServlet {
     }// </editor-fold>
 
     private String show(HttpServletRequest request) throws Exception {
-
-        System.out.println("Goddddddddddddddddddddddddddddddddddd");
+        System.out.println("SHOW");
         HttpSession session = request.getSession(true);
-
-        System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
         User u = (User) session.getAttribute("user");
-
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
         session.setAttribute("groups", Model.getInstance().getGroupsMap(u));
-
-        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         return "/presentation/user/teacher/groups.jsp";
     }
 
     private String show2(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(true);
-        HashMap<String, Group> groups = (HashMap<String, Group>) request.getAttribute("groups");
-        String G1 = (String) request.getAttribute("pepito");
-        List<Student> pepita = groups.get(G1).getStudents();
-        session.setAttribute("students", pepita);
+        HashMap<String, Group> groups = (HashMap<String, Group>) session.getAttribute("groups");
+        User user = (User) session.getAttribute("user");
+        String groupID = request.getParameter("groupID");
+        if(groupID == null) throw new Exception("Group ID Exception");
+        List<Student> students = groups.get(groupID).getStudents();
+        session.setAttribute("students", students);
         return "/presentation/user/teacher/grades.jsp";
     }
 

@@ -157,12 +157,12 @@ public class TeacherDAO implements DAO<String, Teacher> {
         }
     }
 
-    public static Teacher recover4(String id) {
+    public Teacher recover4(String id) {
         Teacher result = null;
         String username;
         try {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
-                    PreparedStatement stm = cnx.prepareStatement(SubjectCRUD.CMD_RECOVER)) {
+                    PreparedStatement stm = cnx.prepareStatement(TeacherCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
                 try (ResultSet rs = stm.executeQuery()) {
@@ -170,6 +170,7 @@ public class TeacherDAO implements DAO<String, Teacher> {
                         username = rs.getString("username");
                         result = new Teacher(username, rs.getString("tea_id"),
                                 rs.getString("email"), rs.getString("phone_num"), rs.getString("pass"));
+                        // public Teacher(String username, String id, String email, String telNum, String pass)
                     }
                 }
             }

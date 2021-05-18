@@ -23,8 +23,11 @@ public class Group {
         this.subj = subj;
         this.teach = teach;
         this.numStu = numStu;
-        this.status = true;
         this.subName = subj.getNameSubj();
+        if(subj.getStatus().equals("OFERTA"))
+            this.status = true;
+        else
+            this.status = false;
         this.nrc = nrc;
     }
 
@@ -133,8 +136,8 @@ public class Group {
         return f;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String isStatus() {
+        return subj.getStatus();
     }
 
     public void setStatus(boolean status) {

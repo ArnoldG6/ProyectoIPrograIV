@@ -25,9 +25,14 @@
         <jsp:include page="/presentation/Header.jsp"/>
 
         <div class="container">
-
-            <% if (groups != null) { %>
             <h1 class="text-white text-center">Cursos registrados en el sistema</h1>
+            <% if (groups != null) { %>
+            <% if (groups.size() == 0) { %>
+            <div class="text-white text-center">
+                No hay grupos registrados en el sistema
+            </div>
+            <% } %>
+            <div></div>
             <div class="row p-1 bg-dark column card-body w-15">
                 <%for (Map.Entry<String, Group> entry : groups.entrySet()) { %>   
                 <% Group sub = groups.get(entry.getKey());%>
@@ -47,11 +52,16 @@
                             <td class= "text-left text-white"> <%=g.getSubject().getNameSubj()%> </td>
                             <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
                             <td class= "text-left text-white"> <%=g.isStatus()%> </td>
-                        <a class ="btn btn-outline-light" 
-                           href="/ProyectoI/presentation/user/teacher/grades">
-                            Ingresar
-                            <%=pepito = g.getNrc()%>
-                        </a> 
+                            <td class= "text-left text-white">
+                                <a class ="text-left text-white" href="/ProyectoI/presentation/user/teacher/grades"
+                                   id = "groupID"
+                                   value =  <%=g.getNrc()%>
+                                   >
+                                    <button class ="btn btn-outline-light">
+                                    Ingresar
+                                    </button>
+                                </a> 
+                            </td>
                         </tr>
                         <% } %>
                     </table>
@@ -62,7 +72,9 @@
             </div>
 
             <% } else { %>
-            <div class="text-white text-center"></div>
+            <div class="text-white text-center">
+                No hay grupos registrados en el sistema
+            </div>
             <% }%>
 
         </div>

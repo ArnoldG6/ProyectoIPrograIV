@@ -159,8 +159,7 @@ public class SubjectDAO implements DAO<String, Subject> {
         }
     }
     
-    public static Subject recover2(String id){
-        Subject result = null;
+    public Subject recover2(String id){
         String subname;
         try {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
@@ -170,14 +169,15 @@ public class SubjectDAO implements DAO<String, Subject> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         subname = rs.getString("sub_name");
-                        result = new Subject(subname, rs.getString("sub_id"), rs.getString("sub_desc"),rs.getString("sub_status"));
+                        return new Subject(rs.getString("sub_id"), subname , rs.getString("sub_desc"),rs.getString("sub_status"));
+                        //(String idSub, String nameSubj, String desc, String stat)
                     }
                 }
             }
         } catch (SQLException ex) {
             System.err.printf("Exception: '%s'%n", ex.getMessage());
         }
-        return result;
+        return null;
     }
     
 }

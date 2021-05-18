@@ -15,7 +15,7 @@ public class Teacher extends User {
         this.email = email;
         this.telNum = telNum;
         this.pass = pass;
-        this.groups = new HashMap<String, Group>();
+        this.groups = new HashMap<>();
         this.type = 1;
     }
 
@@ -34,10 +34,11 @@ public class Teacher extends User {
         return f;
     }
     public void insertGroup(Group g){
-        if(groups.get(g.getNrc()) != null)
+        if(groups.get(g.getNrc()) == null)
             groups.put(g.getNrc(), g);
     }
     public HashMap<String, Group> getGroups() {
+         System.out.println("getGroups()");
         return groups;
     }
 

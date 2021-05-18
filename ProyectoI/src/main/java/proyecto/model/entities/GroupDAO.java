@@ -11,9 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import proyecto.model.Group;
 import proyecto.model.Model;
+import proyecto.model.Subject;
 import proyecto.model.Teacher;
-import static proyecto.model.entities.SubjectDAO.recover2;
-import static proyecto.model.entities.TeacherDAO.recover4;
 
 /**
  *
@@ -27,6 +26,10 @@ public class GroupDAO implements DAO<String, Group> {
     public HashMap<String, Group> listAll() {
         HashMap<String, Group> u = new HashMap<>();
         String gro_id,subject_id,teachers_tea_id;
+        String nrc;
+        Subject subj;
+        Teacher teach; 
+        int numStu;
         int num_stu;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -38,16 +41,24 @@ public class GroupDAO implements DAO<String, Group> {
                     subject_id = rs.getString("subject_id");
                     num_stu = rs.getInt("num_stu");
                     teachers_tea_id = rs.getString("teachers_tea_id");
-                    u.put(gro_id,
-                            (new Group(gro_id,
-                            Model.getInstance().getSubjects().get(subject_id),
-                            Model.getInstance().getTeachers().get(teachers_tea_id),
-                            num_stu)));
-                    //String nrc, Subject subj, Teacher teach, int numStu
-                    //u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    Subject sub = SubjectDAO.getInstance().listAll().get(subject_id);
+                    Teacher tea =  TeacherDAO.getInstance().listAll().get(teachers_tea_id);
+                    if(sub != null)
+                        if(tea != null)
+                            u.put(gro_id,(new Group(gro_id, sub, tea,num_stu)));
+                        else
+                            throw new Exception("Error en tabla Teacher");
+                    else
+                        throw new Exception("Error en tabla Subjects");
+                    
+                    //u.put(gro_id, (new Group(gro_id, SubjectDAO.getInstance().recover2(rs.getString("subject_id")), 
+                    //TeacherDAO.getInstance().recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                    
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(GroupDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +108,7 @@ public class GroupDAO implements DAO<String, Group> {
         return result;
     }
 
-    public Group recover3(String id) {
+    public Group recover3(String id) throws Exception {
         Group result = null;
         String username;
         try {
@@ -108,7 +119,7 @@ public class GroupDAO implements DAO<String, Group> {
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         username = rs.getString("gro_id");
-                        result = new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")));
+                        result = new Group(id, SubjectDAO.getInstance().recover2(rs.getString("subject_id")), TeacherDAO.getInstance().recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")));
                     }
                 }
             }
@@ -166,7 +177,7 @@ public class GroupDAO implements DAO<String, Group> {
         return Model.getInstance().searchTeacher(string);
     }
 
-    public HashMap<String, Group> listGroup(String idt) {
+    public HashMap<String, Group> listGroup(String idt) throws Exception {
         HashMap<String, Group> u = new HashMap<>();
         String id;
         try {
@@ -177,7 +188,9 @@ public class GroupDAO implements DAO<String, Group> {
                 while (rs.next()) {
                     if (rs.getString("teachers_tea_id").equals(idt)) {
                         id = rs.getString("gro_id");
-                        u.put(id, (new Group(id, recover2(rs.getString("subject_id")), recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                        u.put(id, (new Group(id, SubjectDAO.getInstance().recover2(rs.getString("subject_id")), TeacherDAO.getInstance().
+                                recover4(rs.getString("teachers_tea_id")), Integer.parseInt(rs.getString("num_stu")))));
+                        //String nrc, Subject subj, Teacher teach, int numStu
                     }
                 }
             } catch (SQLException ex) {
