@@ -52,6 +52,8 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher(viewUrl).forward(request, response);
 
         } catch (Exception e) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("exc", e.getMessage());
             request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
         }
     }
@@ -147,9 +149,6 @@ public class Controller extends HttpServlet {
             nigga.insertNote(groups.get(G1), Float.parseFloat(grade));
             return "/presentation/user/teacher/grades.jsp";
         } catch (Exception e) {
-            ArrayList<String> errors = new ArrayList<>();
-            errors.add(e.getMessage());
-            request.setAttribute("errors", errors);
             throw e;
         }
     }
