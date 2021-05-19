@@ -50,12 +50,6 @@
                     Historial de cursos
                 </a> 
             </li>
-            <li class="list-inline-item">
-                <a class ="btn btn-outline-light" 
-                   href="/ProyectoI/presentation/user/student/constancy.jsp">
-                    Constancia
-                </a> 
-            </li>
             <% } %>
             <% if (user.getType() == 1) { %>
             <li class="list-inline-item">
