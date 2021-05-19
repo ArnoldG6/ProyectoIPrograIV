@@ -44,6 +44,7 @@ public class Model {
         Model.getInstance().setSubjects(SubjectDAO.getInstance().listAll());
         Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
         Model.getInstance().matchGroupsTeachers();
+        Model.getInstance().matchGroupsSubjects();
     }
     public HashMap<String, Subject> getSubjectsMap(User u) throws Exception {
         try {
@@ -65,14 +66,10 @@ public class Model {
             throw e;
         }
     }
-    public HashMap<String, Group> getAvailableGroups(User user) throws Exception {
-        HashMap<String, Group> groups = new HashMap();
-        HashMap<String, Subject>  subjects = Model.getInstance().getSubjectsMap(user);
-        for (HashMap.Entry<String, Subject> sub : subjects.entrySet()) {
-            Subject s = subjects.get(sub.getKey());
-            if(s.getGroups() != null)
-                groups.putAll(s.getGroups());
-        }
+    public HashMap<String, Group> getAvailableGroups(User user,String subID) throws Exception {
+        updateModel();
+        HashMap<String, Group> groups = Model.getInstance().subjects.get(subID).getGroups();
+        if(groups == null) throw new IOException("No se ha encontrado el curso");
         return groups;
     }
     public HashMap<String, Group> getGroupsMap(User u) throws Exception {
@@ -174,7 +171,22 @@ public class Model {
             throw e;
         }
     }
-
+    public void matchGroupsSubjects() throws Exception {
+        try {
+            Subject sub;
+            Group group;
+            for (Map.Entry<String, Subject> entry : Model.getInstance().subjects.entrySet()) {
+                sub = Model.getInstance().subjects.get(entry.getKey());
+                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()){ 
+                    group = Model.getInstance().groups.get(g.getKey());
+                    if(group.getSubject().getIdSub().equals(sub.getIdSub()))
+                        sub.getGroups().put(group.getNrc(),group);
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     public HashMap<String, Teacher> getTeachersMap(User u) throws Exception {
         try {
             updateModel();

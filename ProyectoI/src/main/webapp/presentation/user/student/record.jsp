@@ -30,8 +30,7 @@
                     <tr>
                         <%for (Group g : groups) {%>
                         <td class= "text-center text-white"> <%=g.getNrc()%> </td>
-                        <td class= "text-center text-white"> <%=g.getTeach().getId()+"-"+
-                                g.getTeach()%> </td>
+                        <td class= "text-center text-white"> <%=g.getTeach().getId()+"-"+g.getTeach()%> </td>
                         <td class= "text-center text-white"> N/A </td>
                         
                         <% } %>

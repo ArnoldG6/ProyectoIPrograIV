@@ -36,7 +36,7 @@
 
             
                 <div class="card p-3 bg-dark col w-15">
-                    <a href="#" id="imagen1" class="p-3 bg-dark text-center" >
+                    <a href="/ProyectoI/presentation/student/enroll?subID=<%=sub.getIdSub()%>" id="imagen1" class="p-3 bg-dark text-center" >
                         <img src='/ProyectoI/presentation/subjects/image?subId=<%=sub.getIdSub()%>' height="150" width = "150">
                     </a>
                     <div><label class="card-title text-center"><%= sub.getNameSubj()%></label></div>
@@ -48,7 +48,11 @@
                     <div><a class ="btn btn-outline-light container center_div w-75 p-1 " href="/ProyectoI/presentation/login/View.jsp">Matricular ahora</a></div>
                     <%} else {%>
                     <% if (user.getType() != 3) {%>
-                    <div><a class ="btn btn-outline-light container center_div w-75 p-1" href="#">Matricular ahora</a></div>
+                    <div>
+                        <a class ="btn btn-outline-light container center_div w-75 p-1" href="/ProyectoI/presentation/student/enroll?subID=<%=sub.getIdSub()%>">
+                            Matricular ahora
+                        </a>
+                    </div>
                     <%}%>
                     <%}%>
                 </div>

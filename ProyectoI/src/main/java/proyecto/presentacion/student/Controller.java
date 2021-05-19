@@ -20,7 +20,7 @@ import proyecto.model.Model;
 import proyecto.model.Student;
 import proyecto.model.User;
 
-@WebServlet(name = "StudentController", urlPatterns = {"/presentation/subjects/register"})
+@WebServlet(name = "StudentController", urlPatterns = {"/presentation/student/enroll"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -29,8 +29,8 @@ public class Controller extends HttpServlet {
         try {
             String viewUrl = "/index.jsp";
             switch (request.getServletPath()) {
-                case "/presentation/subjects/show":
-                    viewUrl = this.show(request);
+                case "/presentation/student/enroll":
+                    viewUrl = this.enroll(request,response);
                     break;
                 default:
                     viewUrl = "/index.jsp";
@@ -49,8 +49,11 @@ public class Controller extends HttpServlet {
         try {
             HttpSession session = request.getSession(true);
             User user = (User) session.getAttribute("user");
-            if(user == null) throw new Exception("Sesión expirada");
-            session.setAttribute("studentGroups", Model.getInstance().getAvailableGroups(user));
+            String subID = (String) request.getParameter("subID");
+            if(user == null) return "/presentation/login/View.jsp";
+            System.out.println(Model.getInstance().getAvailableGroups(user,subID).toString());
+            session.setAttribute("studentGroups", Model.getInstance().getAvailableGroups(user,subID));
+            
             return "/presentation/user/student/enroll.jsp";
         
         } catch (Exception e) {
@@ -70,25 +73,8 @@ public class Controller extends HttpServlet {
             throw e;
         }
         return "/presentation/user/student/record.jsp";
-    }
+    
 
-    public String searchSubject(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        try {
-            HttpSession session = request.getSession(true);
-            String searchCriteria = (String) request.getParameter("searchCriteria");
-            if (searchCriteria == null) {
-                throw new IOException("El campo de búsqueda no debe estar vacío");
-            }
-            session.setAttribute("searchedSbjts",
-                    Model.getInstance().searchSubjects((User) session.getAttribute("user"),
-                            searchCriteria));
-        } catch (Exception e) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("exc", e.getMessage());
-            throw e;
-        }
-        return "/presentation/subjects/search.jsp";
     }
 
     @Override
@@ -102,24 +88,6 @@ public class Controller extends HttpServlet {
         }
     }
 
-    private String show(HttpServletRequest request) throws Exception {
-        HttpSession session = request.getSession(true);
-        User u = (User) session.getAttribute("user");
-        session.setAttribute("subjects", Model.getInstance().getSubjectsMap(u));
-        return "/presentation/mainpage.jsp";
-    }
-
-    private String image(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String subId = request.getParameter("subId");
-        Path path = FileSystems.getDefault().getPath("C:/PROYECTO", subId);
-        try (OutputStream out = response.getOutputStream()) {
-            Files.copy(path, out);
-            out.flush();
-        } catch (IOException e) {
-            throw e;
-        }
-        return null;
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
