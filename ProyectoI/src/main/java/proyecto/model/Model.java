@@ -87,8 +87,8 @@ public class Model {
         if (s == null || g == null || grade == null) {
             throw new Exception("Null pointer in linkStudentGroup method");
         }
-        if (!g.getStudents().contains(s)) {
-            g.getStudents().add(s);
+        if (g.getStudents().get(s.getId()) == null) {
+            g.getStudents().put(s.getId(),s);
         }
         if (!s.getGroups().contains(g)) {
             s.getGroups().add(g);

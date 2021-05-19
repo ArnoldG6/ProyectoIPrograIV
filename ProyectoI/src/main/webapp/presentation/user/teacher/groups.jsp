@@ -48,17 +48,14 @@
                         </tr>
                         <tr>
                             <%for (Group g : groups.values()) {%>
-                            <td class= "text-left text-white"> <%=g.getNrc()%> </td>
+                            <td class= "text-left text-white">  <%=g.getNrc()%> </td>
                             <td class= "text-left text-white"> <%=g.getSubject().getNameSubj()%> </td>
                             <td class= "text-left text-white"> <%=Integer.toString(g.getNumStu())%> </td>
                             <td class= "text-left text-white"> <%=g.isStatus()%> </td>
                             <td class= "text-left text-white">
-                                <a class ="text-left text-white" href="/ProyectoI/presentation/user/teacher/grades"
-                                   id = "groupID"
-                                   value =  <%=g.getNrc()%>
-                                   >
+                                <a class ="text-left text-white" href="/ProyectoI/presentation/user/teacher/grades?groupID=<%=g.getNrc()%>">
                                     <button class ="btn btn-outline-light">
-                                    Ingresar
+                                        Ingresar
                                     </button>
                                 </a> 
                             </td>

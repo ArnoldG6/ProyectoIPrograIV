@@ -6,10 +6,7 @@
 package proyecto.presentation.showgroups;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -120,7 +117,7 @@ public class Controller extends HttpServlet {
         User user = (User) session.getAttribute("user");
         String groupID = request.getParameter("groupID");
         if(groupID == null) throw new Exception("Group ID Exception");
-        List<Student> students = groups.get(groupID).getStudents();
+        HashMap<String,Student> students = groups.get(groupID).getStudents();
         session.setAttribute("students", students);
         return "/presentation/user/teacher/grades.jsp";
     }
@@ -140,7 +137,7 @@ public class Controller extends HttpServlet {
             }
             HashMap<String, Group> groups = (HashMap<String, Group>) request.getAttribute("groups");
             String G1 = (String) request.getAttribute("pepito");
-            List<Student> pepita = groups.get(G1).getStudents();
+            //List<Student> pepita = groups.get(G1).getStudents();
             Student nigga = groups.get(G1).SearchStu(id);
             nigga.insertNote(groups.get(G1), Float.parseFloat(grade));
             return "/presentation/user/teacher/grades.jsp";
