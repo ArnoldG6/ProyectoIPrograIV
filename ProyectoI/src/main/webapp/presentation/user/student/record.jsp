@@ -39,12 +39,12 @@
             </div>
             <% }%>
             <div>&nbsp;</div>
-            <li class="list-inline-item">
+            <div class="text-center">
                 <a class ="btn btn-outline-light line-center" 
                    href="/ProyectoI/presentation/user/student/constancy">
-                    Constancia
+                    Generar constancia
                 </a> 
-            </li>
+             </div>
         </div>
 
         <jsp:include page="/presentation/Footer.jsp"/>

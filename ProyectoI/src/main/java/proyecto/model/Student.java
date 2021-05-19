@@ -32,10 +32,9 @@ public class Student extends User {
         return groups;
     }
 
-    List<Pair<Group, Float>> getGrades() {
+    public List<Pair<Group, Float>> getGrades() {
         return grades;
     }
-
     public Student() {
         this("", "", "", "", "");
     }

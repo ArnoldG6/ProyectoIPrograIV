@@ -9,17 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.util.ArrayList;
+import javafx.util.Pair;
+import proyecto.model.Group;
 import proyecto.model.Model;
-import proyecto.model.Subject;
+import proyecto.model.Student;
 import proyecto.model.User;
 
 @WebServlet(name = "StudentController", urlPatterns = {"/presentation/student/enroll",
-    "/presentation/student/matricular", "/presentation/user/student/record"})
+    "/presentation/student/matricular", "/presentation/user/student/record",
+"/presentation/user/student/constancy"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -38,7 +43,7 @@ public class Controller extends HttpServlet {
                     viewUrl = this.getRecord(request, response);
                     break;
                 case "/presentation/user/student/constancy":
-                    viewUrl = this.Contancy(request, response);
+                    viewUrl = this.constancy(request, response);
                     break;
                 default:
                     viewUrl = "/index.jsp";
@@ -89,23 +94,27 @@ public class Controller extends HttpServlet {
         return "/presentation/user/student/record.jsp";
     }
 
-    public String Contancy(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String codigo = request.getParameter("codigo");
-        Subject curso;
+    public String constancy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        
         try {
-            /*
-            PdfDocument pdfa= new PdfDocument();
-            PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));
-            Document doc = new Document(pdf, PageSize.A4.rotate());
-            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
-            doc.add(new Paragraph("CURSO: " + curso.getNameSubj()));
-            doc.add(new Paragraph(""));
-
+            HttpSession session = request.getSession(true);
+            User user = (User) session.getAttribute("user");
+            Student stu = (Student) user;
+            PdfDocument pdf = new PdfDocument();
+            PdfWriter pdfw = PdfWriter.getInstance(pdf,response.getOutputStream());
+            Document doc = new Document(new Rectangle(PageSize.A4.rotate()));
+            for(int i = 0; i<stu.getGrades().size(); i++) {
+                 doc.add(new Paragraph("NRC: "+stu.getGrades().get(i).getKey().getNrc()));
+                 doc.add(new Paragraph("PROFESOR: "+stu.getGrades().get(i).getKey().getTeach().getId()
+                 +" "+ stu.getGrades().get(i).getKey().getTeach().getName()));
+                 doc.add(new Paragraph("NOTA: " + String.valueOf(stu.getGrades().get(i).getValue())));
+            }
+           
             doc.close();
             response.setContentType("application/pdf");
             response.addHeader("Content-disposition", "inline");
-             */
-            return "/presentation/user/student/constancy.jsp";
+             
+            return "/presentation/user/student/record.jsp";
         } catch (Exception ex) {
             return "/presentation/Error.jsp";
         }
