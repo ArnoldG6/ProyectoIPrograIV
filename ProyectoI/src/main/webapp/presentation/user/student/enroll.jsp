@@ -16,8 +16,7 @@
     <body class="d-flex flex-column min-vh-100 bg-dark text-white"> 
         <%@ include file="/presentation/Header.jsp" %>
         <h1 class = "text-center">Matricula de cursos</h1>  
-        <form class = "container center_div w-75 p-3" name = "enrollForm" 
-              action="/ProyectoI/presentation/student/enroll" method="POST">
+        <div class="container">
             <div class = "form-group">
                 <div class = "text-center">
                     <label for = "subId">ID del curso seleccionado&#160;</label>
@@ -36,7 +35,7 @@
                 <div class="container">
                     <% if (studentGroups != null) { %>
                     <div class="card-body bg-dark text-white">
-                        <table class = "table table-condensed">
+                        <table class = "table table-condensed border">
                             <tr>
                                 <th class="text-center text-white">NRC del grupo</th>
                                 <th class="text-center text-white">Datos del profesor</th>
@@ -50,7 +49,11 @@
                                 <td class="text-center text-white"><%=group.getTeach().getId() + "-" + group.getTeach().getName()%></td>
                                 <td class="text-center text-white"><%= group.getNumStu()%></td>
                                 <td class="text-center text-white">
-                                    <button class ="btn btn-outline-light form-control">Matricular</button>
+                                    <a class ="text-left text-white" href="/ProyectoI/presentation/student/matricular?GID=<%=group.getNrc()%>">
+                                        <button class ="btn btn-outline-light form-control">
+                                            Matricular
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             <% } %>
@@ -68,7 +71,7 @@
                     <% request.removeAttribute("message"); %>
                 <div>&nbsp;</div>
                 <%}%>
-        </form> 
+        </div>
         <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>

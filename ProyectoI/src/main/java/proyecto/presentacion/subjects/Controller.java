@@ -21,7 +21,7 @@ import proyecto.model.User;
 
 @WebServlet(name = "SubjectController", urlPatterns = {"/presentation/subjects/register",
     "/presentation/subjects/show", "/presentation/subjects/image", "/presentation/subjects/print",
-    "/presentation/subjects/search", "/presentation/user/student/record"})
+    "/presentation/subjects/search"})
 @MultipartConfig(location = "C:/PROYECTO")
 public class Controller extends HttpServlet {
 
@@ -42,9 +42,6 @@ public class Controller extends HttpServlet {
                     break;
                 case "/presentation/subjects/search":
                     viewUrl = this.searchSubject(request, response);
-                    break;
-                case "/presentation/user/student/record":
-                    viewUrl = this.getRecord(request, response);
                     break;
                 default:
                     viewUrl = "/index.jsp";

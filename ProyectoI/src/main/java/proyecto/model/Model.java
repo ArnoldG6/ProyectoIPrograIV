@@ -46,6 +46,7 @@ public class Model {
         Model.getInstance().matchGroupsTeachers();
         Model.getInstance().matchGroupsSubjects();
     }
+
     public HashMap<String, Subject> getSubjectsMap(User u) throws Exception {
         try {
             updateModel();
@@ -66,35 +67,54 @@ public class Model {
             throw e;
         }
     }
-    public HashMap<String, Group> getAvailableGroups(User user,String subID) throws Exception {
+
+    public HashMap<String, Group> getAvailableGroups(User user, String subID) throws Exception {
         updateModel();
         HashMap<String, Group> groups = Model.getInstance().subjects.get(subID).getGroups();
-        if(groups == null) throw new IOException("No se ha encontrado el curso");
+        if (groups == null) {
+            throw new IOException("No se ha encontrado el curso");
+        }
         return groups;
     }
+
     public HashMap<String, Group> getGroupsMap(User u) throws Exception {
         try {
             updateModel();
-            if (u != null){
-                if(teachers.get(u.getId()) != null) 
-                     return teachers.get(u.getId()).getGroups();
-                     
-                 else
+            if (u != null) {
+                if (teachers.get(u.getId()) != null) {
+                    return teachers.get(u.getId()).getGroups();
+                } else {
                     throw new Exception("Debe ser usuario de tipo profesor");
-            }    
+                }
+            }
             throw new Exception("La sesión ha expirado");
         } catch (Exception e) {
             throw e;
         }
     }
 
+    public List<Group> getGroupsMapS(User u) throws Exception {
+        try {
+            updateModel();
+            if (u != null) {
+                if (students.get(u.getId()) != null) {
+                    return students.get(u.getId()).getGroups();
+                } else {
+                    throw new Exception("Debe ser usuario de tipo estudiante");
+                }
+            }
+            throw new Exception("La sesión ha expirado");
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     public void linkStudentGroup(Student s, Group g, Float grade) throws Exception {
         if (s == null || g == null || grade == null) {
             throw new Exception("Null pointer in linkStudentGroup method");
         }
         if (g.getStudents().get(s.getId()) == null) {
-            g.getStudents().put(s.getId(),s);
+            g.getStudents().put(s.getId(), s);
         }
         if (!s.getGroups().contains(g)) {
             s.getGroups().add(g);
@@ -158,35 +178,38 @@ public class Model {
             Group group;
             for (Map.Entry<String, Teacher> entry : Model.getInstance().teachers.entrySet()) {
                 teacher = Model.getInstance().teachers.get(entry.getKey());
-                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()){ 
+                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()) {
                     group = Model.getInstance().groups.get(g.getKey());
-                    if(group.getTeach().getId().equals(teacher.getId())){
+                    if (group.getTeach().getId().equals(teacher.getId())) {
                         teacher.insertGroup(group);
                         group.setTeach(teacher);
-                     }
-                    
+                    }
+
                 }
             }
         } catch (Exception e) {
             throw e;
         }
     }
+
     public void matchGroupsSubjects() throws Exception {
         try {
             Subject sub;
             Group group;
             for (Map.Entry<String, Subject> entry : Model.getInstance().subjects.entrySet()) {
                 sub = Model.getInstance().subjects.get(entry.getKey());
-                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()){ 
+                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()) {
                     group = Model.getInstance().groups.get(g.getKey());
-                    if(group.getSubject().getIdSub().equals(sub.getIdSub()))
-                        sub.getGroups().put(group.getNrc(),group);
+                    if (group.getSubject().getIdSub().equals(sub.getIdSub())) {
+                        sub.getGroups().put(group.getNrc(), group);
+                    }
                 }
             }
         } catch (Exception e) {
             throw e;
         }
     }
+
     public HashMap<String, Teacher> getTeachersMap(User u) throws Exception {
         try {
             updateModel();
@@ -314,8 +337,6 @@ public class Model {
             throw e;
         }
     }
-
-
 
     public String showGrps(String id) {
         //return getTeachers().get(id);

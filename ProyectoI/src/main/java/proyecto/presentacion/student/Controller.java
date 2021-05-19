@@ -20,7 +20,8 @@ import proyecto.model.Model;
 import proyecto.model.Student;
 import proyecto.model.User;
 
-@WebServlet(name = "StudentController", urlPatterns = {"/presentation/student/enroll"})
+@WebServlet(name = "StudentController", urlPatterns = {"/presentation/student/enroll",
+    "/presentation/student/matricular", "/presentation/user/student/record"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -30,14 +31,20 @@ public class Controller extends HttpServlet {
             String viewUrl = "/index.jsp";
             switch (request.getServletPath()) {
                 case "/presentation/student/enroll":
-                    viewUrl = this.enroll(request,response);
+                    viewUrl = this.enroll(request, response);
+                    break;
+                case "/presentation/student/matricular":
+                    viewUrl = this.getEnroll(request);
+                    break;
+                case "/presentation/user/student/record":
+                    System.out.println("Jesucristo 2");
+                    viewUrl = this.getRecord(request, response);
                     break;
                 default:
                     viewUrl = "/index.jsp";
                     break;
             }
             request.getRequestDispatcher(viewUrl).forward(request, response);
-
         } catch (Exception e) {
             request.getRequestDispatcher("/presentation/Error.jsp").forward(request, response);
         }
@@ -50,12 +57,14 @@ public class Controller extends HttpServlet {
             HttpSession session = request.getSession(true);
             User user = (User) session.getAttribute("user");
             String subID = (String) request.getParameter("subID");
-            if(user == null) return "/presentation/login/View.jsp";
-            System.out.println(Model.getInstance().getAvailableGroups(user,subID).toString());
-            session.setAttribute("studentGroups", Model.getInstance().getAvailableGroups(user,subID));
-            
+            if (user == null) {
+                return "/presentation/login/View.jsp";
+            }
+            System.out.println(Model.getInstance().getAvailableGroups(user, subID).toString());
+            session.setAttribute("studentGroups", Model.getInstance().getAvailableGroups(user, subID));
+
             return "/presentation/user/student/enroll.jsp";
-        
+
         } catch (Exception e) {
             HttpSession session = request.getSession(true);
             session.setAttribute("exc", e.getMessage());
@@ -63,17 +72,29 @@ public class Controller extends HttpServlet {
         }
     }
 
-    public String getRecord(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        try {
-            HttpSession session = request.getSession(true);
-        } catch (Exception e) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("exc", e.getMessage());
-            throw e;
+    private String getEnroll(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
+        String GID = request.getParameter("GID");
+        if (GID == null) {
+            throw new Exception("Group ID Exception");
         }
+        Model.getInstance().getGroups().get(GID).insertStudents((Student) user);
+        Model.getInstance().insertGrpSt(user.getId(), Model.getInstance().getGroups().get(GID));
+        System.out.println("Students de group toString: " + Model.getInstance().getGroups().get(GID).getStudents().toString());
+        System.out.println("Groups de students toString: " + Model.getInstance().getStudents().get(user.getId()).getGroups().toString());
+        return "/presentation/user/student/enrolledCorrectly.jsp";
+    }
+
+    public String getRecord(HttpServletRequest request, HttpServletResponse response)throws Exception {
+        System.out.println("SHOW");
+        HttpSession session = request.getSession(true);
+        User u = (User) session.getAttribute("user");
+        System.out.println("User ID: " + u.getId());
+        System.out.println("Groups toString: " + Model.getInstance().getGroupsMapS(u).toString());
+        
+        session.setAttribute("groups", Model.getInstance().getGroupsMapS(u));
         return "/presentation/user/student/record.jsp";
-    
 
     }
 
@@ -87,7 +108,6 @@ public class Controller extends HttpServlet {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
