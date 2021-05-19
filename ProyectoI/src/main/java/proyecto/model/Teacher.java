@@ -18,7 +18,7 @@ public class Teacher extends User {
         this.groups = new HashMap<>();
         this.type = 1;
     }
-
+    
     public Teacher() {
         this("", "", "", "", "");
     }
@@ -32,6 +32,9 @@ public class Teacher extends User {
             f += getGroups().get(i).show() + "\n";
         }
         return f;
+    }
+    public String getName(){
+        return username;
     }
     public void insertGroup(Group g){
         if(groups.get(g.getNrc()) == null)
