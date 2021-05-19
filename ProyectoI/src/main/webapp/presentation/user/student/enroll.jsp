@@ -2,7 +2,7 @@
 <%@page import="proyecto.model.Group"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%HashMap<String, Group> studentGroups = (HashMap<String, Group>) request.getAttribute("studentGroups");%>
+<%HashMap<String, Group> studentGroups = (HashMap<String, Group>) session.getAttribute("studentGroups");%>
 <%String exc = (String) session.getAttribute("exc");%>
 <%String message = (String) session.getAttribute("message");%>
 <%String subID = (String) request.getParameter("subID");%>
@@ -41,13 +41,17 @@
                                 <th class="text-center text-white">NRC del grupo</th>
                                 <th class="text-center text-white">Datos del profesor</th>
                                 <th class="text-center text-white">Capacidad de estudiantes</th>
+                                <th class="text-center text-white"></th>
                             </tr>
                             <%for (Map.Entry<String, Group> entry : studentGroups.entrySet()) { %>
                             <% Group group = studentGroups.get(entry.getKey());%>
                             <tr>
                                 <td class="text-center text-white"><%= group.getNrc()%></td>
-                                <td class="text-center text-white"><%=group.getTeach().getId()+"-"+group.getTeach()%></td>
+                                <td class="text-center text-white"><%=group.getTeach().getId() + "-" + group.getTeach().getName()%></td>
                                 <td class="text-center text-white"><%= group.getNumStu()%></td>
+                                <td class="text-center text-white">
+                                    <button class ="btn btn-outline-light form-control">Matricular</button>
+                                </td>
                             </tr>
                             <% } %>
                         </table>
@@ -57,9 +61,7 @@
                 </div>    
 
                 <div>&nbsp;</div>
-                <div class = "text-center">
-                    <button class ="btn btn-outline-light form-control w-25">Completar matricula</button>
-                </div>
+
                 <% if (message != null) {%>
                 <div>&nbsp;</div>
                 <div class = "text-center" ><label class = "text-center" ><%=message%></label></div>

@@ -138,8 +138,8 @@ public class Controller extends HttpServlet {
             HashMap<String, Group> groups = (HashMap<String, Group>) request.getAttribute("groups");
             String G1 = (String) request.getAttribute("pepito");
             //List<Student> pepita = groups.get(G1).getStudents();
-            Student nigga = groups.get(G1).SearchStu(id);
-            nigga.insertNote(groups.get(G1), Float.parseFloat(grade));
+            //Student nigga = groups.get(G1).SearchStu(id);
+            //nigga.insertNote(groups.get(G1), Float.parseFloat(grade));
             return "/presentation/user/teacher/grades.jsp";
         } catch (Exception e) {
             throw e;

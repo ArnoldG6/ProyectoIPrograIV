@@ -28,18 +28,8 @@ public class Subject {
             groups.put(gr.getNrc(),gr);
     }
 
-    public void deleteGroups(String nrc) {
-        for (int i = 0; i < groups.size(); i++) {
-            if (groups.get(i).getNrc().equals(nrc)) {
-                groups.remove(i);
-            }
-        }
-    }
 
-    public String showGroup(int pos) {
-        return groups.get(pos).show();
-    }
-    
+
     public String show(){
         String f = "", tn = idSub, tc = nameSubj, numS = Integer.toString(groups.size());
         f = f + "Identificador de curso: " + tn

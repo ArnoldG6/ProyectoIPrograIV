@@ -60,15 +60,4 @@ public class Student extends User {
         return f;
     }
 
-    public String showGroups() {
-        String f = "";
-        f = f
-                + "\n" + "Historial:"
-                + "\n";
-        for (int i = 0; i < groups.size(); i++) {
-            f += groups.get(i).show() + "\n";
-        }
-        return f;
-    }
-
 }

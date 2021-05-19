@@ -59,25 +59,6 @@ public class Group {
         students.put(stu.getId(),stu);
     }
 
-    public void deleteGroups(String id) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId().equals(id)) {
-                students.remove(i);
-            }
-        }
-
-    }
-
-    public Student SearchStu(String id) {
-        Student s = null;
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getId().equals(id)) {
-                s = students.get(i);
-            }
-        }
-        return s;
-    }
-
     public void setSubName(String subName) {
         this.subName = subName;
     }
@@ -118,21 +99,7 @@ public class Group {
         this.nrc = nrc;
     }
 
-    public String show() {
-        String f = "", tn = subj.getNameSubj(), tc = subj.getIdSub(), numS = Double.toString(numStu), nr = nrc;
-        f = f
-                + "Nombre de la materia: " + tn
-                + "\n" + "Identificador de materia: " + tc
-                + "\n" + "Numero de estudiantes matriculados: " + numS
-                + "\n" + "NRC: " + nr
-                + "\n" + "Lista de estudiantes:"
-                + "\n";
-        for (int i = 0; i < students.size(); i++) {
-            f += students.get(i).show() + "\n";
-        }
 
-        return f;
-    }
 
     public String isStatus() {
         return subj.getStatus();

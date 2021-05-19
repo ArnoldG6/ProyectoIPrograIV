@@ -22,17 +22,6 @@ public class Teacher extends User {
     public Teacher() {
         this("", "", "", "", "");
     }
-    @Override
-    public String toString() {
-        String f = "";
-        f = f
-                + "\n" + "Grupos:"
-                + "\n";
-        for (int i = 0; i < getGroups().size(); i++) {
-            f += getGroups().get(i).show() + "\n";
-        }
-        return f;
-    }
     public String getName(){
         return username;
     }
