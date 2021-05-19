@@ -65,7 +65,16 @@ public class Model {
             throw e;
         }
     }
-
+    public HashMap<String, Group> getAvailableGroups(User user) throws Exception {
+        HashMap<String, Group> groups = new HashMap();
+        HashMap<String, Subject>  subjects = Model.getInstance().getSubjectsMap(user);
+        for (HashMap.Entry<String, Subject> sub : subjects.entrySet()) {
+            Subject s = subjects.get(sub.getKey());
+            if(s.getGroups() != null)
+                groups.putAll(s.getGroups());
+        }
+        return groups;
+    }
     public HashMap<String, Group> getGroupsMap(User u) throws Exception {
         try {
             updateModel();

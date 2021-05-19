@@ -5,9 +5,7 @@
 --%>
 
 <%@page import="proyecto.model.Group"%>
-<%@page import="proyecto.model.Group"%>
 <%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="proyecto.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

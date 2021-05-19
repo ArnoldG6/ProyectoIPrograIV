@@ -1,23 +1,20 @@
 package proyecto.model;
 
-import java.awt.Image;
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Subject {
     private String idSub;
     private String nameSubj;
     private String desc;
     private String status;
-    private List<Group> groups;
+    private HashMap<String,Group> groups;
     
     public Subject(String idSub, String nameSubj, String desc, String stat) {
         this.idSub = idSub;
         this.nameSubj = nameSubj;
         this.desc = desc;
         this.status = stat; // "OFERTA" || "INACTIVO"
-        this.groups = new ArrayList<>();
+        this.groups = new HashMap<>();
     }
 
 
@@ -27,7 +24,8 @@ public class Subject {
 
     public void insertGroups(Group gr) {
         gr.setSubName(nameSubj);
-        groups.add(gr);
+        if(groups.get(gr.getNrc()) == null)
+            groups.put(gr.getNrc(),gr);
     }
 
     public void deleteGroups(String nrc) {
@@ -51,11 +49,11 @@ public class Subject {
         return f;
     }
 
-    public List<Group> getGroups() {
+    public HashMap<String, Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(HashMap<String, Group> groups) {
         this.groups = groups;
     }
 
