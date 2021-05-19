@@ -76,11 +76,10 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
         String GID = request.getParameter("GID");
-        if (GID == null) {
-            throw new Exception("Group ID Exception");
+        if (GID == null || user == null) {
+            throw new Exception("Exception");
         }
-        Model.getInstance().getGroups().get(GID).insertStudents((Student) user);
-        Model.getInstance().insertGrpSt(user.getId(), Model.getInstance().getGroups().get(GID));
+        Model.getInstance().insertStudentBase(user.getId(), GID);
         System.out.println("Students de group toString: " + Model.getInstance().getGroups().get(GID).getStudents().toString());
         System.out.println("Groups de students toString: " + Model.getInstance().getStudents().get(user.getId()).getGroups().toString());
         return "/presentation/user/student/enrolledCorrectly.jsp";

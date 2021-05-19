@@ -45,6 +45,7 @@ public class Model {
         Model.getInstance().setGroups(GroupDAO.getInstance().listAll());
         Model.getInstance().matchGroupsTeachers();
         Model.getInstance().matchGroupsSubjects();
+        Model.getInstance().matchGroupsStudents();
     }
 
     public HashMap<String, Subject> getSubjectsMap(User u) throws Exception {
@@ -202,6 +203,51 @@ public class Model {
                     group = Model.getInstance().groups.get(g.getKey());
                     if (group.getSubject().getIdSub().equals(sub.getIdSub())) {
                         sub.getGroups().put(group.getNrc(), group);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void insertStudentBase(String idStu, String idGr) throws Exception {
+        try {
+            updateModel();
+            Student s = students.get(idStu);
+            Group g = groups.get(idGr);
+            System.out.println("Id s:" + idStu);
+            System.out.println("Id g:" + idGr);
+            System.out.println("S:" + s.toString());
+            System.out.println("G:" + g.toString());
+            if (s == null || g == null) {
+                throw new Exception("Exception insertar en intermedia");
+            }
+            GROUPS_STUDENTSDAO.getInstance().add(idGr, idStu, "0");
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void matchGroupsStudents() throws Exception {
+        try {
+            ArrayList<String[]> result = GROUPS_STUDENTSDAO.getInstance().listAll();
+            Student studentuno;
+            Group group;
+            String a,b,c;
+            for (Map.Entry<String, Student> entry : Model.getInstance().students.entrySet()) {
+                studentuno = Model.getInstance().students.get(entry.getKey());
+                for (Map.Entry<String, Group> g : Model.getInstance().groups.entrySet()) {
+                    group = Model.getInstance().groups.get(g.getKey());
+                    for (int i = 0; i < result.size(); i++) {
+                        a=result.get(i)[0];
+                        b=result.get(i)[1];
+                        c=result.get(i)[2];
+                        if(studentuno.getId().equals(b) && group.getNrc().equals(a)){
+                            studentuno.getGroups().add(group);
+                            studentuno.getGrades().add(new Pair<Group,Float> (group,Float.parseFloat(c)));
+                            group.insertStudents(studentuno);
+                        }
                     }
                 }
             }

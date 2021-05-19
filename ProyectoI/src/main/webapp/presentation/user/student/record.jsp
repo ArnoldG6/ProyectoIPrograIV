@@ -20,7 +20,7 @@
         <div class="container">
             <% if (groups != null) { %>
             <div class="card-body bg-dark text-white">
-                <table class = "table table-condensed">
+                <table class = "table table-condensed border">
                     <tr>
                         <th class="text-center text-white">NRC del curso</th>
                         <th class="text-center text-white">Profesor asignado</th>
@@ -30,7 +30,7 @@
                     <tr>
                         <%for (Group g : groups) {%>
                         <td class= "text-center text-white"> <%=g.getNrc()%> </td>
-                        <td class= "text-center text-white"> <%=g.getTeach().getId()+"-"+g.getTeach()%> </td>
+                        <td class= "text-center text-white"> <%=g.getTeach().getId()+"-"+g.getTeach().getName()%> </td>
                         <td class= "text-center text-white"> N/A </td>
                         
                         <% } %>

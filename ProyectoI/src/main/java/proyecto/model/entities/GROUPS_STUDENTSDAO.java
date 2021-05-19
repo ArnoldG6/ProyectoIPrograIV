@@ -78,32 +78,21 @@ public class GROUPS_STUDENTSDAO  {
     }
 
 
-    public void add(String id, Student value) {
+    public void add(String groupid, String stuid, String grade) {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
-                PreparedStatement stm = cnx.prepareStatement(StudentCRUD.CMD_ADD)) {
+                PreparedStatement stm = cnx.prepareStatement(GROUPS_STUDENTSCRUD.CMD_ADD)) {
             stm.clearParameters();
-            stm.setString(1, value.getId());
-            stm.setString(2, value.getName());
-            stm.setString(3, value.getEmail());
-            stm.setString(4, value.getTelNum());
-            stm.setString(5, value.getPass());
+            stm.setString(1, groupid);
+            stm.setString(2, stuid);
+            stm.setString(3, grade);
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
-                        String.format("It couldn't add the register: '%s'", id));
+                        String.format("It couldn't add the register: '%s'", stuid));
             }
         } catch (IllegalArgumentException | SQLException ex) {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-    
-    public void add(Student u) throws IllegalArgumentException {
-        try {
-            add(u.getId(), u);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
-    }
-
 
     public Student recover(String id, String pass) {
         Student result = null;
